@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package entity;
 
 import java.io.Serializable;
@@ -12,27 +7,50 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 
-/**
- *
- * @author Joacim
- */
 @Entity
 public class Rating implements Serializable {
-    
-    public Rating(){
-        this.counter = 0;
-    }
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    
+    private Integer id;
     private int counter;
-    
     @ManyToMany
     private List<User> hasRated;
 
+    public Rating() {
+        counter = 0;
+    }
+
+    public Rating(User hasRatedUser) {
+        counter = 0;
+        hasRated.add(hasRatedUser);
+    }
+
+    public int getCounter() {
+        return counter;
+    }
+
+    public void setCounter(int counter) {
+        this.counter = counter;
+    }
+
+    public List<User> getHasRated() {
+        return hasRated;
+    }
+
+    public void setHasRated(List<User> hasRated) {
+        this.hasRated = hasRated;
+    }
+
+    public void addRater(User user) {
+        hasRated.add(user);
+    }
+
+    @Override
+    public String toString() {
+        return "Rating{" + "id=" + id + ", counter=" + counter + ", hasRated=" + hasRated + '}';
+    }
+    
 }
