@@ -90,5 +90,5 @@ typings/
 !.vscode/extensions.json
 .history
 
-#META-INF
+# META-INF
 META-INF
