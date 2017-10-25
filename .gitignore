@@ -89,3 +89,6 @@ typings/
 !.vscode/launch.json
 !.vscode/extensions.json
 .history
+
+#META-INF
+META-INF
