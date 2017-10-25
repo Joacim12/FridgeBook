@@ -1,0 +1,11 @@
+entity\Ingredient.class
+entity\User.class
+rest\UserResource.class
+entity\Recipe_.class
+entity\Recipe.class
+entity\Rating_.class
+rest\ApplicationConfig.class
+entity\Ingredient_.class
+facade\UserFacade.class
+entity\Rating.class
+entity\User_.class

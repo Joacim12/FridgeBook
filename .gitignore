@@ -89,4 +89,6 @@ typings/
 !.vscode/launch.json
 !.vscode/extensions.json
 .history
-/backend/target/
+
+# META-INF
+META-INF
