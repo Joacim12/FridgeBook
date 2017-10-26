@@ -19,13 +19,12 @@ public class User implements Serializable {
     @JoinColumn
     @OneToMany(mappedBy = "user")
     private List<Recipe> recipes;
-    @ManyToMany(mappedBy = "hasRated")
-    private List<Rating> ratings;
     @ManyToMany
     private List<Ingredient> ingredients;
+    @ManyToMany(mappedBy = "hasRatedUsers")
+    private List<Recipe> favouriteRecipes;
 
     public User() {
-
     }
 
     public User(String userName, String pin) {
@@ -33,7 +32,7 @@ public class User implements Serializable {
         this.pin = pin;
         ingredients = new ArrayList();
         recipes = new ArrayList();
-        ratings = new ArrayList();
+        favouriteRecipes = new ArrayList();
     }
 
     public String getUserName() {
@@ -52,14 +51,6 @@ public class User implements Serializable {
         this.pin = pin;
     }
 
-    public List<Ingredient> getIngredients() {
-        return ingredients;
-    }
-
-    public void setIngredients(List<Ingredient> ingredients) {
-        this.ingredients = ingredients;
-    }
-
     public List<Recipe> getRecipes() {
         return recipes;
     }
@@ -68,17 +59,29 @@ public class User implements Serializable {
         this.recipes = recipes;
     }
 
-    public List<Rating> getRatings() {
-        return ratings;
+    public List<Ingredient> getIngredients() {
+        return ingredients;
     }
 
-    public void setRatings(List<Rating> ratings) {
-        this.ratings = ratings;
+    public void setIngredients(List<Ingredient> ingredients) {
+        this.ingredients = ingredients;
+    }
+
+    public void addIngredient(Ingredient ingredient) {
+        ingredients.add(ingredient);
+    }
+
+    public List<Recipe> getFavouriteRecipes() {
+        return favouriteRecipes;
+    }
+
+    public void setFavouriteRecipes(List<Recipe> favouriteRecipes) {
+        this.favouriteRecipes = favouriteRecipes;
     }
 
     @Override
     public String toString() {
-        return "User{" + "userName=" + userName + ", pin=" + pin + ", ingredients=" + ingredients + ", recipes=" + recipes + ", ratings=" + ratings + '}';
+        return "User{" + "userName=" + userName + ", pin=" + pin + ", recipes=" + recipes + ", ingredients=" + ingredients + ", favouriteRecipes=" + favouriteRecipes + '}';
     }
 
 }

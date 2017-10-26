@@ -1,5 +1,6 @@
 package facade;
 
+import entity.Ingredient;
 import entity.User;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -24,7 +25,9 @@ public class UserFacade {
     }
 
     private void starter() {
-        createUser(new User("Lars", "1234"));
+        User user = new User("Lars", "1234");
+        user.addIngredient(new IngredientFacade("PU").getIngredientByName("Mælk"));
+        createUser(user);
     }
 
     public User getUserById(String username) {

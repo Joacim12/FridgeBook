@@ -27,10 +27,10 @@ public class RecipeFacade {
     }
 
     private void starter() {
-        Ingredient banan = new Ingredient("banan", "2");
+        Ingredient æg = new Ingredient("Æg", "20/10/2017", "1");
         List<Ingredient> ingredients = new ArrayList();
-        ingredients.add(banan);
-        User user = new User("Hans", "1234");
+        ingredients.add(æg);
+        User user = new UserFacade("PU").getUserById("Lars");
         createRecipe(new Recipe("Banankage", "Tag to bananer og bland dem med med mælk...", user, ingredients));
     }
 

@@ -27,6 +27,7 @@ public class Ingredient implements Serializable {
     public Ingredient() {
     }
 
+    //Denne konstruktør bruges, når der skal oprettes en ny opskrift, som kræver en ingrediens der ikke allerede findes
      public Ingredient(String name, String amount) {
         this.name = name;
         this.amount = amount;

@@ -1,6 +1,7 @@
 package entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,7 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 
 @Entity
 public class Recipe implements Serializable {
@@ -19,17 +19,16 @@ public class Recipe implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
+    private int rateCounter;
     private List<String> imagePaths;
-    private int thumbsUp;
-    private int thumbsDown;
     @Lob
     private String text;
-    @OneToOne
-    private Rating rating;
     @ManyToOne
     private User user;
     @ManyToMany
     private List<Ingredient> ingredients;
+    @ManyToMany
+    private List<User> hasRatedUsers;
 
     public Recipe() {
     }
@@ -38,17 +37,21 @@ public class Recipe implements Serializable {
         this.name = name;
         this.text = text;
         this.user = user;
-        this.rating = new Rating(user);
         this.ingredients = ingredients;
+        rateCounter = 0;
+        hasRatedUsers = new ArrayList();
+        hasRatedUsers.add(user);
     }
-    
+
     public Recipe(String name, List<String> imagePaths, String text, User user, List<Ingredient> ingredients) {
         this.name = name;
         this.imagePaths = imagePaths;
         this.text = text;
         this.user = user;
-        this.rating = new Rating(user);
         this.ingredients = ingredients;
+        rateCounter = 0;
+        hasRatedUsers = new ArrayList();
+        hasRatedUsers.add(user);
     }
 
     public Integer getId() {
@@ -63,6 +66,18 @@ public class Recipe implements Serializable {
         this.name = name;
     }
 
+    public int getRateCounter() {
+        return rateCounter;
+    }
+
+    public void incrementRateCounter() {
+        rateCounter++;
+    }
+
+    public void decrementRateCounter() {
+        rateCounter--;
+    }
+
     public List<String> getImagePaths() {
         return imagePaths;
     }
@@ -71,36 +86,12 @@ public class Recipe implements Serializable {
         this.imagePaths = imagePaths;
     }
 
-    public int getThumbsUp() {
-        return thumbsUp;
-    }
-
-    public void setThumbsUp(int thumbsUp) {
-        this.thumbsUp = thumbsUp;
-    }
-
-    public int getThumbsDown() {
-        return thumbsDown;
-    }
-
-    public void setThumbsDown(int thumbsDown) {
-        this.thumbsDown = thumbsDown;
-    }
-
     public String getText() {
         return text;
     }
 
     public void setText(String text) {
         this.text = text;
-    }
-
-    public Rating getRating() {
-        return rating;
-    }
-
-    public void setRating(Rating rating) {
-        this.rating = rating;
     }
 
     public User getUser() {
@@ -119,9 +110,16 @@ public class Recipe implements Serializable {
         this.ingredients = ingredients;
     }
 
-    @Override
-    public String toString() {
-        return "Recipe{" + "id=" + id + ", name=" + name + ", imagePaths=" + imagePaths + ", thumbsUp=" + thumbsUp + ", thumbsDown=" + thumbsDown + ", text=" + text + ", rating=" + rating + ", user=" + user + ", ingredients=" + ingredients + '}';
+    public List<User> getHasRatedUsers() {
+        return hasRatedUsers;
     }
 
+    public void setHasRatedUsers(List<User> hasRatedUsers) {
+        this.hasRatedUsers = hasRatedUsers;
+    }
+
+    @Override
+    public String toString() {
+        return "Recipe{" + "id=" + id + ", name=" + name + ", rateCounter=" + rateCounter + ", imagePaths=" + imagePaths + ", text=" + text + ", user=" + user + ", ingredients=" + ingredients + ", hasRatedUsers=" + hasRatedUsers + '}';
+    }
 }
