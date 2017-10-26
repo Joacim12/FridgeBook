@@ -17,8 +17,8 @@ public class User implements Serializable {
     private String userName;
     private String pin;
     @JoinColumn
-    @OneToMany(mappedBy = "user")
-    private List<Recipe> recipes;
+    @OneToMany(mappedBy = "createdByUser")
+    private List<Recipe> recipesCreatedByUser;
     @ManyToMany
     private List<Ingredient> ingredients;
     @ManyToMany(mappedBy = "hasRatedUsers")
@@ -31,7 +31,7 @@ public class User implements Serializable {
         this.userName = userName;
         this.pin = pin;
         ingredients = new ArrayList();
-        recipes = new ArrayList();
+        recipesCreatedByUser = new ArrayList();
         favouriteRecipes = new ArrayList();
     }
 
@@ -51,14 +51,18 @@ public class User implements Serializable {
         this.pin = pin;
     }
 
-    public List<Recipe> getRecipes() {
-        return recipes;
+    public List<Recipe> getRecipesCreatedByUser() {
+        return recipesCreatedByUser;
     }
 
-    public void setRecipes(List<Recipe> recipes) {
-        this.recipes = recipes;
+    public void setRecipesCreatedByUser(List<Recipe> recipesCreatedByUser) {
+        this.recipesCreatedByUser = recipesCreatedByUser;
     }
 
+    public void addRecipeCreatedByUser(Recipe recipe) {
+        recipesCreatedByUser.add(recipe);
+    }
+    
     public List<Ingredient> getIngredients() {
         return ingredients;
     }
@@ -81,7 +85,7 @@ public class User implements Serializable {
 
     @Override
     public String toString() {
-        return "User{" + "userName=" + userName + ", pin=" + pin + ", recipes=" + recipes + ", ingredients=" + ingredients + ", favouriteRecipes=" + favouriteRecipes + '}';
+        return "User{" + "userName=" + userName + ", pin=" + pin + ", recipes=" + recipesCreatedByUser + ", ingredients=" + ingredients + ", favouriteRecipes=" + favouriteRecipes + '}';
     }
 
 }

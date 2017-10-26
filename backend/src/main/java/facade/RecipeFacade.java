@@ -31,7 +31,7 @@ public class RecipeFacade {
         List<Ingredient> ingredients = new ArrayList();
         ingredients.add(æg);
         User user = new UserFacade("PU").getUserById("Lars");
-        createRecipe(new Recipe("Banankage", "Tag to bananer og bland dem med med mælk...", user, ingredients));
+        createRecipe(new Recipe("Banankage", "Tag to bananer og bland dem med med æg", user, ingredients));
     }
 
     public Recipe getRecipeById(int id) {

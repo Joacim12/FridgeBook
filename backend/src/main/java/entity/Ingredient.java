@@ -20,7 +20,7 @@ public class Ingredient implements Serializable {
     private String expiryDate;
     private String amount;
     @ManyToMany(mappedBy = "ingredients")
-    private List<Recipe> recipes;
+    private List<Recipe> recipesWithIngredient;
     @ManyToMany(mappedBy = "ingredients")
     private List<User> users;
 
@@ -28,19 +28,19 @@ public class Ingredient implements Serializable {
     }
 
     //Denne konstruktør bruges, når der skal oprettes en ny opskrift, som kræver en ingrediens der ikke allerede findes
-     public Ingredient(String name, String amount) {
+    public Ingredient(String name, String amount) {
         this.name = name;
         this.amount = amount;
-        recipes = new ArrayList();
+        recipesWithIngredient = new ArrayList();
         users = new ArrayList();
     }
-    
+
     public Ingredient(String name, String expiryDate, String amount) {
         this.name = name;
         this.addedDate = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
         this.expiryDate = expiryDate;
         this.amount = amount;
-        recipes = new ArrayList();
+        recipesWithIngredient = new ArrayList();
         users = new ArrayList();
     }
 
@@ -50,7 +50,7 @@ public class Ingredient implements Serializable {
         this.addedDate = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
         this.expiryDate = expiryDate;
         this.amount = amount;
-        recipes = new ArrayList();
+        recipesWithIngredient = new ArrayList();
         users = new ArrayList();
     }
 

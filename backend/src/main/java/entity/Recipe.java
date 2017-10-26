@@ -3,6 +3,7 @@ package entity;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -24,8 +25,8 @@ public class Recipe implements Serializable {
     @Lob
     private String text;
     @ManyToOne
-    private User user;
-    @ManyToMany
+    private User createdByUser;
+    @ManyToMany(cascade = {CascadeType.PERSIST})
     private List<Ingredient> ingredients;
     @ManyToMany
     private List<User> hasRatedUsers;
@@ -36,22 +37,24 @@ public class Recipe implements Serializable {
     public Recipe(String name, String text, User user, List<Ingredient> ingredients) {
         this.name = name;
         this.text = text;
-        this.user = user;
+        this.createdByUser = user;
         this.ingredients = ingredients;
         rateCounter = 0;
         hasRatedUsers = new ArrayList();
         hasRatedUsers.add(user);
+        user.addRecipeCreatedByUser(this);
     }
 
     public Recipe(String name, List<String> imagePaths, String text, User user, List<Ingredient> ingredients) {
         this.name = name;
         this.imagePaths = imagePaths;
         this.text = text;
-        this.user = user;
+        this.createdByUser = user;
         this.ingredients = ingredients;
         rateCounter = 0;
         hasRatedUsers = new ArrayList();
         hasRatedUsers.add(user);
+        user.addRecipeCreatedByUser(this);
     }
 
     public Integer getId() {
@@ -94,12 +97,12 @@ public class Recipe implements Serializable {
         this.text = text;
     }
 
-    public User getUser() {
-        return user;
+    public User getCreatedByUser() {
+        return createdByUser;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setCreatedByUser(User createdByUser) {
+        this.createdByUser = createdByUser;
     }
 
     public List<Ingredient> getIngredients() {
@@ -120,6 +123,6 @@ public class Recipe implements Serializable {
 
     @Override
     public String toString() {
-        return "Recipe{" + "id=" + id + ", name=" + name + ", rateCounter=" + rateCounter + ", imagePaths=" + imagePaths + ", text=" + text + ", user=" + user + ", ingredients=" + ingredients + ", hasRatedUsers=" + hasRatedUsers + '}';
+        return "Recipe{" + "id=" + id + ", name=" + name + ", rateCounter=" + rateCounter + ", imagePaths=" + imagePaths + ", text=" + text + ", user=" + createdByUser + ", ingredients=" + ingredients + ", hasRatedUsers=" + hasRatedUsers + '}';
     }
 }
