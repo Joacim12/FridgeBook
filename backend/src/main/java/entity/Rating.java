@@ -28,6 +28,10 @@ public class Rating implements Serializable {
         hasRated.add(hasRatedUser);
     }
 
+    public Integer getId() {
+        return id;
+    }
+    
     public int getCounter() {
         return counter;
     }

@@ -8,7 +8,6 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.persistence.Temporal;
 
 @Entity
 public class Ingredient implements Serializable {
@@ -17,10 +16,8 @@ public class Ingredient implements Serializable {
     @Id
     private String name;
     private String imagePath;
-    @Temporal(javax.persistence.TemporalType.DATE)
-    private Date addedDate;
-    @Temporal(javax.persistence.TemporalType.DATE)
-    private Date expiryDate;
+    private String addedDate;
+    private String expiryDate;
     private String amount;
     @ManyToMany(mappedBy = "ingredients")
     private List<Recipe> recipes;
@@ -30,11 +27,26 @@ public class Ingredient implements Serializable {
     public Ingredient() {
     }
 
-    public Ingredient(String name, String imagePath, Date expiryDate, String amount) {
+     public Ingredient(String name, String amount) {
+        this.name = name;
+        this.amount = amount;
+        recipes = new ArrayList();
+        users = new ArrayList();
+    }
+    
+    public Ingredient(String name, String expiryDate, String amount) {
+        this.name = name;
+        this.addedDate = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
+        this.expiryDate = expiryDate;
+        this.amount = amount;
+        recipes = new ArrayList();
+        users = new ArrayList();
+    }
+
+    public Ingredient(String name, String imagePath, String expiryDate, String amount) {
         this.name = name;
         this.imagePath = imagePath;
-        //this.addedDate = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
-        this.addedDate = new Date();
+        this.addedDate = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
         this.expiryDate = expiryDate;
         this.amount = amount;
         recipes = new ArrayList();
@@ -57,19 +69,19 @@ public class Ingredient implements Serializable {
         this.imagePath = imagePath;
     }
 
-    public Date getAddedDate() {
+    public String getAddedDate() {
         return addedDate;
     }
 
-    public void setAddedDate(Date addedDate) {
+    public void setAddedDate(String addedDate) {
         this.addedDate = addedDate;
     }
 
-    public Date getExpiryDate() {
+    public String getExpiryDate() {
         return expiryDate;
     }
 
-    public void setExpiryDate(Date expiryDate) {
+    public void setExpiryDate(String expiryDate) {
         this.expiryDate = expiryDate;
     }
 

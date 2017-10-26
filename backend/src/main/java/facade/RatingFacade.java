@@ -1,17 +1,17 @@
 package facade;
 
-import entity.User;
+import entity.Rating;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.RollbackException;
 
-public class UserFacade {
+public class RatingFacade {
 
     private EntityManagerFactory emf;
 
-    public UserFacade(String persistenceUnit) {
+    public RatingFacade(String persistenceUnit) {
         this.emf = Persistence.createEntityManagerFactory(persistenceUnit);
     }
 
@@ -20,56 +20,56 @@ public class UserFacade {
     }
 
     public static void main(String[] args) {
-        new UserFacade("PU").starter();
+        new RatingFacade("PU").starter();
     }
 
     private void starter() {
-        createUser(new User("Lars", "1234"));
+        createRating(new Rating());
     }
 
-    public User getUserById(String username) {
-        return getEntityManager().find(User.class, username);
+    public Rating getRatingById(int id) {
+        return getEntityManager().find(Rating.class, id);
     }
 
-    public List<User> getUsers() {
-        return getEntityManager().createQuery("SELECT u FROM User u", User.class).getResultList();
+    public List<Rating> getRatings() {
+        return getEntityManager().createQuery("SELECT r FROM User r", Rating.class).getResultList();
     }
 
-    public User createUser(User user) {
+    public Rating createRating(Rating rating) {
         EntityManager em = getEntityManager();
         try {
             em.getTransaction().begin();
-            em.persist(user);
+            em.persist(rating);
             em.getTransaction().commit();
         } catch (RollbackException r) {
             em.getTransaction().rollback();
         } finally {
             em.close();
         }
-        return getUserById(user.getUserName());
+        return getRatingById(rating.getId());
     }
 
-    public User updateUser(User user) {
+    public Rating updateRating(Rating rating) {
         EntityManager em = getEntityManager();
-        User userInDB = getUserById(user.getUserName());
+        Rating ratingInDB = getRatingById(rating.getId());
         try {
             em.getTransaction().begin();
-            userInDB = em.merge(user);
+            ratingInDB = em.merge(rating);
             em.getTransaction().commit();
         } catch (RollbackException r) {
             em.getTransaction().rollback();
         } finally {
             em.close();
         }
-        return userInDB;
+        return ratingInDB;
     }
 
-    public boolean deleteUser(String username) {
+    public boolean deleteRating(int id) {
         EntityManager em = getEntityManager();
-        User user = getUserById(username);
+        Rating rating = getRatingById(id);
         try {
             em.getTransaction().begin();
-            em.remove(user);
+            em.remove(rating);
             em.getTransaction().commit();
         } catch (RollbackException r) {
             em.getTransaction().rollback();

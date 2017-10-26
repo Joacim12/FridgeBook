@@ -1,17 +1,17 @@
 package facade;
 
-import entity.User;
+import entity.Ingredient;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.RollbackException;
 
-public class UserFacade {
+public class IngredientFacade {
 
     private EntityManagerFactory emf;
 
-    public UserFacade(String persistenceUnit) {
+    public IngredientFacade(String persistenceUnit) {
         this.emf = Persistence.createEntityManagerFactory(persistenceUnit);
     }
 
@@ -20,56 +20,56 @@ public class UserFacade {
     }
 
     public static void main(String[] args) {
-        new UserFacade("PU").starter();
+        new IngredientFacade("PU").starter();
     }
 
     private void starter() {
-        createUser(new User("Lars", "1234"));
+        createIngredient(new Ingredient("Mælk", "26/10/2017", "1"));
     }
 
-    public User getUserById(String username) {
-        return getEntityManager().find(User.class, username);
+    public Ingredient getIngredientByName(String name) {
+        return getEntityManager().find(Ingredient.class, name);
     }
 
-    public List<User> getUsers() {
-        return getEntityManager().createQuery("SELECT u FROM User u", User.class).getResultList();
+    public List<Ingredient> getIngredients() {
+        return getEntityManager().createQuery("SELECT i FROM User i", Ingredient.class).getResultList();
     }
 
-    public User createUser(User user) {
+    public Ingredient createIngredient(Ingredient ingredient) {
         EntityManager em = getEntityManager();
         try {
             em.getTransaction().begin();
-            em.persist(user);
+            em.persist(ingredient);
             em.getTransaction().commit();
         } catch (RollbackException r) {
             em.getTransaction().rollback();
         } finally {
             em.close();
         }
-        return getUserById(user.getUserName());
+        return getIngredientByName(ingredient.getName());
     }
 
-    public User updateUser(User user) {
+    public Ingredient updateIngredient(Ingredient ingredient) {
         EntityManager em = getEntityManager();
-        User userInDB = getUserById(user.getUserName());
+        Ingredient ingredientInDB = getIngredientByName(ingredient.getName());
         try {
             em.getTransaction().begin();
-            userInDB = em.merge(user);
+            ingredientInDB = em.merge(ingredient);
             em.getTransaction().commit();
         } catch (RollbackException r) {
             em.getTransaction().rollback();
         } finally {
             em.close();
         }
-        return userInDB;
+        return ingredientInDB;
     }
 
-    public boolean deleteUser(String username) {
+    public boolean deleteIngredient(String name) {
         EntityManager em = getEntityManager();
-        User user = getUserById(username);
+        Ingredient ingredient = getIngredientByName(name);
         try {
             em.getTransaction().begin();
-            em.remove(user);
+            em.remove(ingredient);
             em.getTransaction().commit();
         } catch (RollbackException r) {
             em.getTransaction().rollback();

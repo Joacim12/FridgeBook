@@ -34,6 +34,14 @@ public class Recipe implements Serializable {
     public Recipe() {
     }
 
+    public Recipe(String name, String text, User user, List<Ingredient> ingredients) {
+        this.name = name;
+        this.text = text;
+        this.user = user;
+        this.rating = new Rating(user);
+        this.ingredients = ingredients;
+    }
+    
     public Recipe(String name, List<String> imagePaths, String text, User user, List<Ingredient> ingredients) {
         this.name = name;
         this.imagePaths = imagePaths;
@@ -41,6 +49,10 @@ public class Recipe implements Serializable {
         this.user = user;
         this.rating = new Rating(user);
         this.ingredients = ingredients;
+    }
+
+    public Integer getId() {
+        return id;
     }
 
     public String getName() {
