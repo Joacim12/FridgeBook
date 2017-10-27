@@ -9,14 +9,14 @@ import javax.persistence.RollbackException;
 
 public class IngredientFacade {
 
-    private EntityManagerFactory emf;
+    private final EntityManagerFactory EMF;
 
     public IngredientFacade(String persistenceUnit) {
-        this.emf = Persistence.createEntityManagerFactory(persistenceUnit);
+        this.EMF = Persistence.createEntityManagerFactory(persistenceUnit);
     }
 
     private EntityManager getEntityManager() {
-        return emf.createEntityManager();
+        return EMF.createEntityManager();
     }
 
     public static void main(String[] args) {
@@ -24,7 +24,7 @@ public class IngredientFacade {
     }
 
     private void starter() {
-        createIngredient(new Ingredient("Mælk", "26/10/2017", "1"));
+//        createIngredient(new Ingredient("Mælk", "26/10/2017", "1"));
     }
 
     public Ingredient getIngredientByName(String name) {

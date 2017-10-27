@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -24,11 +25,11 @@ public class Recipe implements Serializable {
     private List<String> imagePaths;
     @Lob
     private String text;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private User createdByUser;
-    @ManyToMany(cascade = {CascadeType.PERSIST})
-    private List<Ingredient> ingredients;
-    @ManyToMany
+    @ManyToMany(cascade = {CascadeType.PERSIST}, fetch = FetchType.EAGER)
+    private List<Ingredient> recipeIngredients;
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<User> hasRatedUsers;
 
     public Recipe() {
@@ -38,7 +39,7 @@ public class Recipe implements Serializable {
         this.name = name;
         this.text = text;
         this.createdByUser = user;
-        this.ingredients = ingredients;
+        this.recipeIngredients = ingredients;
         rateCounter = 0;
         hasRatedUsers = new ArrayList();
         hasRatedUsers.add(user);
@@ -50,7 +51,7 @@ public class Recipe implements Serializable {
         this.imagePaths = imagePaths;
         this.text = text;
         this.createdByUser = user;
-        this.ingredients = ingredients;
+        this.recipeIngredients = ingredients;
         rateCounter = 0;
         hasRatedUsers = new ArrayList();
         hasRatedUsers.add(user);
@@ -105,12 +106,12 @@ public class Recipe implements Serializable {
         this.createdByUser = createdByUser;
     }
 
-    public List<Ingredient> getIngredients() {
-        return ingredients;
+    public List<Ingredient> getRecipeIngredients() {
+        return recipeIngredients;
     }
 
-    public void setIngredients(List<Ingredient> ingredients) {
-        this.ingredients = ingredients;
+    public void setRecipeIngredients(List<Ingredient> recipeIngredients) {
+        this.recipeIngredients = recipeIngredients;
     }
 
     public List<User> getHasRatedUsers() {
@@ -123,6 +124,6 @@ public class Recipe implements Serializable {
 
     @Override
     public String toString() {
-        return "Recipe{" + "id=" + id + ", name=" + name + ", rateCounter=" + rateCounter + ", imagePaths=" + imagePaths + ", text=" + text + ", user=" + createdByUser + ", ingredients=" + ingredients + ", hasRatedUsers=" + hasRatedUsers + '}';
+        return "Recipe{" + "id=" + id + ", name=" + name + ", rateCounter=" + rateCounter + ", imagePaths=" + imagePaths + ", text=" + text + ", user=" + createdByUser + ", ingredients=" + recipeIngredients + ", hasRatedUsers=" + hasRatedUsers + '}';
     }
 }

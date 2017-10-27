@@ -5,7 +5,6 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSyntaxException;
 import entity.User;
 import facade.UserFacade;
-import java.util.List;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.Produces;
@@ -19,8 +18,8 @@ import javax.ws.rs.core.MediaType;
 @Path("user")
 public class UserResource {
 
-    Gson gson = new GsonBuilder().setPrettyPrinting().create();
-    UserFacade userFacade = new UserFacade("PU");
+    private final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
+    private final UserFacade USERFACADE = new UserFacade("PU");
 
     public UserResource() {
     }
@@ -29,8 +28,7 @@ public class UserResource {
     @Produces(MediaType.APPLICATION_JSON)
     public String getAllUsers() throws Exception {
         try {
-            List<User> users = userFacade.getUsers();
-            return gson.toJson(users);
+            return GSON.toJson(USERFACADE.getUsers());
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
@@ -41,7 +39,7 @@ public class UserResource {
     @Produces(MediaType.APPLICATION_JSON)
     public String getUserById(@PathParam("id") String username) throws Exception {
         try {
-            return gson.toJson(userFacade.getUserById(username));
+            return GSON.toJson(USERFACADE.getUserById(username));
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
@@ -51,8 +49,8 @@ public class UserResource {
     @Consumes(MediaType.APPLICATION_JSON)
     public String updateUser(String content) throws Exception {
         try {
-            User user = gson.fromJson(content, User.class);
-            userFacade.updateUser(user);
+            User user = GSON.fromJson(content, User.class);
+            USERFACADE.updateUser(user);
             return "{\"isSucced\" : \"Updated\"}";
         } catch (JsonSyntaxException e) {
             throw new Exception(e.getMessage());
@@ -63,8 +61,8 @@ public class UserResource {
     @Consumes(MediaType.APPLICATION_JSON)
     public String createUser(String content) throws Exception {
         try {
-            User user = gson.fromJson(content, User.class);
-            userFacade.createUser(user);
+            User user = GSON.fromJson(content, User.class);
+            USERFACADE.createUser(user);
             return "{\"isSucced\" : \"Created\"}";
         } catch (Exception e) {
             throw new Exception(e.getMessage());
@@ -76,7 +74,7 @@ public class UserResource {
     @Consumes(MediaType.APPLICATION_JSON)
     public String deleteBook(@PathParam("id") String username) throws Exception {
         try {
-            userFacade.deleteUser(username);
+            USERFACADE.deleteUser(username);
             return "{\"isSucced\" : \"Deleted\"}";
         } catch (Exception e) {
             throw new Exception(e.getMessage());

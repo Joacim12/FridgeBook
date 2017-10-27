@@ -3,7 +3,9 @@ package entity;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
@@ -17,11 +19,11 @@ public class User implements Serializable {
     private String userName;
     private String pin;
     @JoinColumn
-    @OneToMany(mappedBy = "createdByUser")
+    @OneToMany(mappedBy = "createdByUser", fetch = FetchType.EAGER)
     private List<Recipe> recipesCreatedByUser;
-    @ManyToMany
-    private List<Ingredient> ingredients;
-    @ManyToMany(mappedBy = "hasRatedUsers")
+    @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
+    private List<Ingredient> userIngredients;
+    @ManyToMany(mappedBy = "hasRatedUsers", cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
     private List<Recipe> favouriteRecipes;
 
     public User() {
@@ -30,7 +32,7 @@ public class User implements Serializable {
     public User(String userName, String pin) {
         this.userName = userName;
         this.pin = pin;
-        ingredients = new ArrayList();
+        userIngredients = new ArrayList();
         recipesCreatedByUser = new ArrayList();
         favouriteRecipes = new ArrayList();
     }
@@ -62,17 +64,17 @@ public class User implements Serializable {
     public void addRecipeCreatedByUser(Recipe recipe) {
         recipesCreatedByUser.add(recipe);
     }
-    
-    public List<Ingredient> getIngredients() {
-        return ingredients;
+
+    public List<Ingredient> getUserIngredients() {
+        return userIngredients;
     }
 
-    public void setIngredients(List<Ingredient> ingredients) {
-        this.ingredients = ingredients;
+    public void setUserIngredients(List<Ingredient> userIngredients) {
+        this.userIngredients = userIngredients;
     }
 
     public void addIngredient(Ingredient ingredient) {
-        ingredients.add(ingredient);
+        userIngredients.add(ingredient);
     }
 
     public List<Recipe> getFavouriteRecipes() {
@@ -85,7 +87,7 @@ public class User implements Serializable {
 
     @Override
     public String toString() {
-        return "User{" + "userName=" + userName + ", pin=" + pin + ", recipes=" + recipesCreatedByUser + ", ingredients=" + ingredients + ", favouriteRecipes=" + favouriteRecipes + '}';
+        return "User{" + "userName=" + userName + ", pin=" + pin + ", recipes=" + recipesCreatedByUser + ", ingredients=" + userIngredients + ", favouriteRecipes=" + favouriteRecipes + '}';
     }
 
 }

@@ -10,14 +10,14 @@ import javax.persistence.RollbackException;
 
 public class UserFacade {
 
-    private EntityManagerFactory emf;
+    private final EntityManagerFactory EMF;
 
     public UserFacade(String persistenceUnit) {
-        this.emf = Persistence.createEntityManagerFactory(persistenceUnit);
+        this.EMF = Persistence.createEntityManagerFactory(persistenceUnit);
     }
 
     private EntityManager getEntityManager() {
-        return emf.createEntityManager();
+        return EMF.createEntityManager();
     }
 
     public static void main(String[] args) {
@@ -25,15 +25,17 @@ public class UserFacade {
     }
 
     private void starter() {
-        User user = new User("Lars", "1234");
-        user.addIngredient(new IngredientFacade("PU").getIngredientByName("Mælk"));
-        createUser(user);
+//        User user = new User("Lars", "1234");
+//        Ingredient milk = new Ingredient("Mælk", "26/10/2017", "1");
+//        user.addIngredient(milk);
+//        createUser(user);
+        System.out.println(getUserById("Lars"));
     }
 
     public User getUserById(String username) {
         return getEntityManager().find(User.class, username);
     }
-
+    
     public List<User> getUsers() {
         return getEntityManager().createQuery("SELECT u FROM User u", User.class).getResultList();
     }

@@ -12,14 +12,14 @@ import javax.persistence.RollbackException;
 
 public class RecipeFacade {
 
-    private EntityManagerFactory emf;
+    private final EntityManagerFactory EMF;
 
     public RecipeFacade(String persistenceUnit) {
-        this.emf = Persistence.createEntityManagerFactory(persistenceUnit);
+        this.EMF = Persistence.createEntityManagerFactory(persistenceUnit);
     }
 
     private EntityManager getEntityManager() {
-        return emf.createEntityManager();
+        return EMF.createEntityManager();
     }
 
     public static void main(String[] args) {
