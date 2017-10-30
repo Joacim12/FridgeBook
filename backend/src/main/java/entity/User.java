@@ -8,7 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -19,11 +18,13 @@ public class User implements Serializable {
     private String userName;
     private String pin;
     @JoinColumn
-    @OneToMany(mappedBy = "createdByUser", fetch = FetchType.EAGER)
+    @OneToMany
     private List<Recipe> recipesCreatedByUser;
-    @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
+    @JoinColumn
+    @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
     private List<Ingredient> userIngredients;
-    @ManyToMany(mappedBy = "hasRatedUsers", cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
+    @JoinColumn
+    @OneToMany
     private List<Recipe> favouriteRecipes;
 
     public User() {
@@ -87,7 +88,7 @@ public class User implements Serializable {
 
     @Override
     public String toString() {
-        return "User{" + "userName=" + userName + ", pin=" + pin + ", recipes=" + recipesCreatedByUser + ", ingredients=" + userIngredients + ", favouriteRecipes=" + favouriteRecipes + '}';
+        return "User{" + "userName=" + userName + ", pin=" + pin + ", recipesCreatedByUser=" + recipesCreatedByUser + ", userIngredients=" + userIngredients + ", favouriteRecipes=" + favouriteRecipes + '}';
     }
 
 }

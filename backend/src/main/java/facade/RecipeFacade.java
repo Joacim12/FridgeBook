@@ -39,7 +39,7 @@ public class RecipeFacade {
     }
 
     public List<Recipe> getRecipes() {
-        return getEntityManager().createQuery("SELECT r FROM User r", Recipe.class).getResultList();
+        return getEntityManager().createQuery("SELECT r FROM Recipe r", Recipe.class).getResultList();
     }
 
     public Recipe createRecipe(Recipe recipe) {

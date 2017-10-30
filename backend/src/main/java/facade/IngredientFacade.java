@@ -32,7 +32,7 @@ public class IngredientFacade {
     }
 
     public List<Ingredient> getIngredients() {
-        return getEntityManager().createQuery("SELECT i FROM User i", Ingredient.class).getResultList();
+        return getEntityManager().createQuery("SELECT i FROM Ingredient i", Ingredient.class).getResultList();
     }
 
     public Ingredient createIngredient(Ingredient ingredient) {

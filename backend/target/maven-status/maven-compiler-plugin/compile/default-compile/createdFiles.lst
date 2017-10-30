@@ -1,10 +1,13 @@
 rest\UserResource.class
+jsonMapper\JsonIngredient.class
+jsonMapper\JsonUser.class
 entity\Ingredient_.class
 entity\User_.class
 facade\IngredientFacade.class
 entity\Ingredient.class
 entity\User.class
 entity\Recipe_.class
+jsonMapper\JsonRecipe.class
 entity\Recipe.class
 facade\RecipeFacade.class
 rest\ApplicationConfig.class

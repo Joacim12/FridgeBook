@@ -26,12 +26,8 @@ public class UserResource {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public String getAllUsers() throws Exception {
-        try {
-            return GSON.toJson(USERFACADE.getUsers());
-        } catch (Exception e) {
-            throw new Exception(e.getMessage());
-        }
+    public String getAllUsers() {
+        return GSON.toJson(USERFACADE.getUsers());
     }
 
     @GET
