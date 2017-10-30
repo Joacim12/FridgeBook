@@ -2,7 +2,6 @@ package rest;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonSyntaxException;
 import entity.User;
 import facade.UserFacade;
 import javax.ws.rs.Consumes;
@@ -33,47 +32,31 @@ public class UserResource {
     @GET
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public String getUserById(@PathParam("id") String username) throws Exception {
-        try {
-            return GSON.toJson(USERFACADE.getUserById(username));
-        } catch (Exception e) {
-            throw new Exception(e.getMessage());
-        }
+    public String getUserById(@PathParam("id") String username) {
+        return GSON.toJson(USERFACADE.getUserById(username));
     }
 
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
-    public String updateUser(String content) throws Exception {
-        try {
-            User user = GSON.fromJson(content, User.class);
-            USERFACADE.updateUser(user);
-            return "{\"isSucced\" : \"Updated\"}";
-        } catch (JsonSyntaxException e) {
-            throw new Exception(e.getMessage());
-        }
+    public String updateUser(String content) {
+        User user = GSON.fromJson(content, User.class);
+        USERFACADE.updateUser(user);
+        return "{\"isSucced\" : \"Updated\"}";
     }
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public String createUser(String content) throws Exception {
-        try {
-            User user = GSON.fromJson(content, User.class);
-            USERFACADE.createUser(user);
-            return "{\"isSucced\" : \"Created\"}";
-        } catch (Exception e) {
-            throw new Exception(e.getMessage());
-        }
+    public String createUser(String content) {
+        User user = GSON.fromJson(content, User.class);
+        USERFACADE.createUser(user);
+        return "{\"isSucced\" : \"Created\"}";
     }
 
     @DELETE
     @Path("{id}")
     @Consumes(MediaType.APPLICATION_JSON)
-    public String deleteBook(@PathParam("id") String username) throws Exception {
-        try {
-            USERFACADE.deleteUser(username);
-            return "{\"isSucced\" : \"Deleted\"}";
-        } catch (Exception e) {
-            throw new Exception(e.getMessage());
-        }
+    public String deleteBook(@PathParam("id") String username) {
+        USERFACADE.deleteUser(username);
+        return "{\"isSucced\" : \"Deleted\"}";
     }
 }

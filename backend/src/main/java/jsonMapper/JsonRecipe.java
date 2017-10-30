@@ -1,7 +1,6 @@
 package jsonMapper;
 
 import entity.Recipe;
-import entity.User;
 import java.util.ArrayList;
 import java.util.List;
 
