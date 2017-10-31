@@ -30,6 +30,7 @@ public class ApplicationConfig extends Application {
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
         resources.add(rest.IngredientResource.class);
+        resources.add(rest.RecipeResource.class);
         resources.add(rest.UserResource.class);
     }
     
