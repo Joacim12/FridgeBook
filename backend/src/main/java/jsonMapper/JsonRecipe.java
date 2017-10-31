@@ -24,6 +24,5 @@ public class JsonRecipe {
         recipe.getRecipeIngredients().forEach(ingredient -> {
             recipeIngredients.add(new JsonIngredient(ingredient));
         });
-
     }
 }

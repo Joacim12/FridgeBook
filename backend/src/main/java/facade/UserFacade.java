@@ -1,9 +1,6 @@
 package facade;
 
-import entity.Ingredient;
-import entity.Recipe;
 import entity.User;
-import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -20,29 +17,6 @@ public class UserFacade {
 
     private EntityManager getEntityManager() {
         return EMF.createEntityManager();
-    }
-
-    public static void main(String[] args) {
-        new UserFacade("PU").starter();
-    }
-
-    private void starter() {
-//        User user = new User("Lars", "1234");
-//        List<Ingredient> iList = new ArrayList();
-//        iList.add(new Ingredient("Mælk", "26/10/2017", "1"));
-//        user.setUserIngredients(iList);
-//        user.setFavouriteRecipes(new ArrayList<>());
-//        user.setRecipesCreatedByUser(new ArrayList<>());
-//        createUser(user);
-//        Recipe recipe = new Recipe();
-//        recipe.setName("Banankage");
-//        recipe.setRecipeIngredients(new IngredientFacade("PU").getIngredients());
-//        recipe.setText("Tag to mælk og bland med dit dat");
-//        User lars = getUserById("Lars");
-//        lars.getFavouriteRecipes().add(recipe);
-//        updateUser(lars);
-        System.out.println(getUserById("Lars"));
-        System.out.println(getUsers());
     }
 
     public User getUserById(String username) {

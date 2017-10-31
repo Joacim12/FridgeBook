@@ -19,14 +19,6 @@ public class IngredientFacade {
         return EMF.createEntityManager();
     }
 
-    public static void main(String[] args) {
-        new IngredientFacade("PU").starter();
-    }
-
-    private void starter() {
-//        createIngredient(new Ingredient("Mælk", "26/10/2017", "1"));
-    }
-
     public Ingredient getIngredientByName(String name) {
         return getEntityManager().find(Ingredient.class, name);
     }
@@ -37,6 +29,7 @@ public class IngredientFacade {
 
     public Ingredient createIngredient(Ingredient ingredient) {
         EntityManager em = getEntityManager();
+        ingredient.setName(ingredient.getName().substring(0, 1).toUpperCase() + ingredient.getName().substring(1).toLowerCase());
         Ingredient ingredientInDB = null;
         try {
             em.getTransaction().begin();

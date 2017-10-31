@@ -1,15 +1,16 @@
 package entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -25,8 +26,10 @@ public class Recipe implements Serializable {
     @Lob
     private String text;
     @JoinColumn
-    @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
+    @OneToMany(cascade = {CascadeType.PERSIST})
     private List<Ingredient> recipeIngredients;
+    @ManyToMany(mappedBy = "favouriteRecipes")
+    private List<User> usersWithFavourite;
 
     public Recipe() {
         rateCounter = 0;
@@ -37,6 +40,7 @@ public class Recipe implements Serializable {
         this.imagePaths = imagePaths;
         this.text = text;
         this.recipeIngredients = recipeIngredients;
+        usersWithFavourite = new ArrayList();
         rateCounter = 0;
     }
 
@@ -96,8 +100,20 @@ public class Recipe implements Serializable {
         recipeIngredients.add(ingredient);
     }
 
+    public List<User> getUsersWithFavourite() {
+        return usersWithFavourite;
+    }
+
+    public void setUsersWithFavourite(List<User> usersWithFavourite) {
+        this.usersWithFavourite = usersWithFavourite;
+    }
+
+    public void addUserWithFavourite(User user) {
+        usersWithFavourite.add(user);
+    }
+
     @Override
     public String toString() {
-        return "Recipe{" + "id=" + id + ", name=" + name + ", rateCounter=" + rateCounter + ", imagePaths=" + imagePaths + ", text=" + text + ", recipeIngredients=" + recipeIngredients + '}';
+        return "Recipe{" + "id=" + id + ", name=" + name + ", rateCounter=" + rateCounter + ", imagePaths=" + imagePaths + ", text=" + text + ", recipeIngredients=" + recipeIngredients + ", usersWithFavourite=" + usersWithFavourite + '}';
     }
 }

@@ -3,11 +3,10 @@ package entity;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -18,13 +17,12 @@ public class User implements Serializable {
     private String username;
     private String pin;
     @JoinColumn
-    @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
+    @OneToMany
     private List<Recipe> recipesCreatedByUser;
     @JoinColumn
-    @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
+    @OneToMany
     private List<Ingredient> userIngredients;
-    @JoinColumn
-    @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
+    @ManyToMany
     private List<Recipe> favouriteRecipes;
 
     public User() {

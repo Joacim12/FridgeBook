@@ -1,4 +1,5 @@
 rest\UserResource.class
+testData\TestData.class
 jsonMapper\JsonIngredient.class
 jsonMapper\JsonUser.class
 entity\Ingredient_.class

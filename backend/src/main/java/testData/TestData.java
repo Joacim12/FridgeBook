@@ -22,25 +22,35 @@ public class TestData {
     public void populateDatabase() {
         //Ingredient(String name, String imagePath, String expiryDate, String amount)
         Ingredient tomat = new Ingredient("tomat", "/imagePath", "12/12/2017", "5");
+        INGREDIENTFACADE.createIngredient(tomat);
         Ingredient ost = new Ingredient("ost", "/imagePath", "22/01/2017", "1");
+        INGREDIENTFACADE.createIngredient(ost);
         Ingredient yoghurt = new Ingredient("yoghurt", "/imagePath", "01/12/2017", "3");
+        INGREDIENTFACADE.createIngredient(yoghurt);
         Ingredient mælk = new Ingredient("mælk", "/imagePath", "01/12/2017", "4");
         Ingredient aguark = new Ingredient("aguark", "/imagePath", "31/11/2017", "2");
         Ingredient juice = new Ingredient("juice", "/imagePath", "21/12/2017", "3");
 
-        //Recipe(String name, List<String> imagePaths, String text, List<Ingredient> recipeIngredients)
+        //Recipe(String name, List<String> imagePaths, String text, List<Ingredient> recipeIngredients
         List<String> imagePaths = new ArrayList();
         imagePaths.add("/image");
         imagePaths.add("/image/2");
         imagePaths.add("/image/3");
         List<Ingredient> recipeIngredients = new ArrayList();
-        recipeIngredients.add(tomat);
-        recipeIngredients.add(ost);
+        recipeIngredients.add(mælk);
+        recipeIngredients.add(aguark);
+        recipeIngredients.add(juice);
         Recipe banankage = new Recipe("banankage", imagePaths, "Tag 1 liter yoghurt og bland med...", recipeIngredients);
         Recipe pandekage = new Recipe("pandekage", imagePaths, "Tag 1 liter yoghurt og bland med...", null);
         Recipe drømmekage = new Recipe("drømmekage", imagePaths, "Tag 1 liter yoghurt og bland med...", null);
         Recipe æblekage = new Recipe("æblekage", imagePaths, "Tag 1 liter yoghurt og bland med...", null);
         Recipe chokoladekage = new Recipe("chokoladekage", imagePaths, "Tag 1 liter yoghurt og bland med...", null);
+
+        RECIPEFACADE.createRecipe(æblekage);
+        RECIPEFACADE.createRecipe(chokoladekage);
+        RECIPEFACADE.createRecipe(drømmekage);
+        RECIPEFACADE.createRecipe(pandekage);
+        RECIPEFACADE.createRecipe(banankage);
 
         //User(String username, String pin)
         User lars = new User("Lars", "1234");
@@ -50,6 +60,9 @@ public class TestData {
         lars.addIngredient(aguark);
         lars.addIngredient(juice);
         ib.addIngredient(mælk);
+        gustav.addIngredient(yoghurt);
+        gustav.addIngredient(ost);
+        gustav.addIngredient(aguark);
 
         lars.addRecipeCreatedByUser(drømmekage);
         lars.addRecipeCreatedByUser(banankage);
@@ -63,13 +76,9 @@ public class TestData {
         gustav.addFavouriteRecipe(pandekage);
         gustav.addFavouriteRecipe(æblekage);
         gustav.addFavouriteRecipe(chokoladekage);
-        
+
         USERFACADE.createUser(lars);
         USERFACADE.createUser(ib);
         USERFACADE.createUser(gustav);
-        
-//        INGREDIENTFACADE.createIngredient(mælk);
-//        INGREDIENTFACADE.createIngredient(aguark);
-//        INGREDIENTFACADE.createIngredient(juice);
     }
 }
