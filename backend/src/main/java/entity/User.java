@@ -86,6 +86,10 @@ public class User implements Serializable {
         this.favouriteRecipes = favouriteRecipes;
     }
 
+    public void addFavouriteRecipe(Recipe recipe) {
+        favouriteRecipes.add(recipe);
+    }
+
     @Override
     public String toString() {
         return "User{" + "username=" + username + ", pin=" + pin + ", recipesCreatedByUser=" + recipesCreatedByUser + ", userIngredients=" + userIngredients + ", favouriteRecipes=" + favouriteRecipes + '}';

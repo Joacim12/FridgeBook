@@ -72,6 +72,10 @@ public class Recipe implements Serializable {
         this.imagePaths = imagePaths;
     }
 
+    public void addImagePath(String path) {
+        imagePaths.add(path);
+    }
+
     public String getText() {
         return text;
     }
@@ -86,6 +90,10 @@ public class Recipe implements Serializable {
 
     public void setRecipeIngredients(List<Ingredient> recipeIngredients) {
         this.recipeIngredients = recipeIngredients;
+    }
+
+    public void addRecipeIngredient(Ingredient ingredient) {
+        recipeIngredients.add(ingredient);
     }
 
     @Override
