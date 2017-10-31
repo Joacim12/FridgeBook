@@ -20,12 +20,9 @@ public class UserResource {
     private final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
     private final UserFacade USERFACADE = new UserFacade("PU");
 
-    public UserResource() {
-    }
-
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public String getAllUsers() {
+    public String getUsers() {
         return GSON.toJson(USERFACADE.getUsers());
     }
 
@@ -55,7 +52,7 @@ public class UserResource {
     @DELETE
     @Path("{id}")
     @Consumes(MediaType.APPLICATION_JSON)
-    public String deleteBook(@PathParam("id") String username) {
+    public String deleteUser(@PathParam("id") String username) {
         USERFACADE.deleteUser(username);
         return "Deleted";
     }
