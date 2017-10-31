@@ -27,11 +27,12 @@ public class RecipeFacade {
     }
 
     private void starter() {
-        Ingredient æg = new Ingredient("Æg", "20/10/2017", "1");
+        Ingredient æg = new Ingredient("Æg", "/imagepath", "20/10/2017", "1");
         List<Ingredient> ingredients = new ArrayList();
         ingredients.add(æg);
         User user = new UserFacade("PU").getUserById("Lars");
-        createRecipe(new Recipe("Banankage", "Tag to bananer og bland dem med med æg", user, ingredients));
+        //String name, List<String> imagePaths, String text, List<Ingredient> recipeIngredients
+        createRecipe(new Recipe("Banankage", null, "Tag to bananer og bland dem med med æg", ingredients));
     }
 
     public Recipe getRecipeById(int id) {
@@ -44,21 +45,23 @@ public class RecipeFacade {
 
     public Recipe createRecipe(Recipe recipe) {
         EntityManager em = getEntityManager();
+        Recipe recipeInDB = null;
         try {
             em.getTransaction().begin();
             em.persist(recipe);
             em.getTransaction().commit();
+            recipeInDB = em.find(Recipe.class, recipe.getId());
         } catch (RollbackException r) {
             em.getTransaction().rollback();
         } finally {
             em.close();
         }
-        return getRecipeById(recipe.getId());
+        return recipeInDB;
     }
 
     public Recipe updateRecipe(Recipe recipe) {
         EntityManager em = getEntityManager();
-        Recipe recipeInDB = getRecipeById(recipe.getId());
+        Recipe recipeInDB = em.find(Recipe.class, recipe.getId());
         try {
             em.getTransaction().begin();
             recipeInDB = em.merge(recipe);
@@ -73,7 +76,7 @@ public class RecipeFacade {
 
     public boolean deleteRecipe(int id) {
         EntityManager em = getEntityManager();
-        Recipe recipe = getRecipeById(id);
+        Recipe recipe = em.find(Recipe.class, id);
         try {
             em.getTransaction().begin();
             em.remove(recipe);

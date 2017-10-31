@@ -37,21 +37,23 @@ public class IngredientFacade {
 
     public Ingredient createIngredient(Ingredient ingredient) {
         EntityManager em = getEntityManager();
+        Ingredient ingredientInDB = null;
         try {
             em.getTransaction().begin();
             em.persist(ingredient);
             em.getTransaction().commit();
+            ingredientInDB = em.find(Ingredient.class, ingredient.getName());
         } catch (RollbackException r) {
             em.getTransaction().rollback();
         } finally {
             em.close();
         }
-        return getIngredientByName(ingredient.getName());
+        return ingredientInDB;
     }
 
     public Ingredient updateIngredient(Ingredient ingredient) {
         EntityManager em = getEntityManager();
-        Ingredient ingredientInDB = getIngredientByName(ingredient.getName());
+        Ingredient ingredientInDB = em.find(Ingredient.class, ingredient.getName());
         try {
             em.getTransaction().begin();
             ingredientInDB = em.merge(ingredient);
@@ -66,7 +68,7 @@ public class IngredientFacade {
 
     public boolean deleteIngredient(String name) {
         EntityManager em = getEntityManager();
-        Ingredient ingredient = getIngredientByName(name);
+        Ingredient ingredient = em.find(Ingredient.class, name);
         try {
             em.getTransaction().begin();
             em.remove(ingredient);

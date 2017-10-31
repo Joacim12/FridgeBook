@@ -2,7 +2,9 @@ package entity;
 
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -23,24 +25,18 @@ public class Recipe implements Serializable {
     @Lob
     private String text;
     @JoinColumn
-    @OneToMany
+    @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
     private List<Ingredient> recipeIngredients;
 
     public Recipe() {
-    }
-
-    public Recipe(String name, String text, User user, List<Ingredient> ingredients) {
-        this.name = name;
-        this.text = text;
-        this.recipeIngredients = ingredients;
         rateCounter = 0;
     }
 
-    public Recipe(String name, List<String> imagePaths, String text, User user, List<Ingredient> ingredients) {
+    public Recipe(String name, List<String> imagePaths, String text, List<Ingredient> recipeIngredients) {
         this.name = name;
         this.imagePaths = imagePaths;
         this.text = text;
-        this.recipeIngredients = ingredients;
+        this.recipeIngredients = recipeIngredients;
         rateCounter = 0;
     }
 

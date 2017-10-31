@@ -6,14 +6,14 @@ import java.util.List;
 
 public class JsonUser {
 
-    private String userName;
+    private String username;
     private String pin;
     private List<JsonRecipe> recipesCreatedByUser;
     private List<JsonIngredient> userIngredients;
     private List<JsonRecipe> favouriteRecipes;
 
     public JsonUser(User user) {
-        userName = user.getUserName();
+        username = user.getUsername();
         pin = user.getPin();
         recipesCreatedByUser = new ArrayList();
         userIngredients = new ArrayList();

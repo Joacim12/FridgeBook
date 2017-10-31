@@ -15,35 +15,35 @@ public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    private String userName;
+    private String username;
     private String pin;
     @JoinColumn
-    @OneToMany
+    @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
     private List<Recipe> recipesCreatedByUser;
     @JoinColumn
     @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
     private List<Ingredient> userIngredients;
     @JoinColumn
-    @OneToMany
+    @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
     private List<Recipe> favouriteRecipes;
 
     public User() {
     }
 
-    public User(String userName, String pin) {
-        this.userName = userName;
+    public User(String username, String pin) {
+        this.username = username;
         this.pin = pin;
         userIngredients = new ArrayList();
         recipesCreatedByUser = new ArrayList();
         favouriteRecipes = new ArrayList();
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPin() {
@@ -88,7 +88,7 @@ public class User implements Serializable {
 
     @Override
     public String toString() {
-        return "User{" + "userName=" + userName + ", pin=" + pin + ", recipesCreatedByUser=" + recipesCreatedByUser + ", userIngredients=" + userIngredients + ", favouriteRecipes=" + favouriteRecipes + '}';
+        return "User{" + "username=" + username + ", pin=" + pin + ", recipesCreatedByUser=" + recipesCreatedByUser + ", userIngredients=" + userIngredients + ", favouriteRecipes=" + favouriteRecipes + '}';
     }
 
 }

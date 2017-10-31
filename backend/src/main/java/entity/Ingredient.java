@@ -20,19 +20,6 @@ public class Ingredient implements Serializable {
     public Ingredient() {
     }
 
-    //Denne konstruktør bruges, når der skal oprettes en ny opskrift, som kræver en ingrediens der ikke allerede findes
-    public Ingredient(String name, String amount) {
-        this.name = name;
-        this.amount = amount;
-    }
-
-    public Ingredient(String name, String expiryDate, String amount) {
-        this.name = name;
-        this.addedDate = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
-        this.expiryDate = expiryDate;
-        this.amount = amount;
-    }
-
     public Ingredient(String name, String imagePath, String expiryDate, String amount) {
         this.name = name;
         this.imagePath = imagePath;

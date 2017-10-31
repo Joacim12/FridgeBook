@@ -55,21 +55,23 @@ public class UserFacade {
 
     public User createUser(User user) {
         EntityManager em = getEntityManager();
+        User userInDB = null;
         try {
             em.getTransaction().begin();
             em.persist(user);
             em.getTransaction().commit();
+            userInDB = em.find(User.class, user.getUsername());
         } catch (RollbackException r) {
             em.getTransaction().rollback();
         } finally {
             em.close();
         }
-        return getUserById(user.getUserName());
+        return userInDB;
     }
 
     public User updateUser(User user) {
         EntityManager em = getEntityManager();
-        User userInDB = getUserById(user.getUserName());
+        User userInDB = em.find(User.class, user.getUsername());
         try {
             em.getTransaction().begin();
             userInDB = em.merge(user);
@@ -84,7 +86,7 @@ public class UserFacade {
 
     public boolean deleteUser(String username) {
         EntityManager em = getEntityManager();
-        User user = getUserById(username);
+        User user = em.find(User.class, username);
         try {
             em.getTransaction().begin();
             em.remove(user);

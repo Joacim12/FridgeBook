@@ -36,20 +36,20 @@ public class UserResource {
         return GSON.toJson(USERFACADE.getUserById(username));
     }
 
-    @PUT
-    @Consumes(MediaType.APPLICATION_JSON)
-    public String updateUser(String content) {
-        User user = GSON.fromJson(content, User.class);
-        USERFACADE.updateUser(user);
-        return "{\"isSucced\" : \"Updated\"}";
-    }
-
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public String createUser(String content) {
         User user = GSON.fromJson(content, User.class);
         USERFACADE.createUser(user);
-        return "{\"isSucced\" : \"Created\"}";
+        return "Created";
+    }
+
+    @PUT
+    @Consumes(MediaType.APPLICATION_JSON)
+    public String updateUser(String content) {
+        User user = GSON.fromJson(content, User.class);
+        USERFACADE.updateUser(user);
+        return "Updated";
     }
 
     @DELETE
@@ -57,6 +57,6 @@ public class UserResource {
     @Consumes(MediaType.APPLICATION_JSON)
     public String deleteBook(@PathParam("id") String username) {
         USERFACADE.deleteUser(username);
-        return "{\"isSucced\" : \"Deleted\"}";
+        return "Deleted";
     }
 }
