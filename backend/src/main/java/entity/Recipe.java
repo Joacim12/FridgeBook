@@ -9,7 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class Recipe implements Serializable {
@@ -17,14 +17,14 @@ public class Recipe implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private int id;
     private String name;
     private int rateCounter;
     private List<String> imagePaths;
     @Lob
     private String text;
     @JoinColumn
-    @OneToMany(cascade = {CascadeType.PERSIST})
+    @ManyToMany
     private List<Ingredient> recipeIngredients;
 
     public Recipe() {
@@ -39,7 +39,7 @@ public class Recipe implements Serializable {
         rateCounter = 0;
     }
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 

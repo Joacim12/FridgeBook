@@ -1,10 +1,12 @@
 package entity;
 
 import java.io.Serializable;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Ingredient implements Serializable {
@@ -13,19 +15,19 @@ public class Ingredient implements Serializable {
     @Id
     private String name;
     private String imagePath;
-    private String addedDate;
-    private String expiryDate;
-    private String amount;
+    @OneToMany(cascade = {CascadeType.ALL})
+    private List<IngredientInfo> info;
 
     public Ingredient() {
     }
 
-    public Ingredient(String name, String imagePath, String expiryDate, String amount) {
+    public Ingredient(String name, String imagePath, IngredientInfo info) {
         this.name = name;
         this.imagePath = imagePath;
-        this.addedDate = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
-        this.expiryDate = expiryDate;
-        this.amount = amount;
+        this.info = new ArrayList();
+        if (info != null) {
+            this.info.add(info);
+        }
     }
 
     public String getName() {
@@ -44,33 +46,17 @@ public class Ingredient implements Serializable {
         this.imagePath = imagePath;
     }
 
-    public String getAddedDate() {
-        return addedDate;
+    public List<IngredientInfo> getInfo() {
+        return info;
     }
 
-    public void setAddedDate(String addedDate) {
-        this.addedDate = addedDate;
-    }
-
-    public String getExpiryDate() {
-        return expiryDate;
-    }
-
-    public void setExpiryDate(String expiryDate) {
-        this.expiryDate = expiryDate;
-    }
-
-    public String getAmount() {
-        return amount;
-    }
-
-    public void setAmount(String amount) {
-        this.amount = amount;
+    public void addInfo(IngredientInfo info) {
+        this.info.add(info);
     }
 
     @Override
     public String toString() {
-        return "Ingredient{" + "name=" + name + ", imagePath=" + imagePath + ", addedDate=" + addedDate + ", expiryDate=" + expiryDate + ", amount=" + amount + '}';
+        return "Ingredient{" + "name=" + name + ", imagePath=" + imagePath + ", info=" + info + '}';
     }
 
 }

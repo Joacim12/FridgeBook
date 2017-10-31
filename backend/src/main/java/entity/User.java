@@ -19,8 +19,7 @@ public class User implements Serializable {
     @JoinColumn
     @OneToMany
     private List<Recipe> recipesCreatedByUser;
-    @JoinColumn
-    @OneToMany
+    @ManyToMany
     private List<Ingredient> userIngredients;
     @ManyToMany
     private List<Recipe> favouriteRecipes;
@@ -74,6 +73,10 @@ public class User implements Serializable {
 
     public void addIngredient(Ingredient ingredient) {
         userIngredients.add(ingredient);
+    }
+
+    public void removeIngredient(Ingredient ingredient) {
+        userIngredients.remove(ingredient);
     }
 
     public List<Recipe> getFavouriteRecipes() {

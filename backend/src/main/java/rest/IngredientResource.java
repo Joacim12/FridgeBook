@@ -49,11 +49,11 @@ public class IngredientResource {
         return "Updated";
     }
 
-    @DELETE
-    @Path("{id}")
-    @Consumes(MediaType.APPLICATION_JSON)
-    public String deleteIngredient(@PathParam("id") String name) {
-        INGREDIENTFACADE.deleteIngredient(name);
-        return "Deleted";
-    }
+//    @DELETE
+//    @Path("{id}")
+//    @Consumes(MediaType.APPLICATION_JSON)
+//    public String deleteIngredient(@PathParam("id") String name) {
+//        INGREDIENTFACADE.deleteIngredient(name);
+//        return "Deleted";
+//    }
 }
