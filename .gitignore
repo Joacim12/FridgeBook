@@ -82,6 +82,14 @@ typings/
 # dotenv environment variables file
 .env
 
+### NetBeans ###
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+
 ### VisualStudioCode ###
 .vscode/*
 !.vscode/settings.json
@@ -92,4 +100,3 @@ typings/
 
 # META-INF
 META-INF
-/backend/nbproject/
