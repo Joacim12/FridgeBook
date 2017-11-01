@@ -1,6 +1,7 @@
 rest\UserResource.class
 testData\TestData.class
 jsonMapper\JsonIngredient.class
+facade\IngredientInfoFacade.class
 jsonMapper\JsonUser.class
 rest\RecipeResource.class
 entity\Ingredient_.class
