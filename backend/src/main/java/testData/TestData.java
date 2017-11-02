@@ -1,11 +1,10 @@
 package testData;
 
 import entity.Ingredient;
-import entity.IngredientInfo;
+import entity.Comestible;
 import entity.Recipe;
 import entity.User;
 import facade.IngredientFacade;
-import facade.IngredientInfoFacade;
 import facade.RecipeFacade;
 import facade.UserFacade;
 import java.util.ArrayList;
@@ -15,7 +14,6 @@ public class TestData {
 
     private final UserFacade USER_FACADE = new UserFacade("PU");
     private final IngredientFacade INGREDIENT_FACADE = new IngredientFacade("PU");
-    private final IngredientInfoFacade INGREDIENT_INFO_FACADE = new IngredientInfoFacade("PU");
     private final RecipeFacade RECIPE_FACADE = new RecipeFacade("PU");
 
     public static void main(String[] args) {
@@ -43,17 +41,13 @@ public class TestData {
         INGREDIENT_FACADE.createIngredient(mælk);
         INGREDIENT_FACADE.createIngredient(aguark);
 
-        //IngredientInfo(String expiryDate, String amount, Ingredient ingredient)
-        IngredientInfo ingredientInfo = new IngredientInfo("22/04/2018", "2", tomat);
-        IngredientInfo ingredientInfo2 = new IngredientInfo("22/04/2018", "2", tomat);
-        IngredientInfo ingredientInfo3 = new IngredientInfo("22/04/2018", "2", tomat);
-        IngredientInfo ingredientInfo4 = new IngredientInfo("22/04/2018", "2", tomat);
-        IngredientInfo ingredientInfo5 = new IngredientInfo("22/04/2018", "2", tomat);
-        INGREDIENT_INFO_FACADE.createIngredientInfo(ingredientInfo);
-        INGREDIENT_INFO_FACADE.createIngredientInfo(ingredientInfo2);
-        INGREDIENT_INFO_FACADE.createIngredientInfo(ingredientInfo3);
-        INGREDIENT_INFO_FACADE.createIngredientInfo(ingredientInfo4);
-        INGREDIENT_INFO_FACADE.createIngredientInfo(ingredientInfo5);
+        //Comestible(String name, String imagePath, String expiryDate, String amount)
+        Comestible peber = new Comestible("peber", "/path/to/img", "22/04/2018", "6");
+        Comestible syltetøj = new Comestible("syltetøj", "/path", "15/01/2014", "2");
+        Comestible tun = new Comestible("tun", "imgPath/", "12/05/2018", "1");
+        INGREDIENT_FACADE.createIngredient(peber);
+        INGREDIENT_FACADE.createIngredient(syltetøj);
+        INGREDIENT_FACADE.createIngredient(tun);
 
         //Recipe(String name, List<String> imagePaths, String text, List<Ingredient> recipeIngredients
         List<String> imagePaths = new ArrayList();
@@ -70,14 +64,18 @@ public class TestData {
         RECIPE_FACADE.createRecipe(pandekage);
         RECIPE_FACADE.createRecipe(banankage);
 
-        lars.addIngredient(aguark);
-        lars.addIngredient(mælk);
-        lars.addIngredient(tomat);
-        ib.addIngredient(aguark);
-        ib.addIngredient(mælk);
-        gustav.addIngredient(yoghurt);
-        gustav.addIngredient(ost);
-        gustav.addIngredient(aguark);
+        lars.addComestible(peber);
+        lars.addComestible(syltetøj);
+        lars.addComestible(tun);
+        lars.addComestible(aguark);
+        lars.addComestible(ost);
+        ib.addComestible(peber);
+        ib.addComestible(tun);
+        ib.addComestible(aguark);
+        ib.addComestible(mælk);
+        gustav.addComestible(peber);
+        gustav.addComestible(syltetøj);
+        gustav.addComestible(tomat);
 
         lars.addRecipeCreatedByUser(drømmekage);
         lars.addRecipeCreatedByUser(banankage);

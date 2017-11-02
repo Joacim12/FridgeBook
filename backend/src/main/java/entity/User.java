@@ -22,9 +22,9 @@ public class User implements Serializable {
     @OneToMany
     private List<Recipe> recipesCreatedByUser;
     @ManyToMany
-    private List<Ingredient> userIngredients;
-    @ManyToMany
     private List<Recipe> favouriteRecipes;
+    @ManyToMany
+    private List<Ingredient> comestibles;
 
     public User() {
     }
@@ -32,9 +32,9 @@ public class User implements Serializable {
     public User(String username, String pin) {
         this.username = username;
         this.pin = pin;
-        userIngredients = new ArrayList();
         recipesCreatedByUser = new ArrayList();
         favouriteRecipes = new ArrayList();
+        comestibles = new ArrayList();
     }
 
     public String getUsername() {
@@ -65,20 +65,20 @@ public class User implements Serializable {
         recipesCreatedByUser.add(recipe);
     }
 
-    public List<Ingredient> getUserIngredients() {
-        return userIngredients;
+    public List<Ingredient> getComestibles() {
+        return comestibles;
     }
 
-    public void setUserIngredients(List<Ingredient> userIngredients) {
-        this.userIngredients = userIngredients;
+    public void setComestibles(List<Ingredient> comestibles) {
+        this.comestibles = comestibles;
     }
 
-    public void addIngredient(Ingredient ingredient) {
-        userIngredients.add(ingredient);
+    public void addComestible(Ingredient comestible) {
+        comestibles.add(comestible);
     }
 
-    public void removeIngredient(Ingredient ingredient) {
-        userIngredients.remove(ingredient);
+    public void removeComestible(Ingredient comestible) {
+        comestibles.remove(comestible);
     }
 
     public List<Recipe> getFavouriteRecipes() {
@@ -93,4 +93,8 @@ public class User implements Serializable {
         favouriteRecipes.add(recipe);
     }
 
+    @Override
+    public String toString() {
+        return "User{" + "username=" + username + ", pin=" + pin + ", recipesCreatedByUser=" + recipesCreatedByUser + ", favouriteRecipes=" + favouriteRecipes + ", comestibles=" + comestibles + '}';
+    }
 }

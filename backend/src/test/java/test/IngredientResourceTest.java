@@ -2,7 +2,6 @@
 //
 //import com.google.gson.Gson;
 //import entity.Ingredient;
-//import entity.IngredientInfo;
 //import facade.IngredientFacade;
 //import io.restassured.RestAssured;
 //import static io.restassured.RestAssured.given;
@@ -30,7 +29,7 @@
 //
 //    @Test
 //    public void testGetIngredientByName() {
-//        INGREDIENTFACADE.createIngredient(new Ingredient("Smør", "/image", new IngredientInfo("12/12/2017", "5")));
+//        INGREDIENTFACADE.createIngredient(new Ingredient("Smør", "/image"));
 //
 //        given()
 //                .pathParam("id", "Smør")
@@ -43,7 +42,7 @@
 //
 //    @Test
 //    public void testCreateIngredient() {
-//        Ingredient ingredient = new Ingredient("Salat", "/image", null);
+//        Ingredient ingredient = new Ingredient("Salat", "/image");
 //        given()
 //                .contentType("application/json")
 //                .body(new Gson().toJson(ingredient))
@@ -56,7 +55,7 @@
 //
 //    @Test
 //    public void testUpdateIngredient() {
-//        INGREDIENTFACADE.createIngredient(new Ingredient("Pizza", "/image", new IngredientInfo("22/02/2015", "3")));
+//        INGREDIENTFACADE.createIngredient(new Ingredient("Pizza", "/image"));
 //
 //        Ingredient ingredient = INGREDIENTFACADE.getIngredientByName("Pizza");
 //        ingredient.setImagePath("/image/Pizza.jpg");

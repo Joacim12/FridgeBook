@@ -35,5 +35,9 @@ public class Ingredient implements Serializable {
     public void setImagePath(String imagePath) {
         this.imagePath = imagePath;
     }
-   
+
+    @Override
+    public String toString() {
+        return "Ingredient{" + "name=" + name + ", imagePath=" + imagePath + '}';
+    }
 }
