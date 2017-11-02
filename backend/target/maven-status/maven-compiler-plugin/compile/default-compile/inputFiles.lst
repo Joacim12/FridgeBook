@@ -1,7 +1,7 @@
+C:\Users\Zaeem\Documents\4. Semester\App udvikling\FridgeBook\backend\src\main\java\entity\IngredientInfo.java
 C:\Users\Zaeem\Documents\4. Semester\App udvikling\FridgeBook\backend\src\main\java\rest\IngredientResource.java
 C:\Users\Zaeem\Documents\4. Semester\App udvikling\FridgeBook\backend\src\main\java\entity\Recipe.java
 C:\Users\Zaeem\Documents\4. Semester\App udvikling\FridgeBook\backend\src\main\java\facade\IngredientFacade.java
-C:\Users\Zaeem\Documents\4. Semester\App udvikling\FridgeBook\backend\src\main\java\entity\Comestible.java
 C:\Users\Zaeem\Documents\4. Semester\App udvikling\FridgeBook\backend\src\main\java\jsonMapper\JsonIngredient.java
 C:\Users\Zaeem\Documents\4. Semester\App udvikling\FridgeBook\backend\src\main\java\entity\User.java
 C:\Users\Zaeem\Documents\4. Semester\App udvikling\FridgeBook\backend\src\main\java\jsonMapper\JsonUser.java
@@ -11,5 +11,6 @@ C:\Users\Zaeem\Documents\4. Semester\App udvikling\FridgeBook\backend\src\main\j
 C:\Users\Zaeem\Documents\4. Semester\App udvikling\FridgeBook\backend\src\main\java\entity\Ingredient.java
 C:\Users\Zaeem\Documents\4. Semester\App udvikling\FridgeBook\backend\src\main\java\rest\UserResource.java
 C:\Users\Zaeem\Documents\4. Semester\App udvikling\FridgeBook\backend\src\main\java\facade\UserFacade.java
+C:\Users\Zaeem\Documents\4. Semester\App udvikling\FridgeBook\backend\src\main\java\jsonMapper\JsonIngredientInfo.java
 C:\Users\Zaeem\Documents\4. Semester\App udvikling\FridgeBook\backend\src\main\java\testData\TestData.java
 C:\Users\Zaeem\Documents\4. Semester\App udvikling\FridgeBook\backend\src\main\java\rest\RecipeResource.java

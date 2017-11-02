@@ -1,25 +1,40 @@
 package entity;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
-public class Comestible extends Ingredient {
+public class IngredientInfo implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
     private String addedDate;
     private String expiryDate;
     private String amount;
+    @ManyToOne
+    private Ingredient ingredient;
 
-    public Comestible() {
+    public IngredientInfo() {
         addedDate = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
     }
 
-    public Comestible(String name, String imagePath, String expiryDate, String amount) {
-        super(name, imagePath);
+    public IngredientInfo(String expiryDate, String amount, Ingredient ingredient) {
         addedDate = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
         this.expiryDate = expiryDate;
         this.amount = amount;
+        this.ingredient = ingredient;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getAddedDate() {
@@ -42,9 +57,12 @@ public class Comestible extends Ingredient {
         this.amount = amount;
     }
 
-    @Override
-    public String toString() {
-        return "Comestible{" + "addedDate=" + addedDate + ", expiryDate=" + expiryDate + ", amount=" + amount + '}';
+    public Ingredient getIngredient() {
+        return ingredient;
+    }
+
+    public void setIngredient(Ingredient ingredient) {
+        this.ingredient = ingredient;
     }
 
 }

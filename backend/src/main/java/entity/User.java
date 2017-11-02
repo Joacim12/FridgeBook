@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
@@ -19,12 +20,12 @@ public class User implements Serializable {
     @Column(nullable = false)
     private String pin;
     @JoinColumn
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     private List<Recipe> recipesCreatedByUser;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Recipe> favouriteRecipes;
-    @ManyToMany
-    private List<Ingredient> comestibles;
+    @ManyToMany(fetch = FetchType.EAGER)
+    private List<Ingredient> ingredients;
 
     public User() {
     }
@@ -34,7 +35,7 @@ public class User implements Serializable {
         this.pin = pin;
         recipesCreatedByUser = new ArrayList();
         favouriteRecipes = new ArrayList();
-        comestibles = new ArrayList();
+        ingredients = new ArrayList();
     }
 
     public String getUsername() {
@@ -65,20 +66,20 @@ public class User implements Serializable {
         recipesCreatedByUser.add(recipe);
     }
 
-    public List<Ingredient> getComestibles() {
-        return comestibles;
+    public List<Ingredient> getIngredients() {
+        return ingredients;
     }
 
-    public void setComestibles(List<Ingredient> comestibles) {
-        this.comestibles = comestibles;
+    public void setIngredients(List<Ingredient> ingredients) {
+        this.ingredients = ingredients;
     }
 
-    public void addComestible(Ingredient comestible) {
-        comestibles.add(comestible);
+    public void addIngredient(Ingredient ingredient) {
+        ingredients.add(ingredient);
     }
 
     public void removeComestible(Ingredient comestible) {
-        comestibles.remove(comestible);
+        ingredients.remove(comestible);
     }
 
     public List<Recipe> getFavouriteRecipes() {
@@ -95,6 +96,6 @@ public class User implements Serializable {
 
     @Override
     public String toString() {
-        return "User{" + "username=" + username + ", pin=" + pin + ", recipesCreatedByUser=" + recipesCreatedByUser + ", favouriteRecipes=" + favouriteRecipes + ", comestibles=" + comestibles + '}';
+        return "User{" + "username=" + username + ", pin=" + pin + ", recipesCreatedByUser=" + recipesCreatedByUser + ", favouriteRecipes=" + favouriteRecipes + ", ingredients=" + ingredients + '}';
     }
 }
