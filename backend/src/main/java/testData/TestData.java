@@ -42,21 +42,17 @@ public class TestData {
         INGREDIENT_FACADE.createIngredient(aguark);
 
         //IngredientInfo(String expiryDate, String amount, Ingredient ingredient)
-        IngredientInfo tomatInfo = new IngredientInfo("22/04/2018", "6", tomat);
-        IngredientInfo mælkInfo = new IngredientInfo("22/04/2018", "6", mælk);
-        IngredientInfo ostInfo = new IngredientInfo("22/04/2018", "6", ost);
+        IngredientInfo tomatInfo = new IngredientInfo("22/04/2018", "5", tomat);
+        IngredientInfo tomatInfo2 = new IngredientInfo("31/02/2017", "1", tomat);
+        IngredientInfo mælkInfo = new IngredientInfo("22/04/2018", "4", mælk);
+        IngredientInfo ostInfo = new IngredientInfo("22/04/2018", "2", ost);
         tomat.addIngredientInfo(tomatInfo);
+        tomat.addIngredientInfo(tomatInfo2);
         mælk.addIngredientInfo(mælkInfo);
         ost.addIngredientInfo(ostInfo);
-        lars.addIngredient(yoghurt);
-        ib.addIngredient(ost);
-        gustav.addIngredient(mælk);
-        
         INGREDIENT_FACADE.updateIngredient(tomat);
         INGREDIENT_FACADE.updateIngredient(ost);
-        INGREDIENT_FACADE.updateIngredient(yoghurt);
         INGREDIENT_FACADE.updateIngredient(mælk);
-        INGREDIENT_FACADE.updateIngredient(aguark);
 
         //Recipe(String name, List<String> imagePaths, String text, List<Ingredient> recipeIngredients
         List<String> imagePaths = new ArrayList();
@@ -68,10 +64,17 @@ public class TestData {
         Recipe banankage = new Recipe("banankage", imagePaths, "Tag 1 liter yoghurt og bland med...", recipeIngredients);
         Recipe pandekage = new Recipe("pandekage", imagePaths, "Tag 1 liter yoghurt og bland med...", recipeIngredients);
         Recipe drømmekage = new Recipe("drømmekage", imagePaths, "Tag 1 liter yoghurt og bland med...", null);
-
         RECIPE_FACADE.createRecipe(drømmekage);
         RECIPE_FACADE.createRecipe(pandekage);
         RECIPE_FACADE.createRecipe(banankage);
+
+        lars.addIngredient(tomat);
+        lars.addIngredient(ost);
+        ib.addIngredient(tomat);
+        ib.addIngredient(ost);
+        ib.addIngredient(mælk);
+        gustav.addIngredient(tomat);
+        gustav.addIngredient(mælk);
 
         lars.addRecipeCreatedByUser(drømmekage);
         lars.addRecipeCreatedByUser(banankage);

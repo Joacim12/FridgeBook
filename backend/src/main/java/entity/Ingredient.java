@@ -64,11 +64,16 @@ public class Ingredient implements Serializable {
         return users;
     }
 
-    public void addUsers(List<User> users) {
+    public void setUsers(List<User> users) {
         this.users = users;
     }
 
     public void addUser(User user) {
         users.add(user);
+    }
+
+    @Override
+    public String toString() {
+        return "Ingredient{" + "name=" + name + ", imagePath=" + imagePath + ", ingredientInfos=" + ingredientInfos + ", users=" + users + '}';
     }
 }

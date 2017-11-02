@@ -65,4 +65,8 @@ public class IngredientInfo implements Serializable {
         this.ingredient = ingredient;
     }
 
+    @Override
+    public String toString() {
+        return "IngredientInfo{" + "id=" + id + ", addedDate=" + addedDate + ", expiryDate=" + expiryDate + ", amount=" + amount + ", ingredient=" + ingredient + '}';
+    }
 }
