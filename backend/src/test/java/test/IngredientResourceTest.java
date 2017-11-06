@@ -29,15 +29,11 @@
 //
 //    @Test
 //    public void testGetIngredientByName() {
-//        INGREDIENTFACADE.createIngredient(new Ingredient("Smør", "/image"));
-//
 //        given()
-//                .pathParam("id", "Smør")
+//                .pathParam("id", "Mælk")
 //                .when().get("{id}")
 //                .then().statusCode(200)
-//                .body("name", equalTo("Smør"));
-//
-//        INGREDIENTFACADE.deleteIngredient("Smør");
+//                .body("name", equalTo("Mælk"));
 //    }
 //
 //    @Test
@@ -55,17 +51,15 @@
 //
 //    @Test
 //    public void testUpdateIngredient() {
-//        INGREDIENTFACADE.createIngredient(new Ingredient("Pizza", "/image"));
 //
-//        Ingredient ingredient = INGREDIENTFACADE.getIngredientByName("Pizza");
-//        ingredient.setImagePath("/image/Pizza.jpg");
+//        Ingredient mælk = INGREDIENTFACADE.getIngredientByName("Mælk");
+//        mælk.setImagePath("/image/mælk.png");
 //        given()
 //                .contentType("application/json")
-//                .body(new Gson().toJson(ingredient))
+//                .body(new Gson().toJson(mælk))
 //                .when().put("/")
 //                .then().statusCode(200)
 //                .body(equalTo("Updated"));
 //
-//        INGREDIENTFACADE.deleteIngredient("Pizza");
 //    }
 //}

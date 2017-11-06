@@ -38,7 +38,7 @@ public class IngredientResource {
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public String getIngredientByName(@PathParam("id") String name) {
-        return GSON.toJson(INGREDIENT_FACADE.getIngredientByName(name));
+        return GSON.toJson(new IngredientJson(INGREDIENT_FACADE.getIngredientByName(name)));
     }
 
     @POST
