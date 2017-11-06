@@ -8,6 +8,7 @@ class Recipes extends React.Component {
                 <FlatList
                     data={[
                         {key: 'Devin'},
+                        {key: 'Devin1'},
                         {key: 'Jackson'},
                         {key: 'James'},
                         {key: 'Joel'},
