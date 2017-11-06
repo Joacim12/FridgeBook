@@ -1,7 +1,7 @@
 package testData;
 
 import entity.Ingredient;
-import entity.IngredientInfo;
+import entity.Comestible;
 import entity.Recipe;
 import entity.User;
 import facade.IngredientFacade;
@@ -41,18 +41,20 @@ public class TestData {
         INGREDIENT_FACADE.createIngredient(mælk);
         INGREDIENT_FACADE.createIngredient(aguark);
 
-        //IngredientInfo(String expiryDate, String amount, Ingredient ingredient)
-        IngredientInfo tomatInfo = new IngredientInfo("22/04/2018", "5", tomat);
-        IngredientInfo tomatInfo2 = new IngredientInfo("31/02/2017", "1", tomat);
-        IngredientInfo mælkInfo = new IngredientInfo("22/04/2018", "4", mælk);
-        IngredientInfo ostInfo = new IngredientInfo("22/04/2018", "2", ost);
-        tomat.addIngredientInfo(tomatInfo);
-        tomat.addIngredientInfo(tomatInfo2);
-        mælk.addIngredientInfo(mælkInfo);
-        ost.addIngredientInfo(ostInfo);
-        INGREDIENT_FACADE.updateIngredient(tomat);
-        INGREDIENT_FACADE.updateIngredient(ost);
-        INGREDIENT_FACADE.updateIngredient(mælk);
+        //Comestible(String expiryDate, String amount, Ingredient ingredient)
+        Comestible larsTomat = new Comestible("22/04/2018", "5", tomat);
+        Comestible ibTomat = new Comestible("31/02/2017", "1", tomat);
+        Comestible gustavTomat = new Comestible("31/02/2017", "1", tomat);
+        Comestible ibMælk = new Comestible("22/04/2018", "4", mælk);
+        Comestible larsOst = new Comestible("22/04/2018", "2", ost);
+        Comestible gustavOst = new Comestible("19/12/2028", "1", ost);
+
+        lars.addComestible(larsTomat);
+        lars.addComestible(larsOst);
+        ib.addComestible(ibTomat);
+        ib.addComestible(ibMælk);
+        gustav.addComestible(gustavTomat);
+        gustav.addComestible(gustavOst);
 
         //Recipe(String name, List<String> imagePaths, String text, List<Ingredient> recipeIngredients
         List<String> imagePaths = new ArrayList();
@@ -67,14 +69,6 @@ public class TestData {
         RECIPE_FACADE.createRecipe(drømmekage);
         RECIPE_FACADE.createRecipe(pandekage);
         RECIPE_FACADE.createRecipe(banankage);
-
-        lars.addIngredient(tomat);
-        lars.addIngredient(ost);
-        ib.addIngredient(tomat);
-        ib.addIngredient(ost);
-        ib.addIngredient(mælk);
-        gustav.addIngredient(tomat);
-        gustav.addIngredient(mælk);
 
         lars.addRecipeCreatedByUser(drømmekage);
         lars.addRecipeCreatedByUser(banankage);

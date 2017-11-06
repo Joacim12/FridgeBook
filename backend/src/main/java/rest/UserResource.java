@@ -21,12 +21,12 @@ import jsonMapper.UserJson;
 public class UserResource {
 
     private final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
-    private final UserFacade USERFACADE = new UserFacade("PU");
+    private final UserFacade USER_FACADE = new UserFacade("PU");
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public String getUsers() {
-        List<User> users = USERFACADE.getUsers();
+        List<User> users = USER_FACADE.getUsers();
         List<UserJson> usersJson = new ArrayList();
         users.forEach(user -> {
             usersJson.add(new UserJson(user));
@@ -38,14 +38,14 @@ public class UserResource {
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public String getUserById(@PathParam("id") String username) {
-        return GSON.toJson(new UserJson(USERFACADE.getUserById(username)));
+        return GSON.toJson(new UserJson(USER_FACADE.getUserById(username)));
     }
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public String createUser(String content) {
         User user = GSON.fromJson(content, User.class);
-        USERFACADE.createUser(user);
+        USER_FACADE.createUser(user);
         return "Created";
     }
 
@@ -53,7 +53,7 @@ public class UserResource {
     @Consumes(MediaType.APPLICATION_JSON)
     public String updateUser(String content) {
         User user = GSON.fromJson(content, User.class);
-        USERFACADE.updateUser(user);
+        USER_FACADE.updateUser(user);
         return "Updated";
     }
 
@@ -61,7 +61,7 @@ public class UserResource {
     @Path("{id}")
     @Consumes(MediaType.APPLICATION_JSON)
     public String deleteUser(@PathParam("id") String username) {
-        USERFACADE.deleteUser(username);
+        USER_FACADE.deleteUser(username);
         return "Deleted";
     }
 }

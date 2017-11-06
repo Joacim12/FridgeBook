@@ -24,8 +24,9 @@ public class User implements Serializable {
     private List<Recipe> recipesCreatedByUser;
     @ManyToMany(fetch = FetchType.EAGER)
     private List<Recipe> favouriteRecipes;
-    @ManyToMany(fetch = FetchType.EAGER)
-    private List<Ingredient> ingredients;
+    @JoinColumn
+    @OneToMany(fetch = FetchType.EAGER)
+    private List<Comestible> comestibles;
 
     public User() {
     }
@@ -35,7 +36,7 @@ public class User implements Serializable {
         this.pin = pin;
         recipesCreatedByUser = new ArrayList();
         favouriteRecipes = new ArrayList();
-        ingredients = new ArrayList();
+        comestibles = new ArrayList();
     }
 
     public String getUsername() {
@@ -58,44 +59,29 @@ public class User implements Serializable {
         return recipesCreatedByUser;
     }
 
-    public void setRecipesCreatedByUser(List<Recipe> recipesCreatedByUser) {
-        this.recipesCreatedByUser = recipesCreatedByUser;
-    }
-
     public void addRecipeCreatedByUser(Recipe recipe) {
         recipesCreatedByUser.add(recipe);
-    }
-
-    public List<Ingredient> getIngredients() {
-        return ingredients;
-    }
-
-    public void setIngredients(List<Ingredient> ingredients) {
-        this.ingredients = ingredients;
-    }
-
-    public void addIngredient(Ingredient ingredient) {
-        ingredients.add(ingredient);
-    }
-
-    public void removeComestible(Ingredient comestible) {
-        ingredients.remove(comestible);
     }
 
     public List<Recipe> getFavouriteRecipes() {
         return favouriteRecipes;
     }
 
-    public void setFavouriteRecipes(List<Recipe> favouriteRecipes) {
-        this.favouriteRecipes = favouriteRecipes;
-    }
-
     public void addFavouriteRecipe(Recipe recipe) {
         favouriteRecipes.add(recipe);
     }
 
+    public List<Comestible> getComestibles() {
+        return comestibles;
+    }
+
+    public void addComestible(Comestible comestible) {
+        comestibles.add(comestible);
+    }
+
     @Override
     public String toString() {
-        return "User{" + "username=" + username + ", pin=" + pin + ", recipesCreatedByUser=" + recipesCreatedByUser + ", favouriteRecipes=" + favouriteRecipes + ", ingredients=" + ingredients + '}';
+        return "User{" + "username=" + username + ", pin=" + pin + ", recipesCreatedByUser=" + recipesCreatedByUser + ", favouriteRecipes=" + favouriteRecipes + ", comestibles=" + comestibles + '}';
     }
+
 }

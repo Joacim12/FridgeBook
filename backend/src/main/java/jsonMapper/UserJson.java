@@ -8,16 +8,16 @@ public class UserJson {
 
     private String username;
     private String pin;
-    private List< RecipeJson> recipesCreatedByUser;
+    private List<RecipeJson> recipesCreatedByUser;
     private List<RecipeJson> favouriteRecipes;
-    private List<IngredientJson> ingredients;
+    private List<ComestibleJson> comestibles;
 
     public UserJson(User user) {
         username = user.getUsername();
         pin = user.getPin();
         recipesCreatedByUser = new ArrayList();
         favouriteRecipes = new ArrayList();
-        ingredients = new ArrayList();
+        comestibles = new ArrayList();
 
         user.getRecipesCreatedByUser().forEach(recipe -> {
             recipesCreatedByUser.add(new RecipeJson(recipe));
@@ -27,8 +27,8 @@ public class UserJson {
             favouriteRecipes.add(new RecipeJson(recipe));
         });
 
-        user.getIngredients().forEach(ingredient -> {
-            ingredients.add(new IngredientJson(ingredient));
+        user.getComestibles().forEach(comestible -> {
+            comestibles.add(new ComestibleJson(comestible));
         });
     }
 }

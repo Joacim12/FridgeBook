@@ -1,7 +1,0 @@
-entity\Ingredient.class
-entity\IngredientInfo_.class
-entity\MyUser_.class
-entity\Ingredient_.class
-facade\UserFacade.class
-entity\IngredientInfo.class
-entity\MyUser.class

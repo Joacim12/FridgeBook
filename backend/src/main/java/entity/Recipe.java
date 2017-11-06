@@ -100,4 +100,5 @@ public class Recipe implements Serializable {
     public String toString() {
         return "Recipe{" + "id=" + id + ", name=" + name + ", rateCounter=" + rateCounter + ", imagePaths=" + imagePaths + ", text=" + text + ", recipeIngredients=" + recipeIngredients + '}';
     }
+    
 }
