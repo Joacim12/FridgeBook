@@ -19,3 +19,4 @@ rest\ApplicationConfig.class
 facade\UserFacade.class
 jsonMapper\IngredientJson.class
 jsonMapper\UserJson.class
+rest\ComestibleResource.class

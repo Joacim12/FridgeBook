@@ -61,7 +61,7 @@ public class IngredientResource {
 //    @Path("{id}")
 //    @Consumes(MediaType.APPLICATION_JSON)
 //    public String deleteIngredient(@PathParam("id") String name) {
-//        INGREDIENTFACADE.deleteIngredient(name);
+//        INGREDIENT_FACADE.deleteIngredient(name);
 //        return "Deleted";
 //    }
 }
