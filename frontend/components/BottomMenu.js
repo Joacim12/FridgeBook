@@ -7,7 +7,7 @@ class BottomMenu extends React.Component {
         return (
             <View style={styles.nav}>
                 <Link to="/" underlayColor='gray' style={styles.navItem}>
-                    <Text>Home</Text>
+                    <Text>Ingredients</Text>
                 </Link>
                 <Link to="/recipes" underlayColor='gray' style={styles.navItem}>
                     <Text>Recipes</Text>

@@ -19,6 +19,7 @@ class Recipes extends React.Component {
                     ]}
                     renderItem={({item}) =>
                         <Text style={styles.item}>{item.key}</Text>
+
                     }
                 />
             </View>
