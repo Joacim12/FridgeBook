@@ -8,6 +8,7 @@ entity\User_.class
 facade\IngredientFacade.class
 rest\IngredientResource.class
 entity\Comestible.class
+facade\ComestibleFacade.class
 entity\Ingredient.class
 entity\User.class
 entity\Recipe_.class
