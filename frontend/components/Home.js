@@ -15,7 +15,7 @@ class Home extends React.Component {
     }
 
     componentDidMount() {
-        fetch('http://192.168.0.105:8084/FridgeBook/api/user/gustav')
+        fetch('https://vetterlain.dk/FridgeBook/api/user/gustav')
             .then(response => response.json())
             .then(res =>
                 this.setState({
