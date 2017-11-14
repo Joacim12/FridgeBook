@@ -3,6 +3,7 @@ package entity;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,7 +20,7 @@ public class Comestible implements Serializable {
     private String addedDate;
     private String expiryDate;
     private String amount;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.PERSIST)
     private Ingredient ingredient;
 
     public Comestible() {

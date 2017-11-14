@@ -66,7 +66,7 @@ class Home extends React.Component {
                         right: '10%',
                         bottom: '5%',
                     }}
-                    onPress={()=>{console.log("ADD INGREDIENT!")}}
+                    onPress={()=>{this.props.navigation.navigate('AddIngredient')}}
                 >
                     <Icon name={"add"} size={30} color="#fff"/>
                 </TouchableOpacity>
