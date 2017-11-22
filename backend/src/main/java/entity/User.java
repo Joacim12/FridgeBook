@@ -3,6 +3,7 @@ package entity;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -25,7 +26,7 @@ public class User implements Serializable {
     @ManyToMany(fetch = FetchType.EAGER)
     private List<Recipe> favouriteRecipes;
     @JoinColumn
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.EAGER,cascade=CascadeType.PERSIST)
     private List<Comestible> comestibles;
 
     public User() {
