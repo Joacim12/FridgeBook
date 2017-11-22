@@ -1,6 +1,7 @@
 import React from 'react'
-import {Button, Icon, List, ListItem, Text} from "react-native-elements";
-import {RefreshControl, ScrollView, TouchableOpacity, View} from "react-native";
+import { Button, Icon, List, ListItem, Text } from "react-native-elements";
+import { RefreshControl, ScrollView, TouchableOpacity, View } from "react-native";
+import AddIngredient from "./AddIngredient";
 
 class Home extends React.Component {
     static navigationOptions = {
@@ -29,29 +30,29 @@ class Home extends React.Component {
 
     onRefresh = () => {
         // Not much happening here! Should probably fetch new data :-)
-        this.setState({refreshing: false});
+        this.setState({ refreshing: false });
     }
 
 
     render() {
         return (
-            <View style={{flex:1}}>
+            <View style={{ flex: 1 }}>
                 <ScrollView
-                refreshControl={
-                    <RefreshControl refreshing={this.state.refreshing} onRefresh={this.onRefresh}/>
-                }>
-                <List>{
-                    this.state.comestibles.map((item, index) => (
-                        <ListItem
-                            key={index}
-                            title={item.ingredient.name}
-                            leftIcon={{name: item.ingredient.imagePath}}
-                            onPress={() => this.props.navigation.navigate('Ingredient', {ingredient: item})}
-                        />
-                    ))
-                }
-                </List>
-            </ScrollView>
+                    refreshControl={
+                        <RefreshControl refreshing={this.state.refreshing} onRefresh={this.onRefresh} />
+                    }>
+                    <List>{
+                        this.state.comestibles.map((item, index) => (
+                            <ListItem
+                                key={index}
+                                title={item.ingredient.name}
+                                leftIcon={{ name: item.ingredient.imagePath }}
+                                onPress={() => this.props.navigation.navigate('Ingredient', { ingredient: item })}
+                            />
+                        ))
+                    }
+                    </List>
+                </ScrollView>
                 <TouchableOpacity
                     style={{
                         borderWidth: 1,
@@ -62,13 +63,13 @@ class Home extends React.Component {
                         height: 70,
                         backgroundColor: 'red',
                         borderRadius: 100,
-                        position:'absolute',
+                        position: 'absolute',
                         right: '10%',
                         bottom: '5%',
                     }}
-                    onPress={()=>{console.log("ADD INGREDIENT!")}}
+                    onPress={() => this.props.navigation.navigate('AddIngredient')}
                 >
-                    <Icon name={"add"} size={30} color="#fff"/>
+                    <Icon name={"add"} size={30} color="#fff" />
                 </TouchableOpacity>
             </View>
         );
