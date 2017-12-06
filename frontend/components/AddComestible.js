@@ -1,80 +1,123 @@
 import React from 'react';
-import { Button, Text, TextInput, View, StyleSheet, TouchableOpacity } from "react-native";
+import { RefreshControl, TextInput, View, StyleSheet, TouchableOpacity, ScrollView } from "react-native";
+import { Button, Icon, List, ListItem, Text } from "react-native-elements";
 import DatePicker from 'react-native-datepicker';
-import Autocomplete from 'react-native-autocomplete-input';
 
 class AddComestible extends React.Component {
-    state = {
-        name: '',
+    state = {        
+        name:"",
         amount: '',
-        date: ''
+        expiryDate: '',
+        ingredient:"",
+        ingredients: null,
+        search: false,         
+        user:this.props.navigation.state.params.user,
     };
 
     static navigationOptions = ({ navigation }) => ({
-        headerRight: <Button
-            title="hej"
-            onPress={() => console.log("clicked")}
-        />
+        // headerRight: <Button
+        //     title="hej"
+        //     onPress={() => console.log("clicked")}
+        // />
     });
 
-    // componentDidMount() {
-    //     fetch('https://vetterlain.dk/FridgeBook/api/user/gustav')
-    //         .then(response => response.json())
-    //         .then(res =>
-    //             this.setState({
-    //                 username: res.username,
-    //                 comestibles: res.comestibles
-    //             })
-    //         )
-    //         .catch(error => console.log("Couldn't fetch user!!!"))
-    // };
+    componentDidMount() {
+        this.getIngredients();
+    };
+
+
+    getIngredients = async () => {
+        const ingredients = await (await fetch('https://vetterlain.dk/FridgeBook/api/ingredient')).json();
+        this.setState({ ingredients });
+    }
+
+    addComestible = async () => {
+        let comestible = {
+            expiryDate: this.state.expiryDate,
+            amount: this.state.amount,
+            ingredient:{
+                name:this.state.ingredient.name,
+                imagePath:this.state.ingredient.imagePath
+            }
+        }
+
+        let user = this.state.user; 
+        user.comestibles.push(comestible);
+
+        const options = {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            method: "PUT",
+            body: JSON.stringify(user)
+        }
+
+        const res = await fetch('https:/vetterlain.dk/FridgeBook/api/user', options);
+        console.log(res);
+    }
+
+    deleteComestible = async (id) => {
+        const options = {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            method: "DELETE"
+        }
+
+        const res = await fetch('https://vetterlain.dk/FridgeBook/api/comestible/' + id, options);
+        console.log(res);
+    }
+
+    test = () => {
+        this.setState({ search: true })
+    }
+
+    pickIngredient = (ingredient) => {
+        this.setState({
+            search: false,
+            name:ingredient.name,
+            ingredient:ingredient
+        })
+    }
 
     render() {
-        getIngredients = async () => {
-            const ingredients = await (await fetch('https://vetterlain.dk/FridgeBook/api/ingredient')).json();
-            const names = ingredients.map(ingredient => ingredient.name);
-            return names;
-        }
+        if (this.state.search) {
+            const ingredientsContainingInput = this.state.ingredients.filter(ingredient =>
+                ingredient.name.toUpperCase().substring(0, this.state.name.length) === this.state.name.toUpperCase());
+            return (
+                <View style={{ padding: 10 }}>
+                    <TextInput
+                        style={{ height: 40 }}
+                        value={this.state.name}
+                        onChangeText={(text) => { this.setState({ name: text }) }}
+                        placeholder="Navn på vare"
+                    />
 
-        addComestible = async () => {
-            const options = {
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                method: "POST",
-                body: JSON.stringify({ expiryDate: this.state.date, amount: this.state.amount, ingredient: { name: this.state.name, imagePath: "hejImage" } })
-            }
-
-            const res = await fetch('https://vetterlain.dk/FridgeBook/api/comestible', options);
-            console.log(res);
-        }
-
-        deleteComestible = async (id) => {
-            const options = {
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                method: "DELETE"
-            }
-
-            const res = await fetch('https://vetterlain.dk/FridgeBook/api/comestible/' + id, options);
-            console.log(res);
+                    <List>{
+                        ingredientsContainingInput.map((ingredient, index) => (
+                            <ListItem
+                                key={index}
+                                title={ingredient.name}
+                                leftIcon={{ name: "assignment-return" }}
+                                onPress={() => this.pickIngredient(ingredient)}
+                            />
+                        ))
+                    }
+                    </List>
+                </View>
+            )
         }
 
         return (
             <View style={{ padding: 10 }}>
-                <Text style={{ padding: 10, fontSize: 42 }}>Tilføj ny vare</Text>
                 <TextInput
                     style={{ height: 40 }}
                     placeholder="Navn på vare"
-                    onChangeText={async (input) => {
-                        const names = await getIngredients();
-                        const ingredientsContainingInput = names.filter(name => name.toUpperCase().substring(0, input.length) === input.toUpperCase());
-                        console.log(ingredientsContainingInput);
-                        this.setState({ name: input })
-                    }}
+                    value={this.state.name}
+                    onChangeText={(text) => { this.setState({ search: true ,name:text}) }}
+                    onFocus={this.test}
                 />
                 <TextInput
                     style={{ height: 40 }}
@@ -84,7 +127,8 @@ class AddComestible extends React.Component {
                 />
                 <DatePicker
                     style={{ width: 200 }}
-                    date={this.state.date}
+                    date={this.state.expiryDate}
+                    value={this.state.expiryDate}
                     mode="date"
                     placeholder="Vælg udløbsdato"
                     format="DD/MM/YYYY"
@@ -104,9 +148,9 @@ class AddComestible extends React.Component {
                         }
                         // ... You can check the source to find the other keys.
                     }}
-                    onDateChange={(date) => { this.setState({ date: date }) }}
+                    onDateChange={(date) => { this.setState({ expiryDate: date }) }}
                 />
-                <TouchableOpacity onPress={() => deleteComestible("11")}>
+                <TouchableOpacity onPress={this.addComestible}>
                     <View style={styles.button}>
                         <Text style={styles.buttonText}>Tilføj</Text>
                     </View>
@@ -117,48 +161,6 @@ class AddComestible extends React.Component {
 }
 
 const styles = StyleSheet.create({
-    container: {
-        backgroundColor: '#F5FCFF',
-        flex: 1,
-        paddingTop: 25
-    },
-    autocompleteContainer: {
-        flex: 1,
-        left: 0,
-        position: 'absolute',
-        right: 0,
-        top: 0,
-        zIndex: 1
-    },
-    itemText: {
-        fontSize: 15,
-        margin: 2
-    },
-    descriptionContainer: {
-        // `backgroundColor` needs to be set otherwise the
-        // autocomplete input will disappear on text input.
-        backgroundColor: '#F5FCFF',
-        marginTop: 25
-    },
-    infoText: {
-        textAlign: 'center'
-    },
-    titleText: {
-        fontSize: 18,
-        fontWeight: '500',
-        marginBottom: 10,
-        marginTop: 10,
-        textAlign: 'center'
-    },
-    directorText: {
-        color: 'grey',
-        fontSize: 12,
-        marginBottom: 10,
-        textAlign: 'center'
-    },
-    openingText: {
-        textAlign: 'center'
-    },
     button: {
         margin: 3,
         alignItems: 'center',

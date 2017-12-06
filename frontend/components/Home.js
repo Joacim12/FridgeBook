@@ -9,20 +9,15 @@ class Home extends React.Component {
     };
 
     state = {
-        username: '',
-        comestibles: [],
         refreshing: false,
+        user: {},
+        loading: true
     }
 
-    componentDidMount() {
+    componentDidMount = () => {
         fetch('https://vetterlain.dk/FridgeBook/api/user/gustav')
             .then(response => response.json())
-            .then(res =>
-                this.setState({
-                    username: res.username,
-                    comestibles: res.comestibles
-                })
-            )
+            .then(user => this.setState({ user: user, loading: false }))
             .catch(error => console.log("Couldn't fetch user!!!"))
     };
 
@@ -33,7 +28,16 @@ class Home extends React.Component {
     }
 
 
+
     render() {
+        if (this.state.loading) {
+            return (
+                <View>
+                    <Text>Loading</Text>
+                </View>
+            )
+        }
+
         return (
             <View style={{ flex: 1 }}>
                 <ScrollView
@@ -41,12 +45,12 @@ class Home extends React.Component {
                         <RefreshControl refreshing={this.state.refreshing} onRefresh={this.onRefresh} />
                     }>
                     <List>{
-                        this.state.comestibles.map((item, index) => (
+                        this.state.user.comestibles.map((comestible, index) => (
                             <ListItem
                                 key={index}
-                                title={item.ingredient.name}
-                                leftIcon={{ name: item.ingredient.imagePath }}
-                                onPress={() => this.props.navigation.navigate('Ingredient', { ingredient: item })}
+                                title={comestible.ingredient.name}
+                                leftIcon={{ name: comestible.ingredient.imagePath }}
+                                onPress={() => this.props.navigation.navigate('Comestible',{comestible:comestible})}
                             />
                         ))
                     }
@@ -71,7 +75,7 @@ class Home extends React.Component {
                         right: '10%',
                         bottom: '5%',
                     }}
-                    onPress={() => this.props.navigation.navigate('AddComestible')}
+                    onPress={() => this.props.navigation.navigate('AddComestible',{user:this.state.user})}
                 >
                     <Icon name={"add"} size={30} color="#fff" />
                 </TouchableOpacity>

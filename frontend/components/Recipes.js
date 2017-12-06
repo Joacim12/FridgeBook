@@ -8,27 +8,25 @@ class Recipes extends React.Component {
     };
 
     state = {
-        recipeNames: [],
+        recipes: [],
         refreshing: false,
     }
 
     componentDidMount() {
+        this.getRecipes();
+    };
+
+    getRecipes = () => {
         fetch('https://vetterlain.dk/FridgeBook/api/recipe')
             .then(response => response.json())
-            .then(recipes => {
-                recipes.forEach(recipe => {
-                    this.state.recipeNames.push(recipe.name);
-                    console.log(this.state.recipeNames);
-                })
-            }
-            )
-            .catch(error => console.log("Couldn't fetch recipes!!!"))
-    };
+            .then(recipes => { this.setState({ recipes }) })
+            .catch(error => console.log("Couldn't fetch recipes!!!"));
+    }
 
 
     onRefresh = () => {
         // Not much happening here! Should probably fetch new data :-)
-        this.setState({ refreshing: false });
+        this.setState({ refreshing: false })
     }
 
 
@@ -40,11 +38,11 @@ class Recipes extends React.Component {
                         <RefreshControl refreshing={this.state.refreshing} onRefresh={this.onRefresh} />
                     }>
                     <List>{
-                        this.state.recipeNames.map((item, index) => (
+                        this.state.recipes.map((recipe, index) => (
                             <ListItem
                                 key={index}
-                                title={item}
-                                onPress={() => this.props.navigation.navigate('Recipe', { Recipe: item })}
+                                title={recipe.name}
+                                onPress={() => this.props.navigation.navigate('Recipe', { recipe: recipe })}
                             />
                         ))
                     }
