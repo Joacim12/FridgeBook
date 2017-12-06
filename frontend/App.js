@@ -2,13 +2,16 @@ import React from 'react'
 import { StackNavigator } from 'react-navigation';
 import Home from "./components/Home";
 import Ingredient from "./components/Ingredient";
-import AddIngredient from "./components/AddIngredient";
-
+import AddComestible from "./components/AddComestible";
+import Recipes from "./components/Recipes";
+import Recipe from "./components/Recipe";
 
 const SimpleApp = StackNavigator({
   Home: { screen: Home },
   Ingredient: { screen: Ingredient },
-  AddIngredient: { screen: AddIngredient },
+  AddComestible: { screen: AddComestible },
+  Recipes: { screen: Recipes },
+  Recipe: { screen: Recipe },
 }, {
     navigationOptions: {
       title: null,

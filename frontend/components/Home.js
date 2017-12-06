@@ -1,13 +1,12 @@
 import React from 'react'
 import { Button, Icon, List, ListItem, Text } from "react-native-elements";
-import { RefreshControl, ScrollView, TouchableOpacity, View } from "react-native";
-import AddIngredient from "./AddIngredient";
+import { RefreshControl, ScrollView, TouchableOpacity, View, StyleSheet } from "react-native";
+import AddComestible from "./AddComestible";
 
 class Home extends React.Component {
     static navigationOptions = {
         title: 'FridgeBook',
     };
-
 
     state = {
         username: '',
@@ -53,6 +52,11 @@ class Home extends React.Component {
                     }
                     </List>
                 </ScrollView>
+                <TouchableOpacity onPress={() => this.props.navigation.navigate('Recipes')}>
+                    <View style={styles.button}>
+                        <Text style={styles.buttonText}>Se alle opskrifter</Text>
+                    </View>
+                </TouchableOpacity>
                 <TouchableOpacity
                     style={{
                         borderWidth: 1,
@@ -67,7 +71,7 @@ class Home extends React.Component {
                         right: '10%',
                         bottom: '5%',
                     }}
-                    onPress={() => this.props.navigation.navigate('AddIngredient')}
+                    onPress={() => this.props.navigation.navigate('AddComestible')}
                 >
                     <Icon name={"add"} size={30} color="#fff" />
                 </TouchableOpacity>
@@ -76,7 +80,21 @@ class Home extends React.Component {
     }
 }
 
-export default Home
+const styles = StyleSheet.create({
+    button: {
+        margin: 3,
+        alignItems: 'center',
+        backgroundColor: '#2196F3'
+    },
+    buttonText: {
+        padding: 7,
+        fontSize: 18,
+        fontWeight: "bold",
+        color: 'white'
+    }
+});
+
+export default Home;
 
 // <View style={{
 //     position: 'absolute',

@@ -2,7 +2,7 @@ import React from 'react'
 import { Button, Text, View } from "react-native";
 import { Divider } from "react-native-elements";
 
-class Ingredient extends React.Component {
+class Recipe extends React.Component {
     static navigationOptions = ({ navigation }) => ({
         title: navigation.state.params.ingredient.ingredient.name,
         headerRight: <Button
@@ -11,17 +11,18 @@ class Ingredient extends React.Component {
         />
     });
     render() {
-        const { ingredient } = this.props.navigation.state.params;
+        const { recipe } = this.props.navigation.state.params;
         return (
             <View>
                 <Text>{ingredient.ingredient.name}</Text>
-                <Text>Tilføjet: {ingredient.addedDate}</Text>
-                <Text>Udløbsdato: {ingredient.expiryDate}</Text>
+                <Text>Titel: {ingredient.addedDate}</Text>
+                <Text>Bedømmelse: {ingredient.expiryDate}</Text>
+                <Text>Tekst: {ingredient.expiryDate}</Text>
+                <Text>Ingredienser: {ingredient.expiryDate}</Text>
                 <Divider style={{ backgroundColor: 'gray' }} />
-                <Text>Opskrifter med denne ingrediens:</Text>
             </View>
         );
     }
 }
 
-export default Ingredient
+export default Recipe;
