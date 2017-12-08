@@ -4,9 +4,6 @@ import { RefreshControl, ScrollView, TouchableOpacity, View, StyleSheet } from "
 import AddComestible from "./AddComestible";
 
 class Home extends React.Component {
-    static navigationOptions = {
-        title: 'FridgeBook',
-    };
 
     state = {
         refreshing: false,
@@ -29,7 +26,8 @@ class Home extends React.Component {
 
 
 
-    render() {
+    render(navigation) {
+        console.log(navigation)
         if (this.state.loading) {
             return (
                 <View>
@@ -39,7 +37,7 @@ class Home extends React.Component {
         }
 
         return (
-            <View style={{ flex: 1 }}>
+            <View style={{ flex: 1, backgroundColor:"#ffffff" }}>
                 <ScrollView
                     refreshControl={
                         <RefreshControl refreshing={this.state.refreshing} onRefresh={this.onRefresh} />
@@ -56,11 +54,6 @@ class Home extends React.Component {
                     }
                     </List>
                 </ScrollView>
-                <TouchableOpacity onPress={() => this.props.navigation.navigate('Recipes')}>
-                    <View style={styles.button}>
-                        <Text style={styles.buttonText}>Se alle opskrifter</Text>
-                    </View>
-                </TouchableOpacity>
                 <TouchableOpacity
                     style={{
                         borderWidth: 1,
@@ -69,7 +62,7 @@ class Home extends React.Component {
                         justifyContent: 'center',
                         width: 70,
                         height: 70,
-                        backgroundColor: 'red',
+                        backgroundColor: '#3b9bff',
                         borderRadius: 100,
                         position: 'absolute',
                         right: '10%',

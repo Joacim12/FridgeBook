@@ -4,11 +4,7 @@ import { Divider } from "react-native-elements";
 
 class Comestible extends React.Component {
     static navigationOptions = ({ navigation }) => ({
-        title: navigation.state.params.comestible.ingredient.name,
-        // headerRight: <Button
-        //     title="something"
-        //     onPress={() => console.log("clicked")}
-        // />
+        tabBarLabel:'home',
     });
     
     render() {
