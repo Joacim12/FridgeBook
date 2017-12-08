@@ -4,7 +4,7 @@ import { RefreshControl, ScrollView, TouchableOpacity, View, StyleSheet } from "
 
 class Recipes extends React.Component {
     static navigationOptions = {
-        title: 'FridgeBook',
+        // title: 'FridgeBook',
     };
 
     state = {

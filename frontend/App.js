@@ -1,13 +1,11 @@
 import React from 'react'
 import {StackNavigator, TabNavigator} from 'react-navigation';
-import {View} from "react-native";
 import Home from "./components/Home";
 import Comestible from "./components/Comestible";
 import AddComestible from "./components/AddComestible";
 import Recipes from "./components/Recipes";
 import Shop from "./components/Shop";
 import Recipe from "./components/Recipe";
-
 
 const Start = StackNavigator({
     Home: {
@@ -32,7 +30,8 @@ const Start = StackNavigator({
             tabBarLabel: 'Home',
         }
     },
-}, {
+    }
+, {
     navigationOptions: {
         headerStyle: {marginTop: 24}
     },

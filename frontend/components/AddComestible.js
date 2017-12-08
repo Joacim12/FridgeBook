@@ -5,10 +5,10 @@ import DatePicker from 'react-native-datepicker';
 
 class AddComestible extends React.Component {
     state = {
-        name: "",
+        name: '',
         amount: '',
         expiryDate: '',
-        ingredient: "",
+        ingredient: '',
         ingredients: null,
         search: false,
         user: this.props.navigation.state.params.user,
@@ -48,7 +48,6 @@ class AddComestible extends React.Component {
         }
 
         const res = await fetch('https:/vetterlain.dk/FridgeBook/api/user', options);
-        console.log(res);
     }
 
     deleteComestible = async (id) => {
@@ -120,15 +119,14 @@ class AddComestible extends React.Component {
                 <FormInput
                     value={this.state.name}
                     placeholder="Søg efter vare..."
-                    onChangeText={(text) => {
-                        this.setSearching(text);
-                    }}
+                    onChangeText={text => this.setSearching(text)}
+                    onFocus={() => this.setState({ search: true })}
                 />
                 <FormLabel>Antal</FormLabel>
                 <FormInput
                     keyboardType="numeric"
                     placeholder="Tast antal varer..."
-                    onChangeText={(amount) => this.setState({amount})}
+                    onChangeText={amount => this.setState({ amount })}
                 />
 
                 <DatePicker
@@ -162,6 +160,7 @@ class AddComestible extends React.Component {
                     title='Tilføj'
                     onPress={this.addComestible}
                     backgroundColor={"#3B9BFF"}
+                    onDateChange={date => this.setState({ expiryDate: date })}
                 />
             </View>
         );

@@ -4,11 +4,16 @@ import { RefreshControl, ScrollView, TouchableOpacity, View, StyleSheet } from "
 import AddComestible from "./AddComestible";
 
 class Home extends React.Component {
+    static navigationOptions = {
+        //Dette ikon kan bruges til at slette varer (comestibles)
+        // <Icon name="delete" size={30} />
+    };
 
     state = {
         refreshing: false,
         user: {},
-        loading: true
+        loading: true,
+        deleteVisible: false
     }
 
     componentDidMount = () => {
@@ -24,10 +29,20 @@ class Home extends React.Component {
         this.setState({ refreshing: false });
     }
 
+    deleteComestible = async (id) => {
+        const options = {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            method: "DELETE"
+        }
 
+        const res = await fetch('https://vetterlain.dk/FridgeBook/api/comestible/' + id, options);
+        console.log(res);
+    }
 
     render(navigation) {
-        console.log(navigation)
         if (this.state.loading) {
             return (
                 <View>
@@ -48,7 +63,8 @@ class Home extends React.Component {
                                 key={index}
                                 title={comestible.ingredient.name}
                                 leftIcon={{ name: comestible.ingredient.imagePath }}
-                                onPress={() => this.props.navigation.navigate('Comestible',{comestible:comestible})}
+                                onPress={() => this.props.navigation.navigate('Comestible', { comestible: comestible })}
+                                onLongPress={() => this.setState({ deleteVisible: true })}
                             />
                         ))
                     }
@@ -68,7 +84,7 @@ class Home extends React.Component {
                         right: '10%',
                         bottom: '5%',
                     }}
-                    onPress={() => this.props.navigation.navigate('AddComestible',{user:this.state.user})}
+                    onPress={() => this.props.navigation.navigate('AddComestible', { user: this.state.user })}
                 >
                     <Icon name={"add"} size={30} color="#fff" />
                 </TouchableOpacity>
@@ -92,43 +108,3 @@ const styles = StyleSheet.create({
 });
 
 export default Home;
-
-// <View style={{
-//     position: 'absolute',
-//         left:'70%',
-//         top:'100%',
-//         right: 0,
-//         bottom: 0,
-// }}>
-// <TouchableOpacity
-// style={{
-//     borderWidth: 1,
-//         borderColor: 'rgba(0,0,0,0.2)',
-//         alignItems: 'center',
-//         justifyContent: 'center',
-//         width: 70,
-//         height: 70,
-//         backgroundColor: 'red',
-//         borderRadius: 100,
-//
-// }}
-// >
-// <Icon name={"add"} size={30} color="#fff"/>
-//     </TouchableOpacity>
-
-// <Icon
-// style={{
-//     position: 'absolute',
-//         left: '50%',
-//         top: '50%',
-//         right: 40,
-//         bottom: 20,
-// }}
-// raised
-// name='ship'
-// type='font-awesome'
-// color='#f50'
-// size={35}
-// onPress={() => console.log('hello')}
-//
-// />
