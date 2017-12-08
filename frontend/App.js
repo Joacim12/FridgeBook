@@ -6,6 +6,7 @@ import AddComestible from "./components/AddComestible";
 import Recipes from "./components/Recipes";
 import Shop from "./components/Shop";
 import Recipe from "./components/Recipe";
+import AddIngredient from "./components/AddIngredient";
 
 const Start = StackNavigator({
     Home: {
@@ -30,6 +31,13 @@ const Start = StackNavigator({
             tabBarLabel: 'Home',
         }
     },
+    AddIngredient:{
+        screen:AddIngredient,
+        navigationOptions:{
+            title:'Opret vare',
+            tabBarLabel:'Home'
+        }
+    }
     }
 , {
     navigationOptions: {
@@ -59,10 +67,24 @@ const RecipesTab = StackNavigator({
     },
 });
 
+const Maps = StackNavigator({
+    Shop: {
+        screen: Shop,
+        navigationOptions: {
+            title: "Map",
+            tabBarLabel: "Shop",
+        },
+    },
+},{
+    navigationOptions: {
+        headerStyle: {marginTop: 24}
+    },
+});
+
 const MyApp = TabNavigator({
     Home: {screen: Start},
     Recipes: {screen: RecipesTab},
-    Shop: {screen: Shop},
+    Shop: {screen: Maps},
 }, {
     tabBarPosition: 'bottom',
     animationEnabled: true,

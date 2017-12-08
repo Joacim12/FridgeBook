@@ -1,16 +1,50 @@
 import React from 'react';
 import { TextInput, View, StyleSheet, TouchableOpacity } from "react-native";
-import { Icon, List, ListItem, Text } from "react-native-elements";
+import {Button, Text} from "react-native-elements";
+import {ImagePicker} from "expo";
 
 class AddIngredient extends React.Component {
     state = {
         ingredient: {},
         ingredients: [],
+        image:{},
     };
 
     componentDidMount() {
         this.getIngredients();
     };
+
+    takePicture = async () => {
+        let result = await ImagePicker.launchCameraAsync({
+            allowsEditing: true,
+            aspect: [4, 4],
+        });
+        if (result.cancelled) {
+            return;
+        }
+        this.setState({image: result},()=>{this.uploadPicture()})
+    }
+
+    // setImageInState = () => {
+    //     this.setState({name: this.state.image.uri.split('/').pop()})
+    // }
+
+    uploadPicture = () => {
+        console.log("uploading image")
+            let localUri = this.state.image.uri;
+            let filename = localUri.split('/').pop();
+            let match = /\.(\w+)$/.exec(filename);
+            let type = match ? `image/${match[1]}` : `image`;
+            let formData = new FormData();
+            formData.append('file', {uri: localUri, name: filename, type});
+            return fetch("https://vetterlain.dk/FridgeBook/api/imageUpload", {
+                method: 'POST',
+                body: formData,
+                header: {
+                    'content-type': 'multipart/form-data',
+                },
+            });
+    }
 
 
     getIngredients = async () => {
@@ -21,11 +55,8 @@ class AddIngredient extends React.Component {
     addIngredient = async () => {
         const ingredient = {
             name: this.state.ingredient.name,
-            imagePath: this.state.ingredient.imagePath
+            imagePath: 'fridgebook/' + this.state.image.uri.split('/').pop()
         }
-
-        // this.state.user.comestibles.push(ingredient);
-
         const options = {
             headers: {
                 'Accept': 'application/json',
@@ -48,6 +79,10 @@ class AddIngredient extends React.Component {
                     value={this.state.name}
                     onChangeText={text => this.setState({ ingredient: { ...this.state.ingredient, name: text } })}
                 />
+                <Button
+                    title="TAG ET BILLEDE!!!!!!!!!!!"
+                    onPress={this.takePicture}/>
+                {/*<Text>{this.state.image?this.state.image.uri.split('/').pop():""}</Text>*/}
 
 
                 <TouchableOpacity onPress={this.addIngredient}>

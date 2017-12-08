@@ -1,6 +1,6 @@
 import React from 'react'
-import { Button, Icon, List, ListItem, Text } from "react-native-elements";
-import { RefreshControl, ScrollView, TouchableOpacity, View, StyleSheet } from "react-native";
+import {Avatar, Icon, List, ListItem, Text} from "react-native-elements";
+import {RefreshControl, ScrollView, TouchableOpacity, View, StyleSheet} from "react-native";
 import AddComestible from "./AddComestible";
 
 class Home extends React.Component {
@@ -19,14 +19,14 @@ class Home extends React.Component {
     componentDidMount = () => {
         fetch('https://vetterlain.dk/FridgeBook/api/user/gustav')
             .then(response => response.json())
-            .then(user => this.setState({ user: user, loading: false }))
+            .then(user => this.setState({user: user, loading: false}))
             .catch(error => console.log("Couldn't fetch user!!!"))
     };
 
 
     onRefresh = () => {
         // Not much happening here! Should probably fetch new data :-)
-        this.setState({ refreshing: false });
+        this.setState({refreshing: false});
     }
 
     deleteComestible = async (id) => {
@@ -52,19 +52,24 @@ class Home extends React.Component {
         }
 
         return (
-            <View style={{ flex: 1, backgroundColor:"#ffffff" }}>
+            <View style={{flex: 1, backgroundColor: "#ffffff"}}>
                 <ScrollView
                     refreshControl={
-                        <RefreshControl refreshing={this.state.refreshing} onRefresh={this.onRefresh} />
+                        <RefreshControl refreshing={this.state.refreshing} onRefresh={this.onRefresh}/>
                     }>
                     <List>{
                         this.state.user.comestibles.map((comestible, index) => (
                             <ListItem
                                 key={index}
                                 title={comestible.ingredient.name}
-                                leftIcon={{ name: comestible.ingredient.imagePath }}
-                                onPress={() => this.props.navigation.navigate('Comestible', { comestible: comestible })}
-                                onLongPress={() => this.setState({ deleteVisible: true })}
+                                avatar={<Avatar
+                                    rounded
+                                    source={'https://vetterlain.dk/images/' + comestible.ingredient.imagePath && {uri: 'https://vetterlain.dk/images/' + comestible.ingredient.imagePath}}
+                                    title={comestible.ingredient.name}
+                                />}
+                                subtitle={<Text> Udløber den: {comestible.expiryDate}</Text>}
+                                onPress={() => this.props.navigation.navigate('Comestible', {comestible: comestible})}
+                                onLongPress={() => this.setState({deleteVisible: true})}
                             />
                         ))
                     }
@@ -84,9 +89,9 @@ class Home extends React.Component {
                         right: '10%',
                         bottom: '5%',
                     }}
-                    onPress={() => this.props.navigation.navigate('AddComestible', { user: this.state.user })}
+                    onPress={() => this.props.navigation.navigate('AddComestible', {user: this.state.user})}
                 >
-                    <Icon name={"add"} size={30} color="#fff" />
+                    <Icon name={"add"} size={30} color="#fff"/>
                 </TouchableOpacity>
             </View>
         );

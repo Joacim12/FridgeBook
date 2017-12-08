@@ -1,6 +1,6 @@
 import React from 'react';
 import {RefreshControl, TextInput, View, StyleSheet, TouchableOpacity} from "react-native";
-import {Button, Icon, List, ListItem, Text, FormInput, FormLabel} from "react-native-elements";
+import {Button, Icon, List, ListItem, Text, FormInput, FormLabel, Avatar} from "react-native-elements";
 import DatePicker from 'react-native-datepicker';
 
 class AddComestible extends React.Component {
@@ -18,6 +18,7 @@ class AddComestible extends React.Component {
     componentDidMount() {
         this.getIngredients();
     };
+
 
 
     getIngredients = async () => {
@@ -75,6 +76,10 @@ class AddComestible extends React.Component {
         })
     }
 
+    addIngredientNav=()=>{
+        this.props.navigation.navigate('AddIngredient')
+    }
+
 
     render() {
         if (this.state.search) {
@@ -95,17 +100,19 @@ class AddComestible extends React.Component {
                             <ListItem
                                 key={index}
                                 title={ingredient.name}
+                                avatar={<Avatar
+                                    rounded
+                                    source={'https://vetterlain.dk/images/'+ingredient.imagePath && {uri: 'https://vetterlain.dk/images/'+ingredient.imagePath}}
+                                    title={ingredient.name}
+                                />}
                                 hideChevron
-                                leftIcon={{name: "assignment-return"}}
                                 onPress={() => this.pickIngredient(ingredient)}
                             />
                         ))
                     }
                         <ListItem
                             title={"Opret ny vare"}
-                            onPress={() => {
-                                console.log("tilføj en vare")
-                            }}
+                            onPress={()=>{this.addIngredientNav()}}
 
                         />
                     </List>
