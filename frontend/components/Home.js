@@ -6,12 +6,15 @@ import AddComestible from "./AddComestible";
 class Home extends React.Component {
     static navigationOptions = {
         title: 'FridgeBook',
+        //Dette ikon kan bruges til at slette varer (comestibles)
+        // <Icon name="delete" size={30} />
     };
 
     state = {
         refreshing: false,
         user: {},
-        loading: true
+        loading: true,
+        deleteVisible: false
     }
 
     componentDidMount = () => {
@@ -27,7 +30,18 @@ class Home extends React.Component {
         this.setState({ refreshing: false });
     }
 
+    deleteComestible = async (id) => {
+        const options = {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            method: "DELETE"
+        }
 
+        const res = await fetch('https://vetterlain.dk/FridgeBook/api/comestible/' + id, options);
+        console.log(res);
+    }
 
     render() {
         if (this.state.loading) {
@@ -50,7 +64,8 @@ class Home extends React.Component {
                                 key={index}
                                 title={comestible.ingredient.name}
                                 leftIcon={{ name: comestible.ingredient.imagePath }}
-                                onPress={() => this.props.navigation.navigate('Comestible',{comestible:comestible})}
+                                onPress={() => this.props.navigation.navigate('Comestible', { comestible: comestible })}
+                                onLongPress={() => this.setState({ deleteVisible: true })}
                             />
                         ))
                     }
@@ -75,7 +90,7 @@ class Home extends React.Component {
                         right: '10%',
                         bottom: '5%',
                     }}
-                    onPress={() => this.props.navigation.navigate('AddComestible',{user:this.state.user})}
+                    onPress={() => this.props.navigation.navigate('AddComestible', { user: this.state.user })}
                 >
                     <Icon name={"add"} size={30} color="#fff" />
                 </TouchableOpacity>

@@ -4,14 +4,14 @@ import { Button, Icon, List, ListItem, Text } from "react-native-elements";
 import DatePicker from 'react-native-datepicker';
 
 class AddComestible extends React.Component {
-    state = {        
-        name:"",
+    state = {
+        name: '',
         amount: '',
         expiryDate: '',
-        ingredient:"",
+        ingredient: '',
         ingredients: null,
-        search: false,         
-        user:this.props.navigation.state.params.user,
+        search: false,
+        user: this.props.navigation.state.params.user,
     };
 
     static navigationOptions = ({ navigation }) => ({
@@ -35,13 +35,13 @@ class AddComestible extends React.Component {
         let comestible = {
             expiryDate: this.state.expiryDate,
             amount: this.state.amount,
-            ingredient:{
-                name:this.state.ingredient.name,
-                imagePath:this.state.ingredient.imagePath
+            ingredient: {
+                name: this.state.ingredient.name,
+                imagePath: this.state.ingredient.imagePath
             }
         }
 
-        let user = this.state.user; 
+        let user = this.state.user;
         user.comestibles.push(comestible);
 
         const options = {
@@ -54,31 +54,14 @@ class AddComestible extends React.Component {
         }
 
         const res = await fetch('https:/vetterlain.dk/FridgeBook/api/user', options);
-        console.log(res);
-    }
-
-    deleteComestible = async (id) => {
-        const options = {
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            method: "DELETE"
-        }
-
-        const res = await fetch('https://vetterlain.dk/FridgeBook/api/comestible/' + id, options);
-        console.log(res);
-    }
-
-    test = () => {
-        this.setState({ search: true })
+        // console.log(res);
     }
 
     pickIngredient = (ingredient) => {
         this.setState({
             search: false,
-            name:ingredient.name,
-            ingredient:ingredient
+            name: ingredient.name,
+            ingredient: ingredient
         })
     }
 
@@ -116,14 +99,14 @@ class AddComestible extends React.Component {
                     style={{ height: 40 }}
                     placeholder="Navn på vare"
                     value={this.state.name}
-                    onChangeText={(text) => { this.setState({ search: true ,name:text}) }}
-                    onFocus={this.test}
+                    onChangeText={text => this.setState({ search: true, name: text })}
+                    onFocus={() => this.setState({ search: true })}
                 />
                 <TextInput
                     style={{ height: 40 }}
                     placeholder="Antal"
                     keyboardType="numeric"
-                    onChangeText={(amount) => this.setState({ amount })}
+                    onChangeText={amount => this.setState({ amount })}
                 />
                 <DatePicker
                     style={{ width: 200 }}
@@ -148,7 +131,7 @@ class AddComestible extends React.Component {
                         }
                         // ... You can check the source to find the other keys.
                     }}
-                    onDateChange={(date) => { this.setState({ expiryDate: date }) }}
+                    onDateChange={date => this.setState({ expiryDate: date })}
                 />
                 <TouchableOpacity onPress={this.addComestible}>
                     <View style={styles.button}>
