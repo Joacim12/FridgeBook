@@ -62,6 +62,7 @@ class Home extends React.Component {
                             <ListItem
                                 key={index}
                                 title={comestible.ingredient.name}
+                                badge={{ value: comestible.amount, textStyle: { color: 'white' }, containerStyle: {marginTop: 0, backgroundColor:'#3b9bff' } }}
                                 avatar={<Avatar
                                     rounded
                                     source={'https://vetterlain.dk/images/' + comestible.ingredient.imagePath && {uri: 'https://vetterlain.dk/images/' + comestible.ingredient.imagePath}}

@@ -36,7 +36,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="package.json" pinned="false" current-in-tab="true">
+      <file leaf-file-name="package.json" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/package.json">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="238">
@@ -58,14 +58,24 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Home.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Comestible.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/components/Comestible.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="745">
+              <caret line="79" column="51" lean-forward="false" selection-start-line="79" selection-start-column="51" selection-end-line="79" selection-end-column="51" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Home.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/components/Home.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-255">
-              <caret line="69" column="49" lean-forward="false" selection-start-line="69" selection-start-column="49" selection-end-line="69" selection-end-column="49" />
+            <state relative-caret-position="419">
+              <caret line="79" column="28" lean-forward="true" selection-start-line="79" selection-start-column="28" selection-end-line="79" selection-end-column="28" />
               <folding>
                 <element signature="e#0#25#0" expanded="true" />
-                <marker date="1512747747735" expanded="true" signature="3577:3698" ph="&lt;TouchableOpacity/&gt;" />
+                <marker date="1512749085881" expanded="true" signature="3737:3858" ph="&lt;TouchableOpacity/&gt;" />
               </folding>
             </state>
           </provider>
@@ -106,9 +116,9 @@
         <option value="$PROJECT_DIR$/App.js" />
         <option value="$PROJECT_DIR$/components/Shop.js" />
         <option value="$PROJECT_DIR$/components/AddIngredient.js" />
-        <option value="$PROJECT_DIR$/components/Home.js" />
         <option value="$PROJECT_DIR$/components/AddComestible.js" />
         <option value="$PROJECT_DIR$/package.json" />
+        <option value="$PROJECT_DIR$/components/Home.js" />
       </list>
     </option>
   </component>
@@ -223,12 +233,12 @@
       <workItem from="1510591983333" duration="3250000" />
       <workItem from="1512675969372" duration="44000" />
       <workItem from="1512676036471" duration="12713000" />
-      <workItem from="1512720970550" duration="20974000" />
+      <workItem from="1512720970550" duration="21650000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="75095000" />
+    <option name="totallyTimeSpent" value="75771000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -404,26 +414,6 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/components/Comestible.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1191">
-          <caret line="79" column="51" lean-forward="false" selection-start-line="79" selection-start-column="51" selection-end-line="79" selection-end-column="51" />
-          <folding>
-            <element signature="e#0#25#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/App.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="498">
-          <caret line="86" column="23" lean-forward="false" selection-start-line="86" selection-start-column="23" selection-end-line="86" selection-end-column="23" />
-          <folding>
-            <marker date="1512736932529" expanded="true" signature="1096:1097" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/components/Shop.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
@@ -431,17 +421,6 @@
           <folding>
             <marker date="1512743363848" expanded="true" signature="296:314" ph="..." />
             <marker date="1512743363848" expanded="true" signature="314:367" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/components/Home.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-255">
-          <caret line="69" column="49" lean-forward="false" selection-start-line="69" selection-start-column="49" selection-end-line="69" selection-end-column="49" />
-          <folding>
-            <element signature="e#0#25#0" expanded="true" />
-            <marker date="1512747747735" expanded="true" signature="3577:3698" ph="&lt;TouchableOpacity/&gt;" />
           </folding>
         </state>
       </provider>
@@ -485,6 +464,35 @@
         <state relative-caret-position="238">
           <caret line="14" column="17" lean-forward="false" selection-start-line="14" selection-start-column="17" selection-end-line="14" selection-end-column="17" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/App.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="498">
+          <caret line="86" column="23" lean-forward="false" selection-start-line="86" selection-start-column="23" selection-end-line="86" selection-end-column="23" />
+          <folding>
+            <marker date="1512736932529" expanded="true" signature="1096:1097" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/Comestible.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="745">
+          <caret line="79" column="51" lean-forward="false" selection-start-line="79" selection-start-column="51" selection-end-line="79" selection-end-column="51" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/Home.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="419">
+          <caret line="79" column="28" lean-forward="true" selection-start-line="79" selection-start-column="28" selection-end-line="79" selection-end-column="28" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+            <marker date="1512749085881" expanded="true" signature="3737:3858" ph="&lt;TouchableOpacity/&gt;" />
+          </folding>
         </state>
       </provider>
     </entry>
