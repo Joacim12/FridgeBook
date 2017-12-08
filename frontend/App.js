@@ -14,28 +14,28 @@ const Start = StackNavigator({
         path: '/',
         navigationOptions: {
             title: 'Fridgebook',
-            tabBarLabel: 'Home',
+            tabBarLabel: 'Varer',
         },
     },
     AddComestible: {
         screen: AddComestible,
         navigationOptions: {
             title: 'Tilføj vare',
-            tabBarLabel: 'Home',
+            tabBarLabel: 'Varer',
         }
     },
     Comestible: {
         screen: Comestible,
         navigationOptions: {
             title: 'Ingrediens',
-            tabBarLabel: 'Home',
+            tabBarLabel: 'Varer',
         }
     },
     AddIngredient:{
         screen:AddIngredient,
         navigationOptions:{
             title:'Opret vare',
-            tabBarLabel:'Home'
+            tabBarLabel:'Varer'
         }
     }
     }
