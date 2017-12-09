@@ -1,18 +1,17 @@
-{
+﻿{
   "expo": {
     "name": "fridgebook",
     "description": "Se hvad der er i dit køleskab!",
     "slug": "fridgebook",
     "privacy": "public",
     "sdkVersion": "22.0.0",
-    "version": "0.2",
-    "versionCode":"0,2",
+    "version": "0.0.2",    
     "orientation": "portrait",
     "primaryColor": "#cccccc",
     "icon": "./assets/icon.png",
     "splash": {
       "image": "./assets/splash.png",
-      "resizeMode": "stretch",
+      "resizeMode": "cover",
       "backgroundColor": "#ffffff"
     },
     "packagerOpts": {
@@ -25,7 +24,8 @@
       "supportsTablet": true
     },
     "android": {
-      "package": "dk.vetterlain.fridgebook"
+      "package": "com.companyName.appname",
+	"versionCode":"2",
     }
   }
 }

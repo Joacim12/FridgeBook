@@ -3,9 +3,6 @@ import { Button, Icon, List, ListItem, Text } from "react-native-elements";
 import { RefreshControl, ScrollView, TouchableOpacity, View, StyleSheet } from "react-native";
 
 class Recipes extends React.Component {
-    static navigationOptions = {
-        // title: 'FridgeBook',
-    };
 
     state = {
         recipes: [],

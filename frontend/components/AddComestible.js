@@ -48,7 +48,9 @@ class AddComestible extends React.Component {
             body: JSON.stringify(user)
         }
 
-        const res = await fetch('https:/vetterlain.dk/FridgeBook/api/user', options);
+        const res = await fetch('https:/vetterlain.dk/FridgeBook/api/user', options).then(()=>{
+            this.props.navigation.navigate('Home');
+        });
     }
 
     deleteComestible = async (id) => {
@@ -102,7 +104,7 @@ class AddComestible extends React.Component {
                                 title={ingredient.name}
                                 avatar={<Avatar
                                     rounded
-                                    source={'https://vetterlain.dk/images/'+ingredient.imagePath && {uri: 'https://vetterlain.dk/images/'+ingredient.imagePath}}
+                                    source={{uri: 'https://vetterlain.dk/images/'+ingredient.imagePath}}
                                     title={ingredient.name}
                                 />}
                                 hideChevron
