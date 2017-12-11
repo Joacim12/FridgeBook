@@ -25,6 +25,7 @@ class AddIngredient extends React.Component {
         this.setState({image: result},()=>{this.uploadPicture()})
     }
 
+//
     // setImageInState = () => {
     //     this.setState({name: this.state.image.uri.split('/').pop()})
     // }
