@@ -18,6 +18,7 @@ class AddIngredient extends React.Component {
         let result = await ImagePicker.launchCameraAsync({
             allowsEditing: true,
             aspect: [4, 4],
+            quality:0.1
         });
         if (result.cancelled) {
             return;
@@ -67,7 +68,9 @@ class AddIngredient extends React.Component {
             body: JSON.stringify(ingredient)
         }
 
-        const res = await fetch('https:/vetterlain.dk/FridgeBook/api/ingredient', options);
+        const res = await fetch('https:/vetterlain.dk/FridgeBook/api/ingredient', options).then(()=>{
+            this.props.navigation.goBack();
+        });
         console.log(res);
     }
 

@@ -1,7 +1,8 @@
 import React from 'react'
 import {Avatar, Icon, List, ListItem, Text} from "react-native-elements";
-import {RefreshControl, ScrollView, TouchableOpacity, View, StyleSheet} from "react-native";
+import {RefreshControl, ScrollView, TouchableOpacity, View, StyleSheet, Image} from "react-native";
 import AddComestible from "./AddComestible";
+import {AppLoading, Asset} from "expo";
 
 class Home extends React.Component {
     static navigationOptions = {
@@ -16,12 +17,15 @@ class Home extends React.Component {
         deleteVisible: false
     }
 
-    componentDidMount = () => {
-        fetch('https://vetterlain.dk/FridgeBook/api/user/gustav')
-            .then(response => response.json())
-            .then(user => this.setState({user: user, loading: false}))
-            .catch(error => console.log("Couldn't fetch user!!!"))
+    componentDidMount() {
+        this.getUser();
     };
+
+
+    getUser = async () => {
+        const user = await (await fetch('https://vetterlain.dk/FridgeBook/api/user/gustav')).json();
+        this.setState({user, loading: false});
+    }
 
 
     onRefresh = () => {
@@ -42,7 +46,8 @@ class Home extends React.Component {
         console.log(res);
     }
 
-    render(navigation) {
+
+    render() {
         if (this.state.loading) {
             return (
                 <View>
@@ -62,10 +67,14 @@ class Home extends React.Component {
                             <ListItem
                                 key={index}
                                 title={comestible.ingredient.name}
-                                badge={{ value: comestible.amount, textStyle: { color: 'white' }, containerStyle: {marginTop: 0, backgroundColor:'#3b9bff' } }}
+                                badge={{
+                                    value: comestible.amount,
+                                    textStyle: {color: 'white'},
+                                    containerStyle: {marginTop: 0, backgroundColor: '#3b9bff'}
+                                }}
                                 avatar={<Avatar
                                     rounded
-                                    source={'https://vetterlain.dk/images/' + comestible.ingredient.imagePath && {uri: 'https://vetterlain.dk/images/' + comestible.ingredient.imagePath}}
+                                    source={{uri: 'https://vetterlain.dk/images/' + comestible.ingredient.imagePath}}
                                     title={comestible.ingredient.name}
                                 />}
                                 subtitle={<Text> Udløber den: {comestible.expiryDate}</Text>}
