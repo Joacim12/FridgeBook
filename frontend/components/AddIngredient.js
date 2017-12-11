@@ -1,13 +1,13 @@
 import React from 'react';
 import { TextInput, View, StyleSheet, TouchableOpacity } from "react-native";
-import {Button, Text} from "react-native-elements";
-import {ImagePicker} from "expo";
+import { Button, Text } from "react-native-elements";
+import { ImagePicker } from "expo";
 
 class AddIngredient extends React.Component {
     state = {
         ingredient: {},
         ingredients: [],
-        image:{},
+        image: {},
     };
 
     componentDidMount() {
@@ -18,34 +18,33 @@ class AddIngredient extends React.Component {
         let result = await ImagePicker.launchCameraAsync({
             allowsEditing: true,
             aspect: [4, 4],
-            quality:0.1
+            quality: 0.1
         });
         if (result.cancelled) {
             return;
         }
-        this.setState({image: result},()=>{this.uploadPicture()})
+        this.setState({ image: result }, () => { this.uploadPicture() })
     }
 
-//
     // setImageInState = () => {
     //     this.setState({name: this.state.image.uri.split('/').pop()})
     // }
 
     uploadPicture = () => {
         console.log("uploading image")
-            let localUri = this.state.image.uri;
-            let filename = localUri.split('/').pop();
-            let match = /\.(\w+)$/.exec(filename);
-            let type = match ? `image/${match[1]}` : `image`;
-            let formData = new FormData();
-            formData.append('file', {uri: localUri, name: filename, type});
-            return fetch("https://vetterlain.dk/FridgeBook/api/imageUpload", {
-                method: 'POST',
-                body: formData,
-                header: {
-                    'content-type': 'multipart/form-data',
-                },
-            });
+        let localUri = this.state.image.uri;
+        let filename = localUri.split('/').pop();
+        let match = /\.(\w+)$/.exec(filename);
+        let type = match ? `image/${match[1]}` : `image`;
+        let formData = new FormData();
+        formData.append('file', { uri: localUri, name: filename, type });
+        return fetch("https://vetterlain.dk/FridgeBook/api/imageUpload", {
+            method: 'POST',
+            body: formData,
+            header: {
+                'content-type': 'multipart/form-data',
+            },
+        });
     }
 
 
@@ -68,7 +67,7 @@ class AddIngredient extends React.Component {
             body: JSON.stringify(ingredient)
         }
 
-        const res = await fetch('https:/vetterlain.dk/FridgeBook/api/ingredient', options).then(()=>{
+        const res = await fetch('https:/vetterlain.dk/FridgeBook/api/ingredient', options).then(() => {
             this.props.navigation.goBack();
         });
         console.log(res);
@@ -85,7 +84,7 @@ class AddIngredient extends React.Component {
                 />
                 <Button
                     title="TAG ET BILLEDE!!!!!!!!!!!"
-                    onPress={this.takePicture}/>
+                    onPress={this.takePicture} />
                 {/*<Text>{this.state.image?this.state.image.uri.split('/').pop():""}</Text>*/}
 
 
