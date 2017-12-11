@@ -1,10 +1,18 @@
 import React from 'react'
-import {Avatar, Icon, List, ListItem, Text} from "react-native-elements";
-import {RefreshControl, ScrollView, TouchableOpacity, View, StyleSheet, Image} from "react-native";
+import { Avatar, Icon, List, ListItem, Text } from "react-native-elements";
+import { RefreshControl, ScrollView, TouchableOpacity, View, StyleSheet, Image } from "react-native";
 import AddComestible from "./AddComestible";
-import {AppLoading, Asset} from "expo";
+import { AppLoading, Asset } from "expo";
 
 class Home extends React.Component {
+
+    static navigationOptions = ({ navigation }) => (
+        {
+            title: 'Fridgebook',
+            tabBarLabel: 'Varer',
+        });
+
+
     static navigationOptions = {
         //Dette ikon kan bruges til at slette varer (comestibles)
         // <Icon name="delete" size={30} />
@@ -18,19 +26,20 @@ class Home extends React.Component {
     }
 
     componentDidMount() {
+
         this.getUser();
     };
 
 
     getUser = async () => {
         const user = await (await fetch('https://vetterlain.dk/FridgeBook/api/user/gustav')).json();
-        this.setState({user, loading: false});
+        this.setState({ user, loading: false });
     }
 
 
     onRefresh = () => {
         // Not much happening here! Should probably fetch new data :-)
-        this.setState({refreshing: false});
+        this.setState({ refreshing: false });
     }
 
     deleteComestible = async (id) => {
@@ -48,6 +57,7 @@ class Home extends React.Component {
 
 
     render() {
+
         if (this.state.loading) {
             return (
                 <View>
@@ -57,10 +67,10 @@ class Home extends React.Component {
         }
 
         return (
-            <View style={{flex: 1, backgroundColor: "#ffffff"}}>
+            <View style={{ flex: 1, backgroundColor: "#ffffff" }}>
                 <ScrollView
                     refreshControl={
-                        <RefreshControl refreshing={this.state.refreshing} onRefresh={this.onRefresh}/>
+                        <RefreshControl refreshing={this.state.refreshing} onRefresh={this.onRefresh} />
                     }>
                     <List>{
                         this.state.user.comestibles.map((comestible, index) => (
@@ -69,17 +79,17 @@ class Home extends React.Component {
                                 title={comestible.ingredient.name}
                                 badge={{
                                     value: comestible.amount,
-                                    textStyle: {color: 'white'},
-                                    containerStyle: {marginTop: 0, backgroundColor: '#3b9bff'}
+                                    textStyle: { color: 'white' },
+                                    containerStyle: { marginTop: 0, backgroundColor: '#3b9bff' }
                                 }}
                                 avatar={<Avatar
-                                    rounded
-                                    source={{uri: 'https://vetterlain.dk/images/' + comestible.ingredient.imagePath}}
+                                    source={{ uri: 'https://vetterlain.dk/images/' + comestible.ingredient.imagePath }}
                                     title={comestible.ingredient.name}
                                 />}
                                 subtitle={<Text> Udløber den: {comestible.expiryDate}</Text>}
-                                onPress={() => this.props.navigation.navigate('Comestible', {comestible: comestible})}
-                                onLongPress={() => this.setState({deleteVisible: true})}
+                                onPress={() =>
+                                    this.props.navigation.navigate('Comestible', { comestible: comestible, getUser: this.getUser })}
+                                onLongPress={() => this.setState({ deleteVisible: true })}
                             />
                         ))
                     }
@@ -99,9 +109,9 @@ class Home extends React.Component {
                         right: '10%',
                         bottom: '5%',
                     }}
-                    onPress={() => this.props.navigation.navigate('AddComestible', {user: this.state.user})}
+                    onPress={() => this.props.navigation.navigate('AddComestible', { user: this.state.user })}
                 >
-                    <Icon name={"add"} size={30} color="#fff"/>
+                    <Icon name={"add"} size={30} color="#fff" />
                 </TouchableOpacity>
             </View>
         );

@@ -1,11 +1,11 @@
 ﻿{
   "expo": {
-    "name": "fridgebook",
+    "name": "FridgeBook",
     "description": "Se hvad der er i dit køleskab!",
-    "slug": "fridgebook",
+    "slug": "FridgeBook",
     "privacy": "public",
     "sdkVersion": "22.0.0",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "orientation": "portrait",
     "primaryColor": "#cccccc",
     "icon": "./assets/icon.png",
@@ -25,7 +25,7 @@
     },
     "android": {
       "package": "com.companyName.appname",
-      "versionCode": 2
+      "versionCode": 3
     }
   }
 }

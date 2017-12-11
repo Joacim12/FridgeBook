@@ -1,5 +1,5 @@
 import React from 'react'
-import {StackNavigator, TabNavigator} from 'react-navigation';
+import { StackNavigator, TabNavigator } from 'react-navigation';
 import Home from "./components/Home";
 import Comestible from "./components/Comestible";
 import AddComestible from "./components/AddComestible";
@@ -12,10 +12,6 @@ const Start = StackNavigator({
     Home: {
         screen: Home,
         path: '/',
-        navigationOptions: {
-            title: 'Fridgebook',
-            tabBarLabel: 'Varer',
-        },
     },
     AddComestible: {
         screen: AddComestible,
@@ -26,24 +22,21 @@ const Start = StackNavigator({
     },
     Comestible: {
         screen: Comestible,
+
+    },
+    AddIngredient: {
+        screen: AddIngredient,
         navigationOptions: {
-            title: 'Ingrediens',
-            tabBarLabel: 'Varer',
-        }
-    },
-    AddIngredient:{
-        screen:AddIngredient,
-        navigationOptions:{
-            title:'Opret vare',
-            tabBarLabel:'Varer'
+            title: 'Opret vare',
+            tabBarLabel: 'Varer'
         }
     }
-    }
-, {
-    navigationOptions: {
-        headerStyle: {marginTop: 24}
-    },
-});
+}
+    , {
+        navigationOptions: {
+            headerStyle: { marginTop: 24 }
+        },
+    });
 
 
 const RecipesTab = StackNavigator({
@@ -62,10 +55,10 @@ const RecipesTab = StackNavigator({
         }
     },
 }, {
-    navigationOptions: {
-        headerStyle: {marginTop: 24}
-    },
-});
+        navigationOptions: {
+            headerStyle: { marginTop: 24 }
+        },
+    });
 
 const Maps = StackNavigator({
     Shop: {
@@ -75,37 +68,37 @@ const Maps = StackNavigator({
             tabBarLabel: "Shop",
         },
     },
-},{
-    navigationOptions: {
-        headerStyle: {marginTop: 24}
-    },
-});
+}, {
+        navigationOptions: {
+            headerStyle: { marginTop: 24 }
+        },
+    });
 
 const MyApp = TabNavigator({
-    Home: {screen: Start},
-    Recipes: {screen: RecipesTab},
-    Shop: {screen: Maps},
+    Home: { screen: Start },
+    Recipes: { screen: RecipesTab },
+    Shop: { screen: Maps },
 }, {
-    tabBarPosition: 'bottom',
-    animationEnabled: true,
-    indicatorStyle:{backgroundColor:"red"},
-    tabBarOptions: {
-        activeTintColor:'white',
-        inactiveTintColor:'#D3D3D3',
-        style:{
-            backgroundColor:'#3b9bff',
+        tabBarPosition: 'bottom',
+        animationEnabled: true,
+        indicatorStyle: { backgroundColor: "red" },
+        tabBarOptions: {
+            activeTintColor: 'white',
+            inactiveTintColor: '#D3D3D3',
+            style: {
+                backgroundColor: '#3b9bff',
+            },
+            indicatorStyle: {
+                backgroundColor: 'white',
+            },
         },
-        indicatorStyle: {
-            backgroundColor: 'white',
-        },
-    },
-});
+    });
 
 
 export default class App extends React.Component {
     render() {
         return (
-            <MyApp/>
+            <MyApp />
         )
     }
 }
