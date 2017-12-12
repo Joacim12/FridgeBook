@@ -11,3 +11,4 @@
 - Kan du oprette en vare fra dit køleskab?
 - Kan du finde en opskrift på drømmekage?
 - Kan du slette en vare?
+- Kan du finde en Faxe Kondi vha. stregkoden på flasken?
