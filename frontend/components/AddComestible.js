@@ -26,7 +26,8 @@ class AddComestible extends React.Component {
                         }
                     })
                     if (!found) {
-                        this.props.navigation.navigate('AddIngredient', { barcode: this.props.navigation.state.params.data });
+                        this.props.navigation.navigate('AddIngredient',
+                            { barcode: this.props.navigation.state.params.data, getIngredients: getIngredients });
                     }
                 }
             })
@@ -179,8 +180,8 @@ class AddComestible extends React.Component {
                         }
                     }}
                     backgroundColor={"#3B9BFF"}
-                    //HVAD ER DET HER???
-                    onDateChange={date => this.setState({ expiryDate: date })}
+                //HVAD ER DET HER???
+                // onDateChange={date => this.setState({ expiryDate: date })}
                 />
             </View>
         );
