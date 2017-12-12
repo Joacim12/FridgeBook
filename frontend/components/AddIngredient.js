@@ -8,10 +8,15 @@ class AddIngredient extends React.Component {
         ingredient: {},
         ingredients: [],
         image: {},
+        barcode:"",
     };
 
     componentDidMount() {
-        this.getIngredients();
+        this.getIngredients().then(()=>{
+            if(this.props.navigation.state.params.barcode!==undefined){
+                this.setState({barcode:this.props.navigation.state.params.barcode})
+            }
+        })
     };
 
     takePicture = async () => {
@@ -26,12 +31,7 @@ class AddIngredient extends React.Component {
         this.setState({ image: result }, () => { this.uploadPicture() })
     }
 
-    // setImageInState = () => {
-    //     this.setState({name: this.state.image.uri.split('/').pop()})
-    // }
-
     uploadPicture = () => {
-        console.log("uploading image")
         let localUri = this.state.image.uri;
         let filename = localUri.split('/').pop();
         let match = /\.(\w+)$/.exec(filename);
@@ -56,7 +56,8 @@ class AddIngredient extends React.Component {
     addIngredient = async () => {
         const ingredient = {
             name: this.state.ingredient.name,
-            imagePath: 'fridgebook/' + this.state.image.uri.split('/').pop()
+            imagePath: 'fridgebook/' + this.state.image.uri.split('/').pop(),
+            barcode:this.state.barcode
         }
         const options = {
             headers: {
@@ -83,16 +84,10 @@ class AddIngredient extends React.Component {
                     onChangeText={text => this.setState({ ingredient: { ...this.state.ingredient, name: text } })}
                 />
                 <Button
-                    title="TAG ET BILLEDE!!!!!!!!!!!"
+                    title="Tag et billede"
                     onPress={this.takePicture} />
-                {/*<Text>{this.state.image?this.state.image.uri.split('/').pop():""}</Text>*/}
-
-
-                <TouchableOpacity onPress={this.addIngredient}>
-                    <View style={styles.button}>
-                        <Text style={styles.buttonText}>Tilføj</Text>
-                    </View>
-                </TouchableOpacity>
+                <Text>{"\n"}</Text>
+                <Button onPress={()=>this.addIngredient()} title="Ok"/>
             </View>
         );
     }

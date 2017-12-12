@@ -12,6 +12,8 @@ public class Ingredient implements Serializable {
     @Id
     private String name;
     private String imagePath;
+    private String barcode;
+    private Boolean newIngredient = true;
     @OneToOne(mappedBy = "ingredient")
     private Comestible comestible;
 
@@ -21,6 +23,22 @@ public class Ingredient implements Serializable {
     public Ingredient(String name, String imagePath) {
         this.name = name;
         this.imagePath = imagePath;
+    }
+
+    public Boolean getNewIngredient() {
+        return newIngredient;
+    }
+
+    public void setNewIngredient(Boolean newIngredient) {
+        this.newIngredient = newIngredient;
+    }
+
+    public String getBarcode() {
+        return barcode;
+    }
+
+    public void setBarcode(String barcode) {
+        this.barcode = barcode;
     }
 
     public String getName() {
