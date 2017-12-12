@@ -4,7 +4,7 @@
 - Se opskrifter ud fra varene i køleskabet
 
 ## Test Scenarios
-- Kan du tilføje 5 oste til dit køleskab?
+- Kan du tilføje 5 havarti oste til dit køleskab?
 - Kan du redigere udløbsdatoen på ostene?
 - Kan du se hvor mange oste du har tilføjet?
 - Kan du se udløbsdatoen på dine varer?
