@@ -3,7 +3,6 @@ import { Button, Icon, List, ListItem, Text } from "react-native-elements";
 import { RefreshControl, ScrollView, TouchableOpacity, View, StyleSheet } from "react-native";
 
 class Recipes extends React.Component {
-
     state = {
         recipes: [],
         refreshing: false,
@@ -20,12 +19,10 @@ class Recipes extends React.Component {
             .catch(error => console.log("Couldn't fetch recipes!!!"));
     }
 
-
     onRefresh = () => {
         // Not much happening here! Should probably fetch new data :-)
         this.setState({ refreshing: false })
     }
-
 
     render() {
         return (

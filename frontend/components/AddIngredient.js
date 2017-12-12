@@ -1,5 +1,5 @@
 import React from 'react';
-import { TextInput, View, StyleSheet, TouchableOpacity } from "react-native";
+import { TextInput, View, StyleSheet, TouchableOpacity, Alert } from "react-native";
 import { Button, Text } from "react-native-elements";
 import { ImagePicker } from "expo";
 
@@ -8,13 +8,13 @@ class AddIngredient extends React.Component {
         ingredient: {},
         ingredients: [],
         image: {},
-        barcode:"",
+        barcode: '',
     };
 
     componentDidMount() {
-        this.getIngredients().then(()=>{
-            if(this.props.navigation.state.params.barcode!==undefined){
-                this.setState({barcode:this.props.navigation.state.params.barcode})
+        this.getIngredients().then(() => {
+            if (this.props.navigation.state.params.barcode !== undefined) {
+                this.setState({ barcode: this.props.navigation.state.params.barcode })
             }
         })
     };
@@ -47,7 +47,6 @@ class AddIngredient extends React.Component {
         });
     }
 
-
     getIngredients = async () => {
         const ingredients = await (await fetch('https://vetterlain.dk/FridgeBook/api/ingredient')).json();
         this.setState({ ingredients });
@@ -57,7 +56,7 @@ class AddIngredient extends React.Component {
         const ingredient = {
             name: this.state.ingredient.name,
             imagePath: 'fridgebook/' + this.state.image.uri.split('/').pop(),
-            barcode:this.state.barcode
+            barcode: this.state.barcode
         }
         const options = {
             headers: {
@@ -87,7 +86,16 @@ class AddIngredient extends React.Component {
                     title="Tag et billede"
                     onPress={this.takePicture} />
                 <Text>{"\n"}</Text>
-                <Button onPress={()=>this.addIngredient()} title="Ok"/>
+                <Button onPress={() => {
+                    if (this.state.ingredient.name === undefined) {
+                        Alert.alert(
+                            'Fejl i indtastning',
+                            'Indtast venligst navn på den vare du ønsker at oprette'
+                        );
+                    } else {
+                        this.addIngredient();
+                    }
+                }} title="OK" />
             </View>
         );
     }

@@ -7,14 +7,12 @@ class Comestible extends React.Component {
     static navigationOptions = ({ navigation }) => ({
         title: navigation.state.params.comestible.ingredient.name,
         tabBarLabel: 'Varer',
-        tabBarVisible: false,
-
+        tabBarVisible: false
     });
 
     state = {
         comestible: this.props.navigation.state.params.comestible
     }
-
 
     updateComestible = async () => {
         const options = {
@@ -58,7 +56,6 @@ class Comestible extends React.Component {
                             placeholder="Mængde"
                         />
                         <View style={styles.buttonContainer}>
-
                             <DatePicker
                                 style={{ width: 200 }}
                                 date={this.state.comestible.expiryDate}
@@ -77,8 +74,6 @@ class Comestible extends React.Component {
                                         top: 4,
                                         marginLeft: 0
                                     }
-
-                                    // ... You can check the source to find the other keys.
                                 }}
                                 onDateChange={date => this.setState({ comestible: { ...this.state.comestible, expiryDate: date } })}
                             />
