@@ -25,7 +25,6 @@ class Comestible extends React.Component {
         }
 
         const res = await fetch('https://vetterlain.dk/FridgeBook/api/comestible/', options);
-        console.log(res);
     }
 
     deleteComestible = async (id) => {
@@ -38,7 +37,6 @@ class Comestible extends React.Component {
         }
 
         const res = await fetch('https://vetterlain.dk/FridgeBook/api/comestible/' + id, options);
-        console.log(res);
     }
 
     render() {
@@ -80,7 +78,9 @@ class Comestible extends React.Component {
                         </View>
                         <Text>{"\n"}</Text>
                         <View style={styles.buttonContainer}>
-                            <Button title="Gem" backgroundColor="#3B9BFF" onPress={this.updateComestible} />
+                            <Button title="OK" backgroundColor="#3B9BFF" onPress={() => this.updateComestible()
+                                .then(() => this.props.navigation.state.params.getUser())
+                                .then(() => this.props.navigation.goBack())} />
                             <Text>{"\n"}</Text>
                             <Button title="Slet" backgroundColor="#ff0000" onPress={() => {
                                 Alert.alert(
@@ -88,11 +88,9 @@ class Comestible extends React.Component {
                                     `Er du sikker på at du vil slette ${this.state.comestible.ingredient.name.toLowerCase()}? Handlingen kan ikke fortrydes`,
                                     [{ text: 'Annullér' },
                                     {
-                                        text: 'OK', onPress: () => {
-                                            this.deleteComestible(this.state.comestible.id)
-                                                .then(this.props.navigation.state.params.getUser())
-                                                .then(this.props.navigation.goBack())
-                                        }
+                                        text: 'OK', onPress: () => this.deleteComestible(this.state.comestible.id)
+                                            .then(() => this.props.navigation.state.params.getUser())
+                                            .then(() => this.props.navigation.goBack())
                                     }]
                                 );
                             }

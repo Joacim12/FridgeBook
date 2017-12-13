@@ -4,6 +4,10 @@ import { Button, Icon, List, ListItem, Text, FormInput, FormLabel, Avatar } from
 import DatePicker from 'react-native-datepicker';
 
 class AddComestible extends React.Component {
+    static navigationOptions = ({ navigation }) => (
+        {
+        });
+
     state = {
         name: '',
         amount: '',
@@ -62,10 +66,7 @@ class AddComestible extends React.Component {
 
         console.log(user);
 
-        const res = await fetch('https:/vetterlain.dk/FridgeBook/api/user', options).then(() => {
-            console.log(res);
-            this.props.navigation.navigate('Home');
-        });
+        const res = await fetch('https:/vetterlain.dk/FridgeBook/api/user', options);
     }
 
     setSearching = (text) => {
@@ -176,12 +177,13 @@ class AddComestible extends React.Component {
                                 'Indtast venligst vare, mængde samt udløbsdato for at fortsætte'
                             );
                         } else {
-                            this.addComestible();
+                            this.addComestible()
+                                .then(() => this.props.navigation.state.params.getUser())
+                                .then(() => this.props.navigation.goBack())
                         }
-                    }}
+                    }
+                    }
                     backgroundColor={"#3B9BFF"}
-                //HVAD ER DET HER???
-                // onDateChange={date => this.setState({ expiryDate: date })}
                 />
             </View>
         );

@@ -127,7 +127,7 @@ class Home extends React.Component {
                             { text: 'Scan stregkode', onPress: () => this.renderBarcodeScanner() },
                             {
                                 text: 'Tast selv',
-                                onPress: () => this.props.navigation.navigate('AddComestible', { user: this.state.user })
+                                onPress: () => this.props.navigation.navigate('AddComestible', { user: this.state.user, getUser: this.getUser })
                             },
                             { text: 'Annullér' },
                         ]

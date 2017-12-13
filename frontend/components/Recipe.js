@@ -31,7 +31,8 @@ class Recipe extends React.Component {
 
     changeCounter = () => {
         if (true) {
-            this.setState({ recipe: { ...this.state.recipe, rateCounter: this.state.recipe.rateCounter + 1 } });
+            this.setState({ recipe: { ...this.state.recipe, rateCounter: this.state.recipe.rateCounter + 1 } },
+                () => this.updateRecipe());
         } else {
             this.setState({ recipe: { ...this.state.recipe, rateCounter: this.state.recipe.rateCounter - 1 } });
         }
@@ -48,8 +49,6 @@ class Recipe extends React.Component {
                 />
                 <Icon.Button name="thumbs-up" size={30} onPress={() => {
                     this.changeCounter();
-                    console.log(this.state.recipe.rateCounter);
-                    this.updateRecipe();
                 }}></Icon.Button>
                 <Text>Bedømmelse: {this.state.recipe.rateCounter}</Text>
                 <FormInput
