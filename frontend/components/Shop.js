@@ -4,18 +4,16 @@ import { StyleSheet, View } from "react-native"
 class Shop extends React.Component {
     state = {}
 
-    async componentWillMount() {
+    componentWillMount() {
     }
 
     render() {
-
         return (
             <View style={styles.container}>
             </View>
         );
     }
 }
-
 
 const styles = StyleSheet.create({
     container: {

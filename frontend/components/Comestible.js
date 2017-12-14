@@ -4,6 +4,8 @@ import { Button, FormInput, FormLabel, Text } from "react-native-elements";
 import DatePicker from 'react-native-datepicker';
 
 class Comestible extends React.Component {
+    //I dette komponent skal følgende rettes:
+    //Når tastaturet bliver synligt, skal inputfeltet rykke op, således at brugeren kan se hvad han skriver
     static navigationOptions = ({ navigation }) => ({
         title: navigation.state.params.comestible.ingredient.name,
         tabBarLabel: 'Varer',
@@ -40,7 +42,6 @@ class Comestible extends React.Component {
     }
 
     render() {
-        console.log(this.props.navigation.state.params)
         return (
             <View style={styles.container}>
                 <View style={styles.upperContainer}>
@@ -79,18 +80,20 @@ class Comestible extends React.Component {
                         <Text>{"\n"}</Text>
                         <View style={styles.buttonContainer}>
                             <Button title="OK" backgroundColor="#3B9BFF" onPress={() => this.updateComestible()
-                                .then(() => this.props.navigation.state.params.getUser())
+                                .then(() => this.props.navigation.state.params.onBack())
                                 .then(() => this.props.navigation.goBack())} />
                             <Text>{"\n"}</Text>
                             <Button title="Slet" backgroundColor="#ff0000" onPress={() => {
                                 Alert.alert(
                                     'Slet ' + this.state.comestible.ingredient.name,
                                     `Er du sikker på at du vil slette ${this.state.comestible.ingredient.name.toLowerCase()}? Handlingen kan ikke fortrydes`,
-                                    [{ text: 'Annullér' },
+                                    [{ text: 'Annuller' },
                                     {
-                                        text: 'OK', onPress: () => this.deleteComestible(this.state.comestible.id)
-                                            .then(() => this.props.navigation.state.params.getUser())
-                                            .then(() => this.props.navigation.goBack())
+                                        text: 'OK', onPress: () => {
+                                            this.deleteComestible(this.state.comestible.id)
+                                                .then(() => this.props.navigation.state.params.onBack())
+                                                .then(() => this.props.navigation.goBack())
+                                        }
                                     }]
                                 );
                             }

@@ -12,7 +12,8 @@ class Recipe extends React.Component {
     });
 
     state = {
-        recipe: this.props.navigation.state.params.recipe,
+        user: this.props.screenProps.user,
+        recipe: this.props.navigation.state.params.recipe
     }
 
     updateRecipe = async () => {
@@ -26,15 +27,30 @@ class Recipe extends React.Component {
         }
 
         const res = await fetch('https://vetterlain.dk/FridgeBook/api/recipe/', options);
+        //console.log(res);
+    }
+
+    addRecipeToUserFavorites = async () => {
+        this.state.user.favouriteRecipes.push(this.state.recipe);
+
+        const options = {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            method: "PUT",
+            body: JSON.stringify(this.state.user)
+        }
+
+        const res = await fetch('https://vetterlain.dk/FridgeBook/api/user/' + this.state.user.username, options);
         console.log(res);
     }
 
     changeCounter = () => {
         if (true) {
-            this.setState({ recipe: { ...this.state.recipe, rateCounter: this.state.recipe.rateCounter + 1 } },
-                () => this.updateRecipe());
+            this.setState({ recipe: { ...this.state.recipe, rateCounter: this.state.recipe.rateCounter + 1 } }, () => this.updateRecipe());
         } else {
-            this.setState({ recipe: { ...this.state.recipe, rateCounter: this.state.recipe.rateCounter - 1 } });
+            this.setState({ recipe: { ...this.state.recipe, rateCounter: this.state.recipe.rateCounter - 1 } }, () => this.updateRecipe());
         }
     }
 
@@ -49,6 +65,7 @@ class Recipe extends React.Component {
                 />
                 <Icon.Button name="thumbs-up" size={30} onPress={() => {
                     this.changeCounter();
+                    this.addRecipeToUserFavorites();
                 }}></Icon.Button>
                 <Text>Bedømmelse: {this.state.recipe.rateCounter}</Text>
                 <FormInput

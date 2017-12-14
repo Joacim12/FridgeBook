@@ -4,9 +4,6 @@ import { Button, Icon, List, ListItem, Text, FormInput, FormLabel, Avatar } from
 import DatePicker from 'react-native-datepicker';
 
 class AddComestible extends React.Component {
-    static navigationOptions = ({ navigation }) => (
-        {
-        });
 
     state = {
         name: '',
@@ -15,7 +12,7 @@ class AddComestible extends React.Component {
         ingredient: '',
         ingredients: null,
         search: false,
-        user: this.props.navigation.state.params.user,
+        user: this.props.screenProps.user,
     };
 
     componentDidMount() {
@@ -64,8 +61,6 @@ class AddComestible extends React.Component {
             body: JSON.stringify(user)
         }
 
-        console.log(user);
-
         const res = await fetch('https:/vetterlain.dk/FridgeBook/api/user', options);
     }
 
@@ -79,10 +74,6 @@ class AddComestible extends React.Component {
             name: ingredient.name,
             ingredient: ingredient
         })
-    }
-
-    addIngredientNav = () => {
-        this.props.navigation.navigate('AddIngredient')
     }
 
     render() {
@@ -116,10 +107,7 @@ class AddComestible extends React.Component {
                     }
                         <ListItem
                             title={"Opret ny vare"}
-                            onPress={() => {
-                                this.addIngredientNav()
-                            }}
-
+                            onPress={() => this.props.navigation.navigate('AddIngredient')}
                         />
                     </List>
                 </View>
@@ -178,7 +166,7 @@ class AddComestible extends React.Component {
                             );
                         } else {
                             this.addComestible()
-                                .then(() => this.props.navigation.state.params.getUser())
+                                .then(() => this.props.navigation.state.params.onBack())
                                 .then(() => this.props.navigation.goBack())
                         }
                     }

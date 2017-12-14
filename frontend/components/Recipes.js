@@ -16,7 +16,7 @@ class Recipes extends React.Component {
         fetch('https://vetterlain.dk/FridgeBook/api/recipe')
             .then(response => response.json())
             .then(recipes => { this.setState({ recipes }) })
-            .catch(error => console.log("Couldn't fetch recipes!!!"));
+            .catch(error => console.log("Couldn't fetch recipes!!!", error));
     }
 
     onRefresh = () => {

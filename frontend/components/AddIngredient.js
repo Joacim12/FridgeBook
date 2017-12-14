@@ -12,11 +12,12 @@ class AddIngredient extends React.Component {
     };
 
     componentDidMount() {
-        this.getIngredients().then(() => {
-            if (this.props.navigation.state.params.barcode !== undefined) {
-                this.setState({ barcode: this.props.navigation.state.params.barcode })
-            }
-        })
+        this.getIngredients()
+            .then(() => {
+                if (this.props.navigation.state.params.barcode !== undefined) {
+                    this.setState({ barcode: this.props.navigation.state.params.barcode })
+                }
+            })
     };
 
     takePicture = async () => {
@@ -67,13 +68,11 @@ class AddIngredient extends React.Component {
             body: JSON.stringify(ingredient)
         }
 
-        const res = await fetch('https:/vetterlain.dk/FridgeBook/api/ingredient', options).then(() => {
-            this.props.navigation.state.params.getIngredients()
-                .then(() => {
-                    this.props.navigation.goBack();
-
-                })
-        });
+        const res = await fetch('https:/vetterlain.dk/FridgeBook/api/ingredient', options)
+            .then(() => {
+                this.props.navigation.state.params.getIngredients()
+                    .then(() => this.props.navigation.goBack())
+            });
         console.log(res);
     }
 

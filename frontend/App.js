@@ -1,4 +1,5 @@
 import React from 'react'
+import { View, Text, ActivityIndicator } from 'react-native'
 import { StackNavigator, TabNavigator } from 'react-navigation';
 import Home from "./components/Home";
 import Comestible from "./components/Comestible";
@@ -96,9 +97,29 @@ const MyApp = TabNavigator({
 
 
 export default class App extends React.Component {
+    state = {
+        user: {}
+    }
+
+    componentDidMount() {
+        this.getUser();
+    };
+
+    getUser = async () => {
+        const user = await (await fetch('https://vetterlain.dk/FridgeBook/api/user/gustav')).json()
+        this.setState({ user })
+    }
+
     render() {
+        if (Object.keys(this.state.user).length === 0) {
+            return (
+                <View style={{ flex: 1, justifyContent: 'center' }}>
+                    <ActivityIndicator size={100} color="#0000ff" />
+                </View>
+            )
+        }
         return (
-            <MyApp />
+            <MyApp screenProps={{ user: this.state.user }} />
         )
     }
 }

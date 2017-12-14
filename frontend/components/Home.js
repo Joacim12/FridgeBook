@@ -17,20 +17,13 @@ class Home extends React.Component {
     state = {
         refreshing: false,
         user: {},
-        loading: true,
         deleteVisible: false,
         barcode: false
     }
 
-    componentDidMount() {
-
-        this.getUser();
+    componentWillMount() {
+        this.setState({ user: this.props.screenProps.user });
     };
-
-    getUser = async () => {
-        const user = await (await fetch('https://vetterlain.dk/FridgeBook/api/user/gustav')).json();
-        this.setState({ user, loading: false });
-    }
 
     onRefresh = () => {
         // Not much happening here! Should probably fetch new data :-)
@@ -39,7 +32,7 @@ class Home extends React.Component {
 
     handleBarCodeRead = ({ type, data }) => {
         this.setState({ barcode: false })
-        this.props.navigation.navigate('AddComestible', { user: this.state.user, data: data });
+        this.props.navigation.navigate('AddComestible', { data: data });
     }
 
     renderBarcodeScanner = () => {
@@ -53,18 +46,9 @@ class Home extends React.Component {
                     this.setState({ barcode: true })
                 }
             })
-
     }
 
     render() {
-        if (this.state.loading) {
-            return (
-                <View>
-                    <Text>Loading</Text>
-                </View>
-            )
-        }
-
         if (this.state.barcode) {
             return (
                 <View style={{ flex: 1 }}>
@@ -100,7 +84,7 @@ class Home extends React.Component {
                                 onPress={() =>
                                     this.props.navigation.navigate('Comestible', {
                                         comestible: comestible,
-                                        getUser: this.getUser
+                                        onBack: () => this.setState({ user: this.props.screenProps.user })
                                     })}
                                 onLongPress={() => this.setState({ deleteVisible: true })}
                             />
@@ -127,9 +111,9 @@ class Home extends React.Component {
                             { text: 'Scan stregkode', onPress: () => this.renderBarcodeScanner() },
                             {
                                 text: 'Tast selv',
-                                onPress: () => this.props.navigation.navigate('AddComestible', { user: this.state.user, getUser: this.getUser })
+                                onPress: () => this.props.navigation.navigate('AddComestible', { onBack: () => this.setState({ user: this.props.screenProps.user }) })
                             },
-                            { text: 'Annullér' },
+                            { text: 'Annuller' },
                         ]
                     )}
                 // onPress={() => this.props.navigation.navigate('AddComestible', { user: this.state.user })}
