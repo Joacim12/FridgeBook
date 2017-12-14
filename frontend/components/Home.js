@@ -1,6 +1,6 @@
 import React from 'react'
 import { Avatar, Icon, List, ListItem, Text } from "react-native-elements";
-import { RefreshControl, ScrollView, TouchableOpacity, View, StyleSheet, Image, Alert } from "react-native";
+import { RefreshControl, ScrollView, TouchableOpacity, View, StyleSheet, Image, Alert, ActivityIndicator } from "react-native";
 import AddComestible from "./AddComestible";
 import { AppLoading, Asset, BarCodeScanner, Permissions } from "expo";
 
@@ -22,8 +22,13 @@ class Home extends React.Component {
     }
 
     componentWillMount() {
-        this.setState({ user: this.props.screenProps.user });
+        this.updateUserInState();
     };
+
+    updateUserInState = () => {
+        this.props.screenProps.getUser()
+            .then(user => this.setState({ user }));
+    }
 
     onRefresh = () => {
         // Not much happening here! Should probably fetch new data :-)
@@ -49,6 +54,14 @@ class Home extends React.Component {
     }
 
     render() {
+        if (Object.keys(this.state.user).length === 0) {
+            return (
+                <View style={{ flex: 1, justifyContent: 'center' }}>
+                    <ActivityIndicator size={100} color="#0000ff" />
+                </View>
+            )
+        }
+
         if (this.state.barcode) {
             return (
                 <View style={{ flex: 1 }}>
@@ -84,7 +97,7 @@ class Home extends React.Component {
                                 onPress={() =>
                                     this.props.navigation.navigate('Comestible', {
                                         comestible: comestible,
-                                        onBack: () => this.setState({ user: this.props.screenProps.user })
+                                        onBack: this.updateUserInState
                                     })}
                                 onLongPress={() => this.setState({ deleteVisible: true })}
                             />
@@ -111,12 +124,15 @@ class Home extends React.Component {
                             { text: 'Scan stregkode', onPress: () => this.renderBarcodeScanner() },
                             {
                                 text: 'Tast selv',
-                                onPress: () => this.props.navigation.navigate('AddComestible', { onBack: () => this.setState({ user: this.props.screenProps.user }) })
+                                onPress: () => this.props.navigation.navigate('AddComestible',
+                                    {
+                                        onBack: this.updateUserInState,
+                                        user: this.state.user
+                                    })
                             },
-                            { text: 'Annuller' },
+                            { text: 'Annuller' }
                         ]
                     )}
-                // onPress={() => this.props.navigation.navigate('AddComestible', { user: this.state.user })}
                 >
                     <Icon name={"add"} size={30} color="#fff" />
                 </TouchableOpacity>

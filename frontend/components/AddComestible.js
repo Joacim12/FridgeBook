@@ -12,11 +12,11 @@ class AddComestible extends React.Component {
         ingredient: '',
         ingredients: null,
         search: false,
-        user: this.props.screenProps.user,
+        user: this.props.navigation.state.params.user
     };
 
     componentDidMount() {
-        this.getIngredients()
+        this.fetchIngredients()
             .then(() => {
                 if (this.props.navigation.state.params.data !== undefined) {
                     let found = false;
@@ -34,7 +34,7 @@ class AddComestible extends React.Component {
             })
     };
 
-    getIngredients = async () => {
+    fetchIngredients = async () => {
         const ingredients = await (await fetch('https://vetterlain.dk/FridgeBook/api/ingredient')).json();
         this.setState({ ingredients });
     }
