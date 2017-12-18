@@ -89,6 +89,9 @@ nbbuild/
 dist/
 nbdist/
 .nb-gradle/
+target/
+target/*
+
 
 ### VisualStudioCode ###
 .vscode/*
