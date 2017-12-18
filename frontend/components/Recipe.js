@@ -12,8 +12,13 @@ class Recipe extends React.Component {
     });
 
     state = {
-        user: this.props.screenProps.user,
+        user: {},
         recipe: this.props.navigation.state.params.recipe
+    }
+
+    componentDidMount() {
+        this.props.screenProps.getUser()
+            .then(user => this.setState({ user }));
     }
 
     updateRecipe = async () => {
@@ -26,12 +31,20 @@ class Recipe extends React.Component {
             body: JSON.stringify(this.state.recipe)
         }
 
-        const res = await fetch('https://vetterlain.dk/FridgeBook/api/recipe/', options);
+        const res = await fetch('https://vetterlain.dk/FridgeBook/api/recipe', options);
         //console.log(res);
     }
 
-    addRecipeToUserFavorites = async () => {
-        this.state.user.favouriteRecipes.push(this.state.recipe);
+    updateUserFavourites = async (hasFavourite) => {
+        let user = { ...this.state.user };
+        if (!hasFavourite) {
+            console.log("updateUserFavourites - recipe findes IKKE fav")
+            user.favouriteRecipes.push(this.state.recipe);
+        } else {
+            console.log("updateUserFavourites - recipe findes i fav")
+            user.favouriteRecipes = user.favouriteRecipes.filter(recipe => recipe.id !== this.state.recipe.id);
+        }
+        this.setState({ user });
 
         const options = {
             headers: {
@@ -39,18 +52,26 @@ class Recipe extends React.Component {
                 'Content-Type': 'application/json'
             },
             method: "PUT",
-            body: JSON.stringify(this.state.user)
+            body: JSON.stringify(user)
         }
 
-        const res = await fetch('https://vetterlain.dk/FridgeBook/api/user/' + this.state.user.username, options);
-        console.log(res);
+        const res = await fetch('https://vetterlain.dk/FridgeBook/api/user/', options);
+        // console.log(res);
     }
 
-    changeCounter = () => {
-        if (true) {
-            this.setState({ recipe: { ...this.state.recipe, rateCounter: this.state.recipe.rateCounter + 1 } }, () => this.updateRecipe());
+    handleCounterChanging = async () => {
+        if (this.state.user.favouriteRecipes.filter(recipe => recipe.id === this.state.recipe.id).length === 0) {
+            console.log("change counter - recipe findes IKKE i fav")
+            this.setState({ recipe: { ...this.state.recipe, rateCounter: this.state.recipe.rateCounter + 1 } }, async () => {
+                await this.updateRecipe()
+                    .then(this.updateUserFavourites(false));
+            });
         } else {
-            this.setState({ recipe: { ...this.state.recipe, rateCounter: this.state.recipe.rateCounter - 1 } }, () => this.updateRecipe());
+            console.log("change counter - recipe findes i fav")
+            this.setState({ recipe: { ...this.state.recipe, rateCounter: this.state.recipe.rateCounter - 1 } }, async () => {
+                await this.updateRecipe()
+                    .then(this.updateUserFavourites(true));
+            });
         }
     }
 
@@ -63,9 +84,9 @@ class Recipe extends React.Component {
                     onChangeText={text => this.setState({ recipe: { ...this.state.recipe, name: text } })}
                     placeholder="Indtast titel på opskrift..."
                 />
-                <Icon.Button name="thumbs-up" size={30} onPress={() => {
-                    this.changeCounter();
-                    this.addRecipeToUserFavorites();
+                <Icon.Button name="heart" size={30} color="red" onPress={() => {
+                    this.handleCounterChanging()
+                        .then(() => this.props.navigation.state.params.onBack());
                 }}></Icon.Button>
                 <Text>Bedømmelse: {this.state.recipe.rateCounter}</Text>
                 <FormInput

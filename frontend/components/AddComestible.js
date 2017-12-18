@@ -12,10 +12,11 @@ class AddComestible extends React.Component {
         ingredient: '',
         ingredients: null,
         search: false,
-        user: this.props.navigation.state.params.user
+        user: {}
     };
 
     componentDidMount() {
+        this.updateUserInState();
         this.fetchIngredients()
             .then(() => {
                 if (this.props.navigation.state.params.data !== undefined) {
@@ -28,11 +29,16 @@ class AddComestible extends React.Component {
                     })
                     if (!found) {
                         this.props.navigation.navigate('AddIngredient',
-                            { barcode: this.props.navigation.state.params.data, getIngredients: getIngredients });
+                            { barcode: this.props.navigation.state.params.data, fetchIngredients: this.fetchIngredients });
                     }
                 }
             })
     };
+
+    updateUserInState = () => {
+        this.props.screenProps.getUser()
+            .then(user => this.setState({ user }));
+    }
 
     fetchIngredients = async () => {
         const ingredients = await (await fetch('https://vetterlain.dk/FridgeBook/api/ingredient')).json();

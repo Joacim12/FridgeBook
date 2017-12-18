@@ -4,18 +4,25 @@ import { RefreshControl, ScrollView, TouchableOpacity, View, StyleSheet } from "
 
 class Recipes extends React.Component {
     state = {
+        user: {},
         recipes: [],
         refreshing: false,
     }
 
     componentDidMount() {
-        this.getRecipes();
-    };
+        this.updateUserInState();
+        this.fetchRecipes();
+    }
 
-    getRecipes = () => {
+    updateUserInState = () => {
+        this.props.screenProps.getUser()
+            .then(user => this.setState({ user }));
+    }
+
+    fetchRecipes = () => {
         fetch('https://vetterlain.dk/FridgeBook/api/recipe')
             .then(response => response.json())
-            .then(recipes => { this.setState({ recipes }) })
+            .then(recipes => this.setState({ recipes }))
             .catch(error => console.log("Couldn't fetch recipes!!!", error));
     }
 
@@ -36,7 +43,13 @@ class Recipes extends React.Component {
                             <ListItem
                                 key={index}
                                 title={recipe.name}
-                                onPress={() => this.props.navigation.navigate('Recipe', { recipe: recipe })}
+                                onPress={() => this.props.navigation.navigate('Recipe',
+                                    {
+                                        recipe: recipe, onBack: () => {
+                                            this.updateUserInState();
+                                            this.fetchRecipes();
+                                        }
+                                    })}
                             />
                         ))
                     }

@@ -125,10 +125,7 @@ class Home extends React.Component {
                             {
                                 text: 'Tast selv',
                                 onPress: () => this.props.navigation.navigate('AddComestible',
-                                    {
-                                        onBack: this.updateUserInState,
-                                        user: this.state.user
-                                    })
+                                    { onBack: this.updateUserInState, })
                             },
                             { text: 'Annuller' }
                         ]

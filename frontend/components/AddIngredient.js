@@ -70,7 +70,7 @@ class AddIngredient extends React.Component {
 
         const res = await fetch('https:/vetterlain.dk/FridgeBook/api/ingredient', options)
             .then(() => {
-                this.props.navigation.state.params.getIngredients()
+                this.props.navigation.state.params.fetchIngredients()
                     .then(() => this.props.navigation.goBack())
             });
         console.log(res);
