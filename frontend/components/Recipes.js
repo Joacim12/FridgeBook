@@ -1,6 +1,6 @@
 import React from 'react'
-import { Button, Icon, List, ListItem, Text } from "react-native-elements";
-import { RefreshControl, ScrollView, TouchableOpacity, View, StyleSheet } from "react-native";
+import { List, ListItem } from "react-native-elements";
+import { RefreshControl, ScrollView, View } from "react-native";
 
 class Recipes extends React.Component {
     state = {

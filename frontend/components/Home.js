@@ -1,18 +1,18 @@
 import React from 'react'
-import { Avatar, Icon, List, ListItem, Text } from "react-native-elements";
-import { RefreshControl, ScrollView, TouchableOpacity, View, StyleSheet, Image, Alert, ActivityIndicator } from "react-native";
+import {Avatar, Icon, List, ListItem, Text} from "react-native-elements";
+import {RefreshControl, ScrollView, TouchableOpacity, View, StyleSheet, Image, Alert, ActivityIndicator} from "react-native";
 import AddComestible from "./AddComestible";
-import { AppLoading, Asset, BarCodeScanner, Permissions } from "expo";
+import {AppLoading, Asset, BarCodeScanner, Permissions} from "expo";
+import {getUser, fetchUser} from "../js/UserStore";
 
 class Home extends React.Component {
     //Dette ikon kan bruges til at slette varer (comestibles)
     // <Icon name="delete" size={30} />
 
-    static navigationOptions = ({ navigation }) => (
-        {
-            title: 'Fridgebook',
-            tabBarLabel: 'Varer',
-        });
+    static navigationOptions = ({navigation}) => ({
+        title: 'Fridgebook',
+        tabBarLabel: 'Varer',
+    });
 
     state = {
         refreshing: false,
@@ -32,12 +32,12 @@ class Home extends React.Component {
 
     onRefresh = () => {
         // Not much happening here! Should probably fetch new data :-)
-        this.setState({ refreshing: false });
+        this.setState({refreshing: false});
     }
 
-    handleBarCodeRead = ({ type, data }) => {
-        this.setState({ barcode: false })
-        this.props.navigation.navigate('AddComestible', { data: data });
+    handleBarCodeRead = ({type, data}) => {
+        this.setState({barcode: false})
+        this.props.navigation.navigate('AddComestible', {data: data});
     }
 
     renderBarcodeScanner = () => {
@@ -48,7 +48,7 @@ class Home extends React.Component {
                 } else if (permission === false) {
                     console.log("no permission")
                 } else {
-                    this.setState({ barcode: true })
+                    this.setState({barcode: true})
                 }
             })
     }
@@ -56,15 +56,15 @@ class Home extends React.Component {
     render() {
         if (Object.keys(this.state.user).length === 0) {
             return (
-                <View style={{ flex: 1, justifyContent: 'center' }}>
-                    <ActivityIndicator size={100} color="#0000ff" />
+                <View style={{flex: 1, justifyContent: 'center'}}>
+                    <ActivityIndicator size={100} color="#0000ff"/>
                 </View>
             )
         }
 
         if (this.state.barcode) {
             return (
-                <View style={{ flex: 1 }}>
+                <View style={{flex: 1}}>
                     <BarCodeScanner
                         onBarCodeRead={this.handleBarCodeRead}
                         style={StyleSheet.absoluteFill}
@@ -74,10 +74,10 @@ class Home extends React.Component {
         }
 
         return (
-            <View style={{ flex: 1, backgroundColor: "#ffffff" }}>
+            <View style={{flex: 1, backgroundColor: "#ffffff"}}>
                 <ScrollView
                     refreshControl={
-                        <RefreshControl refreshing={this.state.refreshing} onRefresh={this.onRefresh} />
+                        <RefreshControl refreshing={this.state.refreshing} onRefresh={this.onRefresh}/>
                     }>
                     <List>{
                         this.state.user.comestibles.map((comestible, index) => (
@@ -86,20 +86,20 @@ class Home extends React.Component {
                                 title={comestible.ingredient.name}
                                 badge={{
                                     value: comestible.amount,
-                                    textStyle: { color: 'white' },
-                                    containerStyle: { marginTop: 0, backgroundColor: '#3b9bff' }
+                                    textStyle: {color: 'white'},
+                                    containerStyle: {marginTop: 0, backgroundColor: '#3b9bff'}
                                 }}
                                 avatar={<Avatar
-                                    source={{ uri: 'https://vetterlain.dk/images/' + comestible.ingredient.imagePath }}
+                                    source={{uri: 'https://vetterlain.dk/images/' + comestible.ingredient.imagePath}}
                                     title={comestible.ingredient.name}
                                 />}
                                 subtitle={<Text> Udløber den: {comestible.expiryDate}</Text>}
                                 onPress={() =>
                                     this.props.navigation.navigate('Comestible', {
                                         comestible: comestible,
-                                        onBack: this.updateUserInState
+                                        // onBack: this.updateUserInState
                                     })}
-                                onLongPress={() => this.setState({ deleteVisible: true })}
+                                onLongPress={() => this.setState({deleteVisible: true})}
                             />
                         ))
                     }
@@ -121,35 +121,22 @@ class Home extends React.Component {
                     }}
                     onPress={() => Alert.alert('Opret vare', 'Vælg en metode til at oprette din vare',
                         [
-                            { text: 'Scan stregkode', onPress: () => this.renderBarcodeScanner() },
+                            {text: 'Scan stregkode', onPress: () => this.renderBarcodeScanner()},
                             {
                                 text: 'Tast selv',
-                                onPress: () => this.props.navigation.navigate('AddComestible',
-                                    { onBack: this.updateUserInState, })
+                                onPress: () => this.props.navigation.navigate('AddComestible')
+                                    // {onBack: this.updateUserInState,})
                             },
-                            { text: 'Annuller' }
+                            {text: 'Annuller'}
                         ]
                     )}
                 >
-                    <Icon name={"add"} size={30} color="#fff" />
+                    <Icon name={"add"} size={30} color="#fff"/>
                 </TouchableOpacity>
             </View>
         );
     }
 }
 
-const styles = StyleSheet.create({
-    button: {
-        margin: 3,
-        alignItems: 'center',
-        backgroundColor: '#2196F3'
-    },
-    buttonText: {
-        padding: 7,
-        fontSize: 18,
-        fontWeight: "bold",
-        color: 'white'
-    }
-});
 
 export default Home;

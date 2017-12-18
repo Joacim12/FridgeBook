@@ -1,7 +1,7 @@
 import React from 'react';
-import { TextInput, View, StyleSheet, TouchableOpacity, Alert } from "react-native";
-import { Button, Text } from "react-native-elements";
-import { ImagePicker } from "expo";
+import {TextInput, View, StyleSheet, TouchableOpacity, Alert} from "react-native";
+import {Button, Text} from "react-native-elements";
+import {ImagePicker} from "expo";
 
 class AddIngredient extends React.Component {
     state = {
@@ -15,7 +15,7 @@ class AddIngredient extends React.Component {
         this.getIngredients()
             .then(() => {
                 if (this.props.navigation.state.params.barcode !== undefined) {
-                    this.setState({ barcode: this.props.navigation.state.params.barcode })
+                    this.setState({barcode: this.props.navigation.state.params.barcode})
                 }
             })
     };
@@ -29,7 +29,9 @@ class AddIngredient extends React.Component {
         if (result.cancelled) {
             return;
         }
-        this.setState({ image: result }, () => { this.uploadPicture() })
+        this.setState({image: result}, () => {
+            this.uploadPicture()
+        })
     }
 
     uploadPicture = () => {
@@ -38,7 +40,7 @@ class AddIngredient extends React.Component {
         let match = /\.(\w+)$/.exec(filename);
         let type = match ? `image/${match[1]}` : `image`;
         let formData = new FormData();
-        formData.append('file', { uri: localUri, name: filename, type });
+        formData.append('file', {uri: localUri, name: filename, type});
         return fetch("https://vetterlain.dk/FridgeBook/api/imageUpload", {
             method: 'POST',
             body: formData,
@@ -50,7 +52,7 @@ class AddIngredient extends React.Component {
 
     getIngredients = async () => {
         const ingredients = await (await fetch('https://vetterlain.dk/FridgeBook/api/ingredient')).json();
-        this.setState({ ingredients });
+        this.setState({ingredients});
     }
 
     addIngredient = async () => {
@@ -71,23 +73,23 @@ class AddIngredient extends React.Component {
         const res = await fetch('https:/vetterlain.dk/FridgeBook/api/ingredient', options)
             .then(() => {
                 this.props.navigation.state.params.fetchIngredients()
-                    .then(() => this.props.navigation.goBack())
+                    .then(() =>  this.props.navigation.goBack())
             });
         console.log(res);
     }
 
     render() {
         return (
-            <View style={{ padding: 10 }}>
+            <View style={{padding: 10}}>
                 <TextInput
-                    style={{ height: 40 }}
+                    style={{height: 40}}
                     placeholder="Navn på vare"
                     value={this.state.name}
-                    onChangeText={text => this.setState({ ingredient: { ...this.state.ingredient, name: text } })}
+                    onChangeText={text => this.setState({ingredient: {...this.state.ingredient, name: text}})}
                 />
                 <Button
                     title="Tag et billede"
-                    onPress={this.takePicture} />
+                    onPress={this.takePicture}/>
                 <Text>{"\n"}</Text>
                 <Button onPress={() => {
                     if (this.state.ingredient.name === undefined) {
@@ -98,7 +100,7 @@ class AddIngredient extends React.Component {
                     } else {
                         this.addIngredient();
                     }
-                }} title="OK" />
+                }} title="OK"/>
             </View>
         );
     }

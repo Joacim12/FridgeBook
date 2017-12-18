@@ -172,7 +172,8 @@ class AddComestible extends React.Component {
                             );
                         } else {
                             this.addComestible()
-                                .then(() => this.props.navigation.state.params.onBack())
+                                .then(() => this.props.screenProps.getUser() )
+                                // .then(() => this.props.navigation.state.params.onBack())
                                 .then(() => this.props.navigation.goBack())
                         }
                     }

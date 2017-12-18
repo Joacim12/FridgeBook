@@ -86,7 +86,7 @@ class Recipe extends React.Component {
                 />
                 <Icon.Button name="heart" size={30} color="red" onPress={() => {
                     this.handleCounterChanging()
-                        .then(() => this.props.navigation.state.params.onBack());
+                        .then(() => this.props.screenProps.getUser());
                 }}></Icon.Button>
                 <Text>Bedømmelse: {this.state.recipe.rateCounter}</Text>
                 <FormInput

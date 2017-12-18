@@ -1,40 +1,41 @@
 import React from 'react'
-import { StackNavigator, TabNavigator } from 'react-navigation';
+import {StackNavigator, TabNavigator} from 'react-navigation';
 import Home from "./components/Home";
 import Comestible from "./components/Comestible";
 import AddComestible from "./components/AddComestible";
 import Recipes from "./components/Recipes";
-import Shop from "./components/Shop";
+import Map from "./components/Map";
 import Recipe from "./components/Recipe";
-import AddIngredient from "./components/AddIngredient";
+import AddIngredient from "./components/CreateIngredient";
+import Test from "./components/Test";
 
 const Start = StackNavigator({
-    Home: {
-        screen: Home,
-        path: '/',
-    },
-    AddComestible: {
-        screen: AddComestible,
-        navigationOptions: {
-            title: 'Tilføj vare',
-            tabBarLabel: 'Varer',
-        }
-    },
-    Comestible: {
-        screen: Comestible,
+        Home: {
+            screen: Home,
+            path: '/',
+        },
+        AddComestible: {
+            screen: AddComestible,
+            navigationOptions: {
+                title: 'Tilføj vare',
+                tabBarLabel: 'Varer',
+            }
+        },
+        Comestible: {
+            screen: Comestible,
 
-    },
-    AddIngredient: {
-        screen: AddIngredient,
-        navigationOptions: {
-            title: 'Opret vare',
-            tabBarLabel: 'Varer'
+        },
+        AddIngredient: {
+            screen: AddIngredient,
+            navigationOptions: {
+                title: 'Opret vare',
+                tabBarLabel: 'Varer'
+            }
         }
     }
-}
     , {
         navigationOptions: {
-            headerStyle: { marginTop: 24 }
+            headerStyle: {marginTop: 24}
         },
     });
 
@@ -55,44 +56,59 @@ const RecipesTab = StackNavigator({
         }
     },
 }, {
-        navigationOptions: {
-            headerStyle: { marginTop: 24 }
-        },
-    });
+    navigationOptions: {
+        headerStyle: {marginTop: 24}
+    },
+});
 
-const Maps = StackNavigator({
-    Shop: {
-        screen: Shop,
+const MapTab = StackNavigator({
+    Map: {
+        screen: Map,
         navigationOptions: {
             title: "Map",
             tabBarLabel: "Shop",
         },
     },
 }, {
+    navigationOptions: {
+        headerStyle: {marginTop: 24}
+    },
+});
+
+const TestTab = StackNavigator({
+    Shop: {
+        screen: Test,
         navigationOptions: {
-            headerStyle: { marginTop: 24 }
+            title: "Test",
+            tabBarLabel: "Test",
         },
-    });
+    },
+}, {
+    navigationOptions: {
+        headerStyle: {marginTop: 24}
+    },
+});
 
 const MyApp = TabNavigator({
-    Home: { screen: Start },
-    Recipes: { screen: RecipesTab },
-    Shop: { screen: Maps },
+    Home: {screen: Start},
+    Recipes: {screen: RecipesTab},
+    Map: {screen: MapTab},
+    Test: {screen: TestTab},
 }, {
-        tabBarPosition: 'bottom',
-        animationEnabled: true,
-        indicatorStyle: { backgroundColor: "red" },
-        tabBarOptions: {
-            activeTintColor: 'white',
-            inactiveTintColor: '#D3D3D3',
-            style: {
-                backgroundColor: '#3b9bff',
-            },
-            indicatorStyle: {
-                backgroundColor: 'white',
-            },
+    tabBarPosition: 'bottom',
+    animationEnabled: true,
+    indicatorStyle: {backgroundColor: "red"},
+    tabBarOptions: {
+        activeTintColor: 'white',
+        inactiveTintColor: '#D3D3D3',
+        style: {
+            backgroundColor: '#3b9bff',
         },
-    });
+        indicatorStyle: {
+            backgroundColor: 'white',
+        },
+    },
+});
 
 
 export default class App extends React.Component {
