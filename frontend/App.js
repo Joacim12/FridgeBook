@@ -8,6 +8,9 @@ import Recipe from "./components/Recipe";
 import AddIngredient from "./components/CreateIngredient";
 import Test from "./components/Test";
 import {Ionicons} from "react-native-vector-icons";
+import { Font } from 'expo';
+
+
 
 const Start = StackNavigator({
         Home: {
@@ -123,6 +126,12 @@ export default class App extends React.Component {
 
     getUser = async () => {
         return await (await fetch('https://vetterlain.dk/FridgeBook/api/user/gustav')).json()
+    }
+
+    componentDidMount(){
+        Font.loadAsync({
+            'open-sans-bold': require('./assets/fonts/FiraSans-Regular.ttf'),
+        });
     }
 
     render() {

@@ -90,6 +90,7 @@ class Home extends React.Component {
                                     containerStyle: {marginTop: 0, backgroundColor: '#3b9bff'}
                                 }}
                                 avatar={<Avatar
+                                    rounded
                                     source={{uri: 'https://vetterlain.dk/images/fridgebook/thumb' + comestible.ingredient.imagePath}}
                                     title={comestible.ingredient.name}
 
