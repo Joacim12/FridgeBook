@@ -66,7 +66,7 @@ const MapTab = StackNavigator({
         screen: Map,
         navigationOptions: {
             title: "Map",
-            tabBarLabel: "Shop",
+            tabBarLabel: "Kort",
         },
     },
 }, {
@@ -119,7 +119,7 @@ export default class App extends React.Component {
 
     render() {
         return (
-            <MyApp screenProps={{ getUser: this.getUser }} />
+            <MyApp screenProps={{getUser: this.getUser}}/>
         )
     }
 }

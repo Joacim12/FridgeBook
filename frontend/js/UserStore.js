@@ -20,20 +20,20 @@
 //     return await promiseUser;
 // }
 
-export class user {
-    constructor(username) {
-        this.user = this.updateUser();
-        this.username = "gustav";
-    }
+let userjs = {};
 
-    updateUser = async () => {
-        return await (await fetch('https://vetterlain.dk/FridgeBook/api/user/' + this.username)).json();
-    }
+export function setUser(user) {
+    userjs = user;
+}
 
-    getUser = async () => {
-        let promiseUser = {};
-        await this.user.then(user => promiseUser = user);
-        return await promiseUser;
-    }
+export function getUser() {
+    return userjs;
+}
 
+export function updateUser() {
+    return fetchUser();
+}
+
+fetchUser = async () => {
+    return await (await fetch('https://vetterlain.dk/FridgeBook/api/user/gustav')).json();
 }

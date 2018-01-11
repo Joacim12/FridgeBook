@@ -58,7 +58,7 @@ class AddIngredient extends React.Component {
     addIngredient = async () => {
         const ingredient = {
             name: this.state.ingredient.name,
-            imagePath: 'fridgebook/' + this.state.image.uri.split('/').pop(),
+            imagePath:  this.state.image.uri.split('/').pop(),
             barcode: this.state.barcode
         }
         const options = {

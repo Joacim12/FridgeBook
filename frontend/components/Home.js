@@ -27,12 +27,12 @@ class Home extends React.Component {
 
     updateUserInState = () => {
         this.props.screenProps.getUser()
-            .then(user => this.setState({ user }));
+            .then(user => this.setState({user}));
     }
 
     onRefresh = () => {
-        // Not much happening here! Should probably fetch new data :-)
-        this.setState({refreshing: false});
+        this.props.screenProps.getUser()
+            .then(user => this.setState({user, refreshing: false}));
     }
 
     handleBarCodeRead = ({type, data}) => {
@@ -90,14 +90,15 @@ class Home extends React.Component {
                                     containerStyle: {marginTop: 0, backgroundColor: '#3b9bff'}
                                 }}
                                 avatar={<Avatar
-                                    source={{uri: 'https://vetterlain.dk/images/' + comestible.ingredient.imagePath}}
+                                    source={{uri: 'https://vetterlain.dk/images/fridgebook/thumb' + comestible.ingredient.imagePath}}
                                     title={comestible.ingredient.name}
+
                                 />}
                                 subtitle={<Text> Udløber den: {comestible.expiryDate}</Text>}
                                 onPress={() =>
                                     this.props.navigation.navigate('Comestible', {
                                         comestible: comestible,
-                                        // onBack: this.updateUserInState
+                                         onBack: this.updateUserInState
                                     })}
                                 onLongPress={() => this.setState({deleteVisible: true})}
                             />
@@ -124,8 +125,8 @@ class Home extends React.Component {
                             {text: 'Scan stregkode', onPress: () => this.renderBarcodeScanner()},
                             {
                                 text: 'Tast selv',
-                                onPress: () => this.props.navigation.navigate('AddComestible')
-                                    // {onBack: this.updateUserInState,})
+                                onPress: () => this.props.navigation.navigate('AddComestible'),
+                                onBack: this.updateUserInState
                             },
                             {text: 'Annuller'}
                         ]
