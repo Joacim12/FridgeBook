@@ -75,25 +75,25 @@ const MapTab = StackNavigator({
     },
 });
 
-const TestTab = StackNavigator({
-    Shop: {
-        screen: Test,
-        navigationOptions: {
-            title: "Test",
-            tabBarLabel: "Test",
-        },
-    },
-}, {
-    navigationOptions: {
-        headerStyle: {marginTop: 24}
-    },
-});
+// const TestTab = StackNavigator({
+//     Shop: {
+//         screen: Test,
+//         navigationOptions: {
+//             title: "Test",
+//             tabBarLabel: "Test",
+//         },
+//     },
+// }, {
+//     navigationOptions: {
+//         headerStyle: {marginTop: 24}
+//     },
+// });
 
 const MyApp = TabNavigator({
     Home: {screen: Start},
     Recipes: {screen: RecipesTab},
     Map: {screen: MapTab},
-    Test: {screen: TestTab},
+    // Test: {screen: TestTab},
 }, {
     tabBarPosition: 'bottom',
     animationEnabled: true,
