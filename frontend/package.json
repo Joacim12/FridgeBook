@@ -13,7 +13,7 @@
     "react-navigation": "^1.0.0-beta.21"
   },
   "name": "FridgeBook",
-  "version": "0.0.3",
+  "version": "0.0.5",
   "description": "Fridgebooken",
   "author": "Zam og Jocim"
 }

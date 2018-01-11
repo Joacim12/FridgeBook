@@ -11,7 +11,7 @@ class Home extends React.Component {
 
     static navigationOptions = ({navigation}) => ({
         title: 'Fridgebook',
-        tabBarLabel: 'Varer',
+
     });
 
     state = {

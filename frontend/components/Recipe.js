@@ -1,10 +1,11 @@
 import React from 'react'
-import { View } from "react-native";
-import { Button, FormInput, FormLabel, Text } from "react-native-elements";
+import {View} from "react-native";
+import {Button, FormInput, FormLabel, Text} from "react-native-elements";
 import Icon from 'react-native-vector-icons/FontAwesome';
+import Test from "./Test";
 
 class Recipe extends React.Component {
-    static navigationOptions = ({ navigation }) => ({
+    static navigationOptions = ({navigation}) => ({
         // headerRight: <Button
         //     title="something"
         //     onPress={() => console.log("clicked")}
@@ -16,9 +17,13 @@ class Recipe extends React.Component {
         recipe: this.props.navigation.state.params.recipe
     }
 
+    componentWillUnmount() {
+        this.props.navigation.state.params.onBack()
+    }
+
     componentDidMount() {
         this.props.screenProps.getUser()
-            .then(user => this.setState({ user }));
+            .then(user => this.setState({user}));
     }
 
     updateRecipe = async () => {
@@ -36,7 +41,7 @@ class Recipe extends React.Component {
     }
 
     updateUserFavourites = async (hasFavourite) => {
-        let user = { ...this.state.user };
+        let user = {...this.state.user};
         if (!hasFavourite) {
             console.log("updateUserFavourites - recipe findes IKKE fav")
             user.favouriteRecipes.push(this.state.recipe);
@@ -44,7 +49,7 @@ class Recipe extends React.Component {
             console.log("updateUserFavourites - recipe findes i fav")
             user.favouriteRecipes = user.favouriteRecipes.filter(recipe => recipe.id !== this.state.recipe.id);
         }
-        this.setState({ user });
+        this.setState({user});
 
         const options = {
             headers: {
@@ -62,13 +67,13 @@ class Recipe extends React.Component {
     handleCounterChanging = async () => {
         if (this.state.user.favouriteRecipes.filter(recipe => recipe.id === this.state.recipe.id).length === 0) {
             console.log("change counter - recipe findes IKKE i fav")
-            this.setState({ recipe: { ...this.state.recipe, rateCounter: this.state.recipe.rateCounter + 1 } }, async () => {
+            this.setState({recipe: {...this.state.recipe, rateCounter: this.state.recipe.rateCounter + 1}}, async () => {
                 await this.updateRecipe()
                     .then(this.updateUserFavourites(false));
             });
         } else {
             console.log("change counter - recipe findes i fav")
-            this.setState({ recipe: { ...this.state.recipe, rateCounter: this.state.recipe.rateCounter - 1 } }, async () => {
+            this.setState({recipe: {...this.state.recipe, rateCounter: this.state.recipe.rateCounter - 1}}, async () => {
                 await this.updateRecipe()
                     .then(this.updateUserFavourites(true));
             });
@@ -77,25 +82,7 @@ class Recipe extends React.Component {
 
     render() {
         return (
-            <View>
-                <FormLabel>Titel:</FormLabel><FormInput
-                    style={{ height: 40 }}
-                    value={this.state.recipe.name}
-                    onChangeText={text => this.setState({ recipe: { ...this.state.recipe, name: text } })}
-                    placeholder="Indtast titel på opskrift..."
-                />
-                <Icon.Button name="heart" size={30} color="red" onPress={() => {
-                    this.handleCounterChanging()
-                        .then(() => this.props.screenProps.getUser());
-                }}></Icon.Button>
-                <Text>Bedømmelse: {this.state.recipe.rateCounter}</Text>
-                <FormInput
-                    style={{ height: 40 }}
-                    value={this.state.recipe.text}
-                    onChangeText={text => this.setState({ recipe: { ...this.state.recipe, text: text } })}
-                    placeholder="Beskriv din opskrift..."
-                />
-            </View>
+            <Test/>
         );
     }
 }

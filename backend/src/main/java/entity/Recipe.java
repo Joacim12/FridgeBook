@@ -25,6 +25,7 @@ public class Recipe implements Serializable {
     @Lob
     @Column(nullable = false)
     private String text;
+    private String note;
     @ManyToMany(fetch = FetchType.EAGER)
     private List<Ingredient> recipeIngredients;
 
@@ -38,6 +39,18 @@ public class Recipe implements Serializable {
         this.text = text;
         this.recipeIngredients = recipeIngredients;
         rateCounter = 0;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setRateCounter(int rateCounter) {
+        this.rateCounter = rateCounter;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
     }
 
     public int getId() {
@@ -100,5 +113,5 @@ public class Recipe implements Serializable {
     public String toString() {
         return "Recipe{" + "id=" + id + ", name=" + name + ", rateCounter=" + rateCounter + ", imagePaths=" + imagePaths + ", text=" + text + ", recipeIngredients=" + recipeIngredients + '}';
     }
-    
+
 }

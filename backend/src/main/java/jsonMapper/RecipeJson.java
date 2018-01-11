@@ -11,6 +11,7 @@ public class RecipeJson {
     private int rateCounter;
     private List<String> imagePaths;
     private String text;
+    private String note;
     private List<IngredientJson> recipeIngredients;
 
     public RecipeJson(Recipe recipe) {
@@ -19,6 +20,7 @@ public class RecipeJson {
         rateCounter = recipe.getRateCounter();
         imagePaths = recipe.getImagePaths();
         text = recipe.getText();
+        note = recipe.getNote();
         recipeIngredients = new ArrayList();
 
         recipe.getRecipeIngredients().forEach(ingredient -> {

@@ -1,6 +1,7 @@
 package facade;
 
 import entity.Recipe;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -10,6 +11,22 @@ import javax.persistence.RollbackException;
 public class RecipeFacade {
 
     private final EntityManagerFactory EMF;
+
+    public static void main(String[] args) {
+        new RecipeFacade("PU").start();
+    }
+
+    public void start() {
+//        List<String> paths = new ArrayList();
+//        paths.add("https://vetterlain.dk/images/fridgebook/pandekage.jpg");
+        Recipe r = getRecipeById(1);
+//        r.setName("Pandekager");
+r.setRateCounter(1);
+//        r.setNote("Den lækreste drømmekage!");
+//        r.setText("Lækre pandekager bagt med øl");
+//        r.setImagePaths(paths);
+        updateRecipe(r);
+    }
 
     public RecipeFacade(String persistenceUnit) {
         this.EMF = Persistence.createEntityManagerFactory(persistenceUnit);
