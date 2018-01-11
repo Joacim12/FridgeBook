@@ -73,23 +73,23 @@ public class TestData {
         drøømmekageIngredients.add(yoghurt);
         drøømmekageIngredients.add(tomat);
         drøømmekageIngredients.add(aguark);
-        Recipe banankage = new Recipe("banankage", imagePaths, "Tag 1 liter yoghurt og bland med...", bananIngredients);
-        Recipe pandekage = new Recipe("pandekage", imagePaths, "Tag 1 liter mælk og bla bla bla..", pandekageIngredients);
-        Recipe drømmekage = new Recipe("drømmekage", imagePaths, "Beskrivelse af drømmekage", drøømmekageIngredients);
-        RECIPE_FACADE.createRecipe(drømmekage);
-        RECIPE_FACADE.createRecipe(pandekage);
-        RECIPE_FACADE.createRecipe(banankage);
-
-        lars.addRecipeCreatedByUser(drømmekage);
-        lars.addRecipeCreatedByUser(banankage);
-        ib.addRecipeCreatedByUser(pandekage);
-
-        lars.addFavouriteRecipe(drømmekage);
-        lars.addFavouriteRecipe(pandekage);
-        ib.addFavouriteRecipe(drømmekage);
-        gustav.addFavouriteRecipe(drømmekage);
-        gustav.addFavouriteRecipe(banankage);
-        gustav.addFavouriteRecipe(pandekage);
+//        Recipe banankage = new Recipe("banankage", imagePaths, "Tag 1 liter yoghurt og bland med...", bananIngredients);
+//        Recipe pandekage = new Recipe("pandekage", imagePaths, "Tag 1 liter mælk og bla bla bla..", pandekageIngredients);
+//        Recipe drømmekage = new Recipe("drømmekage", imagePaths, "Beskrivelse af drømmekage", drøømmekageIngredients);
+//        RECIPE_FACADE.createRecipe(drømmekage);
+//        RECIPE_FACADE.createRecipe(pandekage);
+//        RECIPE_FACADE.createRecipe(banankage);
+//
+//        lars.addRecipeCreatedByUser(drømmekage);
+//        lars.addRecipeCreatedByUser(banankage);
+//        ib.addRecipeCreatedByUser(pandekage);
+//
+//        lars.addFavouriteRecipe(drømmekage);
+//        lars.addFavouriteRecipe(pandekage);
+//        ib.addFavouriteRecipe(drømmekage);
+//        gustav.addFavouriteRecipe(drømmekage);
+//        gustav.addFavouriteRecipe(banankage);
+//        gustav.addFavouriteRecipe(pandekage);
 
         USER_FACADE.updateUser(lars);
         USER_FACADE.updateUser(ib);

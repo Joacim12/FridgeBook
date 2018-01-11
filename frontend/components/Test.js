@@ -2,30 +2,37 @@ import React, {Component} from 'react'
 import {Animated, View, StyleSheet, Image, Dimensions, ScrollView} from 'react-native'
 
 const deviceWidth = Dimensions.get('window').width
-const FIXED_BAR_WIDTH = 280
-const BAR_SPACE = 10
+const deviceHeight = Dimensions.get('window').height
+const FIXED_BAR_WIDTH = 140
+const BAR_SPACE = 20
 
-const images = [
-    'https://s-media-cache-ak0.pinimg.com/originals/ee/51/39/ee5139157407967591081ee04723259a.png',
-    'https://s-media-cache-ak0.pinimg.com/originals/40/4f/83/404f83e93175630e77bc29b3fe727cbe.jpg',
-    'https://s-media-cache-ak0.pinimg.com/originals/8d/1a/da/8d1adab145a2d606c85e339873b9bb0e.jpg',
-]
+// const images = [
+//     'https://s-media-cache-ak0.pinimg.com/originals/ee/51/39/ee5139157407967591081ee04723259a.png',
+//     'https://s-media-cache-ak0.pinimg.com/originals/40/4f/83/404f83e93175630e77bc29b3fe727cbe.jpg',
+//     'https://s-media-cache-ak0.pinimg.com/originals/8d/1a/da/8d1adab145a2d606c85e339873b9bb0e.jpg',
+// ]
 
 class Test extends Component {
 
-    numItems = images.length
+    state={
+        images:this.props.images
+    }
+
+    numItems = this.state.images.length
     itemWidth = (FIXED_BAR_WIDTH / this.numItems) - ((this.numItems - 1) * BAR_SPACE)
     animVal = new Animated.Value(0)
+
+
 
     render() {
         let imageArray = []
         let barArray = []
-        images.forEach((image, i) => {
+        this.state.images.forEach((image, i) => {
             const thisImage = (
                 <Image
                     key={`image${i}`}
                     source={{uri: image}}
-                    style={{width: deviceWidth}}
+                    style={{width: deviceWidth,height:deviceHeight/3}}
                 />
             )
             imageArray.push(thisImage)
@@ -65,10 +72,7 @@ class Test extends Component {
         })
 
         return (
-            <View
-                style={styles.container}
-                flex={1}
-            >
+            <View style={styles.container}>
                 <ScrollView
                     horizontal
                     showsHorizontalScrollIndicator={false}
@@ -87,7 +91,7 @@ class Test extends Component {
                 <View
                     style={styles.barContainer}
                 >
-                    {barArray}
+                    {this.state.images.length>1?barArray:null}
                 </View>
             </View>
         )
@@ -97,7 +101,7 @@ class Test extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        // flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
     },

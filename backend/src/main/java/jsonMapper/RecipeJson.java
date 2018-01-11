@@ -12,7 +12,7 @@ public class RecipeJson {
     private List<String> imagePaths;
     private String text;
     private String note;
-    private List<IngredientJson> recipeIngredients;
+    private List<CategoryJson> recipeIngredients;
 
     public RecipeJson(Recipe recipe) {
         id = recipe.getId();
@@ -24,7 +24,7 @@ public class RecipeJson {
         recipeIngredients = new ArrayList();
 
         recipe.getRecipeIngredients().forEach(ingredient -> {
-            recipeIngredients.add(new IngredientJson(ingredient));
+            recipeIngredients.add(new CategoryJson(ingredient));
         });
     }
 }

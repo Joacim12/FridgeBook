@@ -27,13 +27,13 @@ public class Recipe implements Serializable {
     private String text;
     private String note;
     @ManyToMany(fetch = FetchType.EAGER)
-    private List<Ingredient> recipeIngredients;
+    private List<Category> recipeIngredients;
 
     public Recipe() {
         rateCounter = 0;
     }
 
-    public Recipe(String name, List<String> imagePaths, String text, List<Ingredient> recipeIngredients) {
+    public Recipe(String name, List<String> imagePaths, String text, List<Category> recipeIngredients) {
         this.name = name;
         this.imagePaths = imagePaths;
         this.text = text;
@@ -97,21 +97,16 @@ public class Recipe implements Serializable {
         this.text = text;
     }
 
-    public List<Ingredient> getRecipeIngredients() {
+    public List<Category> getRecipeIngredients() {
         return recipeIngredients;
     }
 
-    public void setRecipeIngredients(List<Ingredient> recipeIngredients) {
+    public void setRecipeIngredients(List<Category> recipeIngredients) {
         this.recipeIngredients = recipeIngredients;
     }
 
-    public void addRecipeIngredient(Ingredient ingredient) {
-        recipeIngredients.add(ingredient);
-    }
-
-    @Override
-    public String toString() {
-        return "Recipe{" + "id=" + id + ", name=" + name + ", rateCounter=" + rateCounter + ", imagePaths=" + imagePaths + ", text=" + text + ", recipeIngredients=" + recipeIngredients + '}';
+    public void addRecipeIngredient(Category category) {
+        recipeIngredients.add(category);
     }
 
 }

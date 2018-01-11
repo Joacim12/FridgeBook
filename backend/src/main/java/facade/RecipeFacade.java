@@ -1,5 +1,7 @@
 package facade;
 
+import entity.Category;
+import entity.Ingredient;
 import entity.Recipe;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,15 +19,27 @@ public class RecipeFacade {
     }
 
     public void start() {
-//        List<String> paths = new ArrayList();
-//        paths.add("https://vetterlain.dk/images/fridgebook/pandekage.jpg");
-        Recipe r = getRecipeById(1);
+        List<String> paths = new ArrayList();
+        
+        paths.add("https://vetterlain.dk/images/fridgebook/pandekage.jpg");
+        paths.add("https://vetterlain.dk/images/fridgebook/029e06c3-4c5a-428b-8cb0-5f439523ea25.jpg");
+        Recipe r = new Recipe();
+        r.setImagePaths(paths);
+        r.setName("Pandekager");
+        r.setNote("Pandekager bagt med øl");
+        r.setText("bla");
+        r.setRateCounter(0);
+        List<Category> l = new ArrayList();
+        l.add(new CategoryFacade("PU").getCategory(1L));
+        l.forEach(la->{System.out.println(la.getName());});
+        r.setRecipeIngredients(l);
+//        System.out.println(r.getRecipeIngredients());
 //        r.setName("Pandekager");
-r.setRateCounter(1);
+//        r.setRateCounter(0);
 //        r.setNote("Den lækreste drømmekage!");
 //        r.setText("Lækre pandekager bagt med øl");
 //        r.setImagePaths(paths);
-        updateRecipe(r);
+        createRecipe(r);
     }
 
     public RecipeFacade(String persistenceUnit) {

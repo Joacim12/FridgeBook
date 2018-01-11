@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.RollbackException;
 
 /**
  *
@@ -22,20 +23,22 @@ public class CategoryFacade {
     private EntityManager getEntityManager() {
         return EMF.createEntityManager();
     }
-    
+
     public static void main(String[] args) {
         new CategoryFacade("PU").tester();
     }
-    
-    public void tester(){
+
+    public void tester() {
         Category c = new Category();
         c.setIngredients(new ArrayList());
-        c.setName("Ost");
-        c.setImageName("fridgebook/cheese.png");
+        c.setName("Hvedemel");
         createCategory(c);
+//        Category c = getCategory(2l);
+//        c.getIngredients().add(new IngredientFacade("PU").getIngredientByName("Økologisk hvedemel"));
+//        updateUser(c);
     }
 
-    public Category getCategory(int id) {
+    public Category getCategory(Long id) {
         return getEntityManager().find(Category.class, id);
     }
 
@@ -52,6 +55,21 @@ public class CategoryFacade {
         } finally {
             em.close();
         }
+    }
+
+    public Category updateUser(Category category) {
+        EntityManager em = getEntityManager();
+        Category categoryInDB = em.find(Category.class, category.getId().longValue());
+        try {
+            em.getTransaction().begin();
+            categoryInDB = em.merge(category);
+            em.getTransaction().commit();
+        } catch (RollbackException r) {
+            em.getTransaction().rollback();
+        } finally {
+            em.close();
+        }
+        return categoryInDB;
     }
 
 }
