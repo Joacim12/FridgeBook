@@ -1,18 +1,44 @@
 import React from 'react'
-import {Avatar, Icon, List, ListItem, Text} from "react-native-elements";
+import {Avatar, Button, Icon, List, ListItem, Text} from "react-native-elements";
 import {RefreshControl, ScrollView, TouchableOpacity, View, StyleSheet, Image, Alert, ActivityIndicator} from "react-native";
 import AddComestible from "./AddComestible";
-import {AppLoading, Asset, BarCodeScanner, Permissions} from "expo";
-import {getUser, fetchUser} from "../js/UserStore";
+import {BarCodeScanner, Permissions} from "expo";
+import Login from "./Login";
 
 class Home extends React.Component {
     //Dette ikon kan bruges til at slette varer (comestibles)
     // <Icon name="delete" size={30} />
 
-    static navigationOptions = ({navigation}) => ({
-        title: 'Fridgebook',
+    static navigationOptions = ({navigation, screenProps}) => {
+        const params = navigation.state.params || {};
 
-    });
+        return {
+            title: params.title,
+            // headerLeft:  params.headerLeft,
+            headerRight: params.headerRight,
+        }
+    }
+
+    _setNavigationParams() {
+        let title = 'FridgeBook';
+        // let headerLeft  = <Button onPress={console.log("1")} />;
+
+        let headerRight = <Avatar
+            rounded
+            containerStyle={{margin: 15}}
+            source={{uri: this.props.screenProps.fbUser.picture.data.url}}
+            onPress={() => this.props.navigation.navigate('User')}
+        />;
+
+
+        this.props.navigation.setParams({
+            title,
+            // headerLeft,
+            headerRight,
+
+        });
+    }
+
 
     state = {
         refreshing: false,
@@ -22,7 +48,10 @@ class Home extends React.Component {
     }
 
     componentWillMount() {
-        this.updateUserInState();
+        if (this.props.screenProps.fbUser !== null) {
+            this.updateUserInState();
+            this._setNavigationParams();
+        }
     };
 
     updateUserInState = () => {
@@ -54,6 +83,13 @@ class Home extends React.Component {
     }
 
     render() {
+
+        if (this.props.screenProps.fbUser === null) {
+            return (
+                <Login/>
+            )
+        }
+
         if (Object.keys(this.state.user).length === 0) {
             return (
                 <View style={{flex: 1, justifyContent: 'center'}}>
@@ -61,6 +97,7 @@ class Home extends React.Component {
                 </View>
             )
         }
+
 
         if (this.state.barcode) {
             return (
@@ -99,7 +136,7 @@ class Home extends React.Component {
                                 onPress={() =>
                                     this.props.navigation.navigate('Comestible', {
                                         comestible: comestible,
-                                         onBack: this.updateUserInState
+                                        onBack: this.updateUserInState
                                     })}
                                 onLongPress={() => this.setState({deleteVisible: true})}
                             />

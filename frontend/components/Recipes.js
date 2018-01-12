@@ -21,7 +21,9 @@ class Recipes extends React.Component {
 
 
     componentDidMount() {
-        this.updateUserInState()
+        if (this.props.screenProps.fbUser !== null) {
+            this.updateUserInState()
+        }
 
     }
 

@@ -5,8 +5,6 @@ import DatePicker from 'react-native-datepicker';
 import Dimensions from 'Dimensions';
 
 class Comestible extends React.Component {
-    //I dette komponent skal følgende rettes:
-    //Når tastaturet bliver synligt, skal inputfeltet rykke op, således at brugeren kan se hvad han skriver
     static navigationOptions = ({navigation}) => ({
         title: navigation.state.params.comestible.ingredient.name,
         tabBarLabel: 'Varer',

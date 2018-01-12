@@ -1,8 +1,8 @@
 import React from 'react'
 import {ScrollView, View} from "react-native";
-import {Button, FormInput, FormLabel, Text} from "react-native-elements";
+import {Text} from "react-native-elements";
 import Icon from 'react-native-vector-icons/FontAwesome';
-import Test from "./Test";
+import ImageSlider from "./ImageSlider";
 import {Share} from "react-native";
 
 class Recipe extends React.Component {
@@ -136,10 +136,10 @@ class Recipe extends React.Component {
     }
 
     render() {
-        // console.log(this.state.recipe)
+        console.log(this.state.recipe)
         return (
             <ScrollView style={{flex: 1, backgroundColor: "white"}}>
-                <Test images={this.state.recipe.imagePaths}/>
+                <ImageSlider images={this.state.recipe.imagePaths}/>
                 <View style={{flexDirection: 'row'}}>
                     <Icon name={this.state.recipe.icon} style={{padding: 10}} size={40} color={this.state.recipe.color} onPress={() => {
                         this.handleCounterChanging()

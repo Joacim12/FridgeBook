@@ -1,6 +1,7 @@
 import React from 'react'
 import {StackNavigator, TabNavigator} from 'react-navigation';
 import Home from "./components/Home";
+import User from "./components/User";
 import Comestible from "./components/Comestible";
 import AddComestible from "./components/AddComestible";
 import Recipes from "./components/Recipes";
@@ -8,14 +9,22 @@ import Recipe from "./components/Recipe";
 import AddIngredient from "./components/CreateIngredient";
 import Test from "./components/Test";
 import {Ionicons} from "react-native-vector-icons";
-import { Font } from 'expo';
-
+import {Font, SecureStore} from 'expo';
+import Login from "./components/Login";
+import {ActivityIndicator, View} from "react-native";
 
 
 const Start = StackNavigator({
         Home: {
             screen: Home,
             path: '/',
+        },
+        Login: {
+            screen: Login,
+            navigationOptions: {
+                tabBarVisible: false,
+            },
+
         },
         AddComestible: {
             screen: AddComestible,
@@ -32,11 +41,17 @@ const Start = StackNavigator({
             navigationOptions: {
                 title: 'Opret vare',
             }
+        },
+        User: {
+            screen: User,
+            navigationOptions: {
+                title: 'Konto',
+            }
         }
     }
     , {
         navigationOptions: {
-            headerTintColor:'#f0f0f0',
+            headerTintColor: '#f0f0f0',
             headerStyle: {marginTop: 24, backgroundColor: "#3b9bff"},
 
             tabBarIcon: () => {
@@ -67,7 +82,7 @@ const RecipesTab = StackNavigator({
     },
 }, {
     navigationOptions: {
-        headerTintColor:'#f0f0f0',
+        headerTintColor: '#f0f0f0',
         headerStyle: {marginTop: 24, backgroundColor: "#2196F3"},
         tabBarIcon: () => {
             return <Ionicons
@@ -79,25 +94,26 @@ const RecipesTab = StackNavigator({
     },
 });
 
-const TestTab = StackNavigator({
-    Shop: {
-        screen: Test,
-        navigationOptions: {
-            tabBarIcon: () => {
-                return <Ionicons
-                    name={'ios-home'}
-                    size={26}
-                    style={{color: 'white'}}
-                />
+// const TestTab = StackNavigator({
+//     Shop: {
+//         screen: Login,
+//         navigationOptions: {},
+//     },
+// }, {
+//     navigationOptions: {
+//         headerStyle: {marginTop: 24}
+//     },
+// });
 
-            }
-        },
-    },
-}, {
-    navigationOptions: {
-        headerStyle: {marginTop: 24}
-    },
-});
+// const LoginStack = StackNavigator({
+//     LoginScreen: {
+//         screen: Login,
+//     }
+// }, {
+//     navigationOptions: {
+//         headerStyle: {marginTop: 24}
+//     },
+// })
 
 const MyApp = TabNavigator({
     Home: {screen: Start},
@@ -124,19 +140,50 @@ const MyApp = TabNavigator({
 
 export default class App extends React.Component {
 
-    getUser = async () => {
-        return await (await fetch('https://vetterlain.dk/FridgeBook/api/user/gustav')).json()
+    state = {
+        token: null,
+        loading: true,
+        fbUser: null
     }
 
-    componentDidMount(){
-        Font.loadAsync({
-            'open-sans-bold': require('./assets/fonts/FiraSans-Regular.ttf'),
-        });
+    getUser = async () => {
+        return await (await fetch('https://vetterlain.dk/FridgeBook/api/user/' + this.state.fbUser.id)).json()
     }
+
+    // componentDidMount() {
+    //     Font.loadAsync({
+    //         'open-sans-bold': require('./assets/fonts/FiraSans-Regular.ttf'),
+    //     });
+    // }
+
+    componentWillMount = async () => {
+        this.fetchFromFacebook();
+    }
+
+    fetchFromFacebook = async () => {
+        let token = await SecureStore.getItemAsync("fbToken");
+        this.setState({token: token})
+        if (this.state.token !== null) {
+            const response = await fetch(`https://graph.facebook.com/me?fields=id,name,picture&access_token=${this.state.token}`);
+            this.setState({fbUser: await response.json(), loading: false}, () => {
+            })
+        } else {
+            this.setState({loading: false})
+        }
+    }
+
 
     render() {
+        if (this.state.loading) {
+            return (
+                <View style={{flex: 1, justifyContent: 'center'}}>
+                    <ActivityIndicator size={100} color="#0000ff"/>
+                </View>
+            )
+        }
         return (
-            <MyApp screenProps={{getUser: this.getUser}}/>
+            <MyApp screenProps={{getUser: this.getUser, fbUser: this.state.fbUser, fetchFromFacebook: this.fetchFromFacebook}}/>
         )
     }
+
 }

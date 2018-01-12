@@ -1,128 +1,62 @@
-import React, {Component} from 'react'
-import {Animated, View, StyleSheet, Image, Dimensions, ScrollView} from 'react-native'
+import React from 'react'
+import {ScrollView, View} from "react-native";
+import {Button, Text} from "react-native-elements";
+import {Alert} from "react-native";
+import {SecureStore} from 'expo';
 
-const deviceWidth = Dimensions.get('window').width
-const deviceHeight = Dimensions.get('window').height
-const FIXED_BAR_WIDTH = 140
-const BAR_SPACE = 20
+class Test extends React.Component {
 
-// const images = [
-//     'https://s-media-cache-ak0.pinimg.com/originals/ee/51/39/ee5139157407967591081ee04723259a.png',
-//     'https://s-media-cache-ak0.pinimg.com/originals/40/4f/83/404f83e93175630e77bc29b3fe727cbe.jpg',
-//     'https://s-media-cache-ak0.pinimg.com/originals/8d/1a/da/8d1adab145a2d606c85e339873b9bb0e.jpg',
-// ]
 
-class Test extends Component {
-
-    state={
-        images:this.props.images
+    state = {
+        loading: true,
+        token: {}
     }
 
-    numItems = this.state.images.length
-    itemWidth = (FIXED_BAR_WIDTH / this.numItems) - ((this.numItems - 1) * BAR_SPACE)
-    animVal = new Animated.Value(0)
+    componentWillMount = async () => {
+        let at1 = await SecureStore.getItemAsync("fbToken");
+        this.setState({loading: false, token: at1})
+        if (this.state.token !== null) {
+            const response = await fetch(
+                `https://graph.facebook.com/me?fields=id,name,picture&access_token=${this.state.token}`
+            // ,console.log(await response.json())
+        )
 
+        }
+        // Alert.alert('Logged in!', `Hi ${(await response.json()).name}!`);
+    }
 
 
     render() {
-        let imageArray = []
-        let barArray = []
-        this.state.images.forEach((image, i) => {
-            const thisImage = (
-                <Image
-                    key={`image${i}`}
-                    source={{uri: image}}
-                    style={{width: deviceWidth,height:deviceHeight/3}}
-                />
-            )
-            imageArray.push(thisImage)
-
-            const scrollBarVal = this.animVal.interpolate({
-                inputRange: [deviceWidth * (i - 1), deviceWidth * (i + 1)],
-                outputRange: [-this.itemWidth, this.itemWidth],
-                extrapolate: 'clamp',
-            })
-
-            const thisBar = (
-                <View
-                    key={`bar${i}`}
-                    style={[
-                        styles.track,
-                        {
-                            width: this.itemWidth,
-                            marginLeft: i === 0 ? 0 : BAR_SPACE,
-                        },
-                    ]}
-                >
-                    <Animated.View
-
-                        style={[
-                            styles.bar,
-                            {
-                                width: this.itemWidth,
-                                transform: [
-                                    {translateX: scrollBarVal},
-                                ],
-                            },
-                        ]}
-                    />
+        if (this.state.token !== null) {
+            return (
+                <View>
+                    <Text>Hey</Text>
                 </View>
             )
-            barArray.push(thisBar)
-        })
-
+        }
         return (
-            <View style={styles.container}>
-                <ScrollView
-                    horizontal
-                    showsHorizontalScrollIndicator={false}
-                    scrollEventThrottle={10}
-                    pagingEnabled
-                    onScroll={
-                        Animated.event(
-                            [{nativeEvent: {contentOffset: {x: this.animVal}}}]
-                        )
-                    }
-                >
-
-                    {imageArray}
-
-                </ScrollView>
-                <View
-                    style={styles.barContainer}
-                >
-                    {this.state.images.length>1?barArray:null}
-                </View>
-            </View>
-        )
+            <ScrollView style={{flex: 1, backgroundColor: "white"}}>
+                <Button onPress={logIn} title="Sign in with facebook"/>
+            </ScrollView>
+        );
     }
 }
 
+async function logIn() {
+    const {
+        type,
+        token,
+    } = await Expo.Facebook.logInWithReadPermissionsAsync('571905333150508', {
+        permissions: ['public_profile'],
+    });
 
-const styles = StyleSheet.create({
-    container: {
-        // flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    barContainer: {
-        position: 'absolute',
-        zIndex: 2,
-        top: 40,
-        flexDirection: 'row',
-    },
-    track: {
-        backgroundColor: '#ccc',
-        overflow: 'hidden',
-        height: 2,
-    },
-    bar: {
-        backgroundColor: '#5294d6',
-        height: 2,
-        position: 'absolute',
-        left: 0,
-        top: 0,
-    },
-})
+    if (type === 'success') {
+        SecureStore.setItemAsync("fbToken", token);
+        const response = await fetch(
+            `https://graph.facebook.com/me?access_token=${token}`
+        );
+        Alert.alert('Logged in!', `Hi ${(await response.json()).name}!`);
+    }
+}
 
 export default Test;
