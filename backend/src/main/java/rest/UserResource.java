@@ -46,7 +46,7 @@ public class UserResource {
     public String createUser(String content) {
         User user = GSON.fromJson(content, User.class);
         USER_FACADE.createUser(user);
-        return "Created";
+        return "{\"Created\":\"yes\"}";
     }
 
     @PUT
