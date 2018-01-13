@@ -136,7 +136,6 @@ class Recipe extends React.Component {
     }
 
     render() {
-        console.log(this.state.recipe)
         return (
             <ScrollView style={{flex: 1, backgroundColor: "white"}}>
                 <ImageSlider images={this.state.recipe.imagePaths}/>

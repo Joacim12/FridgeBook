@@ -5,6 +5,7 @@ import DatePicker from 'react-native-datepicker';
 
 class AddComestible extends React.Component {
 
+
     state = {
         name: '',
         amount: '',
@@ -19,9 +20,7 @@ class AddComestible extends React.Component {
         this.updateUserInState();
         this.fetchIngredients()
             .then(() => {
-                console.log(this.props.navigation.state.params.data);
                 if (this.props.navigation.state.params.data !== undefined) {
-                    console.log("Nothing")
                     let found = false;
                     this.state.ingredients.forEach(ingredient => {
                         if (ingredient.barcode === this.props.navigation.state.params.data) {
@@ -34,7 +33,6 @@ class AddComestible extends React.Component {
                             {barcode: this.props.navigation.state.params.data, fetchIngredients: this.fetchIngredients});
                     }
                 }
-                console.log("no");
             }).catch(err => {
             console.log(err);
         })
@@ -89,8 +87,16 @@ class AddComestible extends React.Component {
 
     render() {
         if (this.state.search) {
-            let ingredientsContainingInput = this.state.ingredients.filter(ingredient =>
-                ingredient.name.toUpperCase().substring(0, this.state.name.length) === this.state.name.toUpperCase()).slice(0, 5);
+            let ingredientsContainingInput = this.state.ingredients;
+            if (this.state.name.length > 0) {
+                ingredientsContainingInput = [];
+                this.state.ingredients.forEach(ingredient => {
+                        if (ingredient.name.toLowerCase().indexOf(this.state.name.toLowerCase()) > -1) {
+                            ingredientsContainingInput.push(ingredient);
+                        }
+                    }
+                )
+            }
             return (
                 <View style={styles.container}>
                     <FormLabel>Vare</FormLabel>
@@ -176,9 +182,11 @@ class AddComestible extends React.Component {
                                 'Indtast venligst vare, mængde samt udløbsdato for at fortsætte'
                             );
                         } else {
+                            console.log(this.props.navigation)
                             this.addComestible()
                                 .then(() => this.props.screenProps.getUser())
-                                // .then(() => this.props.navigation.state.params.onBack())
+                                .then(() => this.props.navigation.state.params.onBack())
+                                .then(() => this.props.navigation.state.params.setBack())
                                 .then(() => this.props.navigation.goBack())
                         }
                     }

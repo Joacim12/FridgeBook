@@ -3,15 +3,15 @@ import {Text, ScrollView, RefreshControl, StyleSheet} from 'react-native'
 import {Card, Button} from 'react-native-elements'
 
 class Recipes extends React.Component {
-    static navigationOptions = ({navigation}) => ({
-        onTransitionEnd: ((t) => {
-            console.log("transition" + t)
-        }),
-        // headerRight: <Button
-        //     title="something"
-        //     onPress={() => console.log("clicked")}
-        // />
-    });
+    // static navigationOptions = ({navigation}) => ({
+    //     onTransitionEnd: ((t) => {
+    //         console.log("transition" + t)
+    //     }),
+    //     // headerRight: <Button
+    //     //     title="something"
+    //     //     onPress={() => console.log("clicked")}
+    //     // />
+    // });
 
     state = {
         user: {},

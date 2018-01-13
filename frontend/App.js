@@ -12,6 +12,7 @@ import {Ionicons} from "react-native-vector-icons";
 import {Font, SecureStore} from 'expo';
 import Login from "./components/Login";
 import {ActivityIndicator, View} from "react-native";
+import Barcode from "./components/Barcode";
 
 
 const Start = StackNavigator({
@@ -22,9 +23,11 @@ const Start = StackNavigator({
         Login: {
             screen: Login,
             navigationOptions: {
+                title: 'FridgeBook',
+                gesturesEnabled: false,
                 tabBarVisible: false,
+                swipeEnabled: false,
             },
-
         },
         AddComestible: {
             screen: AddComestible,
@@ -47,13 +50,19 @@ const Start = StackNavigator({
             navigationOptions: {
                 title: 'Konto',
             }
+        },
+        Barcode: {
+            screen: Barcode,
+            navigationOptions: {
+                tabBarVisible: false,
+                swipeEnabled: false,
+            }
         }
     }
     , {
         navigationOptions: {
             headerTintColor: '#f0f0f0',
             headerStyle: {marginTop: 24, backgroundColor: "#3b9bff"},
-
             tabBarIcon: () => {
                 return <Ionicons
                     name={'ios-home'}
@@ -177,7 +186,7 @@ export default class App extends React.Component {
         if (this.state.loading) {
             return (
                 <View style={{flex: 1, justifyContent: 'center'}}>
-                    <ActivityIndicator size={100} color="#0000ff"/>
+                    <ActivityIndicator size={100} color="#2196F3"/>
                 </View>
             )
         }

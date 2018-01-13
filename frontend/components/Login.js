@@ -1,5 +1,5 @@
 import React from 'react'
-import {ScrollView} from "react-native";
+import {Text, View} from "react-native";
 import {Button} from "react-native-elements";
 import {SecureStore, Facebook} from 'expo';
 import {NavigationActions} from 'react-navigation';
@@ -24,8 +24,10 @@ class Login extends React.Component {
             permissions: ['public_profile'],
         });
         if (type === 'success') {
+            await this.createUser(token)
             await SecureStore.setItemAsync("fbToken", token);
-            this.createUser(token)
+            await this.props.screenProps.fetchFromFacebook();
+
         }
     }
 
@@ -50,9 +52,15 @@ class Login extends React.Component {
 
     render() {
         return (
-            <ScrollView style={{flex: 1, backgroundColor: "white"}}>
-                <Button onPress={() => this.login()} title="Sign in with facebook"/>
-            </ScrollView>
+            <View style={{flex: 1, backgroundColor: "white", alignItems: "center"}}>
+                <Text style={{textAlign: 'center'}}>{"\n\n"}For at komme i gang med at bruge appen, log venligst ind{"\n"}</Text>
+                <Button
+                    onPress={this.login}
+                    title="Login with Facebook"
+                    icon={{name: 'facebook', type: 'entypo'}}
+                    backgroundColor='#3b5998'
+                />
+            </View>
         );
     }
 }

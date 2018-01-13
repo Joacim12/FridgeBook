@@ -42,7 +42,7 @@ public class ImageResource {
             InputStream is2 = new ByteArrayInputStream(baos.toByteArray());
 
             BufferedImage image = ImageIO.read(is1);
-            BufferedImage resized = resize(image, 48, 48);
+            BufferedImage resized = resize(image, image.getHeight()/8, image.getWidth()/8);
             System.out.println("resizing");
             File output = new File("/home/joacim/images/fridgebook/thumb" + fileDetail.getFileName());
             ImageIO.write(resized, "jpg", output);
