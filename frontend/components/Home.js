@@ -1,11 +1,12 @@
 import React from 'react'
-import {Avatar, Icon} from "react-native-elements";
-import {RefreshControl, ScrollView, TouchableOpacity, View, Alert, ActivityIndicator, FlatList, Text} from "react-native";
+import {Avatar} from "react-native-elements";
+import {RefreshControl, ScrollView, TouchableOpacity, View, ActivityIndicator, FlatList, Text} from "react-native";
 import AddComestible from "./AddComestible";
 import Login from "./Login";
 import {NavigationActions} from "react-navigation";
 import {Permissions} from "expo";
 import Card from "./Card";
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const users = [
     {
@@ -88,21 +89,86 @@ class Home extends React.Component {
         )
     }
 
-    keyExtractor = (item,index) => item.id;
+    keyExtractor = (item, index) => item.id;
 
-    renderItem({item, index}) {
-        return <Card comestible={item}/>
+    renderItem = ({item, index}) => {
+        return <Card comestible={item} search={this.search} updateUser={this.updateUserInState}/>
     }
+
+    search = (name) => {
+        this.props.screenProps.setSearch(name);
+        this.props.navigation.navigate('Recipes');
+    }
+
 
 
     render() {
         if (Object.keys(this.state.user).length === 0) {
             return (
                 <View style={{flex: 1, justifyContent: 'center'}}>
-                    <ActivityIndicator size={100} color="#0000ff"/>
+                    <ActivityIndicator size={100} color="#2196F3"/>
                 </View>
             )
         }
+        if(this.state.user.comestibles.length===0){
+            return(
+                <View style={{flex:1,backgroundColor:'white',justifyContent:'center'}}>
+                    <Text style={{textAlign:'center'}}>Her er tomt</Text>
+                    <TouchableOpacity
+                        style={{
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            width: 70,
+                            height: 70,
+                            backgroundColor: '#ff5613',
+                            borderRadius: 100,
+                            position: 'absolute',
+                            right: '6%',
+                            bottom: '15%',
+                            elevation: 5
+                        }}
+                        onPress={
+                            () => {
+                                Permissions.askAsync(Permissions.CAMERA)
+                                    .then(permission => {
+                                        if (permission === null) {
+                                            console.log("waiting for permission")
+                                        } else if (permission === false) {
+                                            console.log("no permission")
+                                        } else {
+                                            this.props.navigation.navigate('Barcode', {onBack: this.updateUserInState})
+                                        }
+                                    })
+                            }}
+                    >
+                        <Icon name={"barcode-scan"} size={30} color="#fff"/>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        style={{
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            width: 70,
+                            height: 70,
+                            backgroundColor: '#ff5613',
+                            borderRadius: 100,
+                            position: 'absolute',
+                            right: '6%',
+                            bottom: '2%',
+                            elevation: 5
+                        }}
+                        onPress={() => {
+                            this.props.navigation.navigate('AddComestible', {
+                                onBack: this.updateUserInState, setBack: () => {
+                                }
+                            })
+                        }}
+                    >
+                        <Icon name={"plus"} size={30} color="#fff"/>
+                    </TouchableOpacity>
+                </View>
+            )
+        }
+
         return (
             <View style={{flex: 1, backgroundColor: "#ffffff"}}>
                 <ScrollView
@@ -113,50 +179,56 @@ class Home extends React.Component {
                 </ScrollView>
                 <TouchableOpacity
                     style={{
-                        borderWidth: 1,
-                        borderColor: 'rgba(0,0,0,0.2)',
                         alignItems: 'center',
                         justifyContent: 'center',
                         width: 70,
                         height: 70,
-                        backgroundColor: '#3b9bff',
+                        backgroundColor: '#ff5613',
                         borderRadius: 100,
                         position: 'absolute',
-                        right: '10%',
-                        bottom: '5%',
+                        right: '6%',
+                        bottom: '15%',
+                        elevation: 5
                     }}
-                    onPress={() => Alert.alert('Opret vare', 'Vælg en metode til at oprette din vare',
-                        [
-                            {
-                                text: 'Scan stregkode', onPress: () => {
-                                    Permissions.askAsync(Permissions.CAMERA)
-                                        .then(permission => {
-                                            if (permission === null) {
-                                                console.log("waiting for permission")
-                                            } else if (permission === false) {
-                                                console.log("no permission")
-                                            } else {
-                                                this.props.navigation.navigate('Barcode', {onBack: this.updateUserInState})
-                                            }
-                                        })
-                                },
-                            },
-                            {
-                                text: 'Tast selv',
-                                onPress: () => {
-                                    console.log("pres")
-                                    this.props.navigation.navigate('AddComestible', {
-                                        onBack: this.updateUserInState, setBack: () => {
-                                        }
-                                    })
-                                }
-                            },
-                            {text: 'Annuller'}
-                        ]
-                    )}
+                    onPress={
+                        () => {
+                            Permissions.askAsync(Permissions.CAMERA)
+                                .then(permission => {
+                                    if (permission === null) {
+                                        console.log("waiting for permission")
+                                    } else if (permission === false) {
+                                        console.log("no permission")
+                                    } else {
+                                        this.props.navigation.navigate('Barcode', {onBack: this.updateUserInState})
+                                    }
+                                })
+                        }}
                 >
-                    <Icon name={"add"} size={30} color="#fff"/>
+                    <Icon name={"barcode-scan"} size={30} color="#fff"/>
                 </TouchableOpacity>
+                <TouchableOpacity
+                    style={{
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        width: 70,
+                        height: 70,
+                        backgroundColor: '#ff5613',
+                        borderRadius: 100,
+                        position: 'absolute',
+                        right: '6%',
+                        bottom: '2%',
+                        elevation: 5
+                    }}
+                    onPress={() => {
+                        this.props.navigation.navigate('AddComestible', {
+                            onBack: this.updateUserInState, setBack: () => {
+                            }
+                        })
+                    }}
+                >
+                    <Icon name={"plus"} size={30} color="#fff"/>
+                </TouchableOpacity>
+
             </View>
         );
     }

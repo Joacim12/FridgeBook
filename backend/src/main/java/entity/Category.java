@@ -3,6 +3,7 @@ package entity;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -22,7 +23,7 @@ public class Category implements Serializable {
     private String name;
     private Boolean isNew = true;
     private String imageName;
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     private List<Ingredient> ingredients;
 
     public String getImageName() {

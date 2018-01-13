@@ -143,7 +143,7 @@ class AddComestible extends React.Component {
                 <FormLabel>Mængde</FormLabel>
                 <FormInput
                     keyboardType="default"
-                    placeholder="Tast antal varer eller mængde..."
+                    placeholder="Fx: 5 Tomater, 250g smør"
                     onChangeText={amount => this.setState({amount})}
                 />
                 <Text>{"\n"}</Text>

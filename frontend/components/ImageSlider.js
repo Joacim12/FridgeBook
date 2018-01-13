@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {Animated, View, StyleSheet, Image, Dimensions, ScrollView} from 'react-native'
+import {Animated, View, StyleSheet, Image, Dimensions, ScrollView, TouchableHighlight} from 'react-native'
 
 const deviceWidth = Dimensions.get('window').width
 const deviceHeight = Dimensions.get('window').height
@@ -9,14 +9,24 @@ const BAR_SPACE = 20
 
 class ImageSlider extends Component {
 
-    state={
-        images:this.props.images
+    state = {
+        images: this.props.images
     }
 
     numItems = this.state.images.length
     itemWidth = (FIXED_BAR_WIDTH / this.numItems) - ((this.numItems - 1) * BAR_SPACE)
     animVal = new Animated.Value(0)
 
+    handleImagePress = (e) => {
+        const now = new Date().getTime();
+        if (this.lastImagePress && (now - this.lastImagePress) < 300) {
+            delete this.lastImagePress;
+            this.props.handleImagePress();
+        }
+        else {
+            this.lastImagePress = now;
+        }
+    }
 
 
     render() {
@@ -24,11 +34,12 @@ class ImageSlider extends Component {
         let barArray = []
         this.state.images.forEach((image, i) => {
             const thisImage = (
-                <Image
-                    key={`image${i}`}
-                    source={{uri: image}}
-                    style={{width: deviceWidth,height:deviceHeight/3}}
-                />
+                <TouchableHighlight activeOpacity={1} key={`image${i}`} onPress={() => this.handleImagePress()}>
+                    <Image
+                        source={{uri: image}}
+                        style={{width: deviceWidth, height: deviceHeight / 3}}
+                    />
+                </TouchableHighlight>
             )
             imageArray.push(thisImage)
 
@@ -86,7 +97,7 @@ class ImageSlider extends Component {
                 <View
                     style={styles.barContainer}
                 >
-                    {this.state.images.length>1?barArray:null}
+                    {this.state.images.length > 1 ? barArray : null}
                 </View>
             </View>
         )

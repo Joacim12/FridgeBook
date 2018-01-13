@@ -11,9 +11,7 @@ class Login extends React.Component {
             .then(() => {
                 const resetAction = NavigationActions.reset({
                     index: 0,
-                    actions: [
-                        NavigationActions.navigate({routeName: 'Home'})
-                    ]
+                    actions: [NavigationActions.navigate({routeName: 'Home'})]
                 })
                 this.props.navigation.dispatch(resetAction)
             })
@@ -27,7 +25,6 @@ class Login extends React.Component {
             await this.createUser(token)
             await SecureStore.setItemAsync("fbToken", token);
             await this.props.screenProps.fetchFromFacebook();
-
         }
     }
 

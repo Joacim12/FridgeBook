@@ -29,13 +29,16 @@ public class CategoryFacade {
     }
 
     public void tester() {
-        Category c = new Category();
-        c.setIngredients(new ArrayList());
-        c.setName("Hvedemel");
-        createCategory(c);
-//        Category c = getCategory(2l);
-//        c.getIngredients().add(new IngredientFacade("PU").getIngredientByName("Økologisk hvedemel"));
+//        Category c = new Category();
+//        c.setIngredients(new ArrayList());
+//Økologisk hvedemel
+//        c.setName("Hvedemel");
+//        createCategory(c);
+        Category c = getCategory(1l);
+        c.getIngredients().add(new IngredientFacade("PU").getIngredientByName("Økologisk hvedemel"));
+        updateCategory(c);
 //        updateUser(c);
+//        System.out.println(getCategories());
     }
 
     public Category getCategory(Long id) {
@@ -43,7 +46,7 @@ public class CategoryFacade {
     }
 
     public List<Category> getCategories() {
-        return getEntityManager().createQuery("SELECT c FROM Comestible c", Category.class).getResultList();
+        return getEntityManager().createQuery("SELECT c FROM Category c", Category.class).getResultList();
     }
 
     public void createCategory(Category category) {
@@ -57,7 +60,7 @@ public class CategoryFacade {
         }
     }
 
-    public Category updateUser(Category category) {
+    public Category updateCategory(Category category) {
         EntityManager em = getEntityManager();
         Category categoryInDB = em.find(Category.class, category.getId().longValue());
         try {

@@ -9,10 +9,11 @@ import Recipe from "./components/Recipe";
 import AddIngredient from "./components/CreateIngredient";
 import Test from "./components/Test";
 import {Ionicons} from "react-native-vector-icons";
-import {Font, SecureStore} from 'expo';
+import {SecureStore} from 'expo';
 import Login from "./components/Login";
 import {ActivityIndicator, View} from "react-native";
 import Barcode from "./components/Barcode";
+import {Icon} from "react-native-elements";
 
 
 const Start = StackNavigator({
@@ -33,6 +34,8 @@ const Start = StackNavigator({
             screen: AddComestible,
             navigationOptions: {
                 title: 'Tilføj vare',
+                tabBarVisible: false,
+                swipeEnabled: false,
             }
         },
         Comestible: {
@@ -49,11 +52,14 @@ const Start = StackNavigator({
             screen: User,
             navigationOptions: {
                 title: 'Konto',
+                swipeEnabled: false,
+                tabBarVisible: false,
             }
         },
         Barcode: {
             screen: Barcode,
             navigationOptions: {
+                title:'Scan stregkode',
                 tabBarVisible: false,
                 swipeEnabled: false,
             }
@@ -62,12 +68,14 @@ const Start = StackNavigator({
     , {
         navigationOptions: {
             headerTintColor: '#f0f0f0',
-            headerStyle: {marginTop: 24, backgroundColor: "#3b9bff"},
+            headerStyle: {marginTop: 24, backgroundColor: "#3b9bff", height: 45},
             tabBarIcon: () => {
-                return <Ionicons
-                    name={'ios-home'}
-                    size={26}
-                    style={{color: '#ffffff'}}
+                return <Icon
+                    name='home'
+                    size={24}
+                    type='MaterialIcons'
+                    color="#2196F3"
+                    iconStyle={{paddingBottom: 23}}
                 />
             }
         },
@@ -77,28 +85,36 @@ const Start = StackNavigator({
 const RecipesTab = StackNavigator({
     Recipes: {
         screen: Recipes,
-        navigationOptions: {
-            title: 'Opskrifter',
-            tabBarLabel: 'Opskrifter'
-        },
+        // navigationOptions: {
+        //     title: 'Opskrifter',
+        // },
     },
     Recipe: {
         screen: Recipe,
         navigationOptions: {
             title: 'Opskrift',
-            tabBarLabel: 'Opskrifter'
+            tabBarVisible: false,
+            swipeEnabled: false,
         }
     },
 }, {
     navigationOptions: {
         headerTintColor: '#f0f0f0',
-        headerStyle: {marginTop: 24, backgroundColor: "#2196F3"},
+        headerStyle: {marginTop: 24, backgroundColor: "#2196F3", height: 45},
         tabBarIcon: () => {
-            return <Ionicons
-                name={'ios-nutrition'}
-                size={26}
-                style={{color: '#ffc16a'}}
+            return <Icon
+                name='local-dining'
+                size={24}
+                type='MaterialIcons'
+                color="#2196F3"
+                iconStyle={{paddingBottom: 23}}
             />
+            // return <Ionicons
+            //     name={'bowl'}
+            //     type="entypo"
+            //     size={26}
+            //     style={{color: '#2196F3',paddingBottom:32}}
+            // />
         }
     },
 });
@@ -114,15 +130,6 @@ const RecipesTab = StackNavigator({
 //     },
 // });
 
-// const LoginStack = StackNavigator({
-//     LoginScreen: {
-//         screen: Login,
-//     }
-// }, {
-//     navigationOptions: {
-//         headerStyle: {marginTop: 24}
-//     },
-// })
 
 const MyApp = TabNavigator({
     Home: {screen: Start},
@@ -131,17 +138,23 @@ const MyApp = TabNavigator({
 }, {
     tabBarPosition: 'bottom',
     animationEnabled: true,
-    indicatorStyle: {backgroundColor: "red"},
+    // indicatorStyle: {backgroundColor: "red"},
     tabBarOptions: {
         showIcon: true,
         showLabel: false,
-        activeTintColor: 'white',
-        inactiveTintColor: '#D3D3D3',
+        activeTintColor: 'black',
+        inactiveTintColor: '#c6c6c6',
+        iconStyle: {
+            width: 35,
+            height: 40
+        },
         style: {
-            backgroundColor: '#2196F3',
+            backgroundColor: 'white',
+            height: 40,
         },
         indicatorStyle: {
-            backgroundColor: 'white',
+            height: .1,
+            backgroundColor: '#c6c6c6',
         },
     },
 });
@@ -152,7 +165,8 @@ export default class App extends React.Component {
     state = {
         token: null,
         loading: true,
-        fbUser: null
+        fbUser: null,
+        search: "",
     }
 
     getUser = async () => {
@@ -181,6 +195,16 @@ export default class App extends React.Component {
         }
     }
 
+    setSearch = (text) => {
+        this.setState({search: text});
+    }
+
+    getSearch = () => {
+        return this.state.search;
+        // this.setState({search: ''});
+        // return text;
+    }
+
 
     render() {
         if (this.state.loading) {
@@ -191,7 +215,13 @@ export default class App extends React.Component {
             )
         }
         return (
-            <MyApp screenProps={{getUser: this.getUser, fbUser: this.state.fbUser, fetchFromFacebook: this.fetchFromFacebook}}/>
+            <MyApp screenProps={{
+                getUser: this.getUser,
+                fbUser: this.state.fbUser,
+                fetchFromFacebook: this.fetchFromFacebook,
+                setSearch: this.setSearch,
+                getSearch: this.getSearch,
+            }}/>
         )
     }
 

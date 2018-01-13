@@ -35,6 +35,7 @@ class Recipe extends React.Component {
         this.setState({recipe})
     }
 
+
     heart = (user) => {
         let recipe = this.state.recipe;
         recipe.icon = "heart-o";
@@ -128,7 +129,7 @@ class Recipe extends React.Component {
     }
 
     renderIngredients = () => {
-       return this.state.recipe.recipeIngredients.map((ingredient,index) => {
+        return this.state.recipe.recipeIngredients.map((ingredient, index) => {
             return (
                 <Text key={index}>{ingredient.name}</Text>
             )
@@ -138,24 +139,28 @@ class Recipe extends React.Component {
     render() {
         return (
             <ScrollView style={{flex: 1, backgroundColor: "white"}}>
-                <ImageSlider images={this.state.recipe.imagePaths}/>
-                <View style={{flexDirection: 'row'}}>
-                    <Icon name={this.state.recipe.icon} style={{padding: 10}} size={40} color={this.state.recipe.color} onPress={() => {
-                        this.handleCounterChanging()
-                            .then(() => this.props.screenProps.getUser());
-                    }}/>
-                    <Icon name="bullhorn" style={{padding: 10}} size={40} color="gray" onPress={() => {
-                        this.onClick();
-                    }}/>
-                </View>
+                <ImageSlider handleImagePress={()=>this.handleCounterChanging()} images={this.state.recipe.imagePaths}/>
                 <View style={{flex: 1}}>
-                    <Text h3 style={{
+                    <Text style={{
+                        fontWeight: 'bold',
+                        fontSize: 34,
+
                         textAlign: 'center',
                         borderBottomColor: 'black',
                         borderBottomWidth: .5,
                         marginLeft: 20,
-                        marginRight: 20
+                        marginRight: 20,
+                        marginBottom: -15,
                     }}>{this.state.recipe.name}</Text>
+                    <View style={{flexDirection: 'row', position: 'absolute'}}>
+                        <Icon name={this.state.recipe.icon} style={{padding: 10, elevation: 5}} size={26} color={this.state.recipe.color} onPress={() => {
+                            this.handleCounterChanging()
+                                .then(() => this.props.screenProps.getUser());
+                        }}/>
+                        <Icon name="share" style={{margin: 10}} size={26} color="gray" onPress={() => {
+                            this.onClick();
+                        }}/>
+                    </View>
                     <Text h4>{"\n"}Ingredienser:</Text>
                     {this.renderIngredients()}
                     <Text h4>Fremgangsmåde:</Text>
