@@ -44,7 +44,7 @@ public class ImageResource {
             BufferedImage image = ImageIO.read(is1);
             BufferedImage resized = resize(image, image.getHeight()/8, image.getWidth()/8);
             System.out.println("resizing");
-            File output = new File("/home/joacim/images/fridgebook/thumb" + fileDetail.getFileName());
+            File output = new File("/home/joacim/images/fridgebook/thumb/" + fileDetail.getFileName());
             ImageIO.write(resized, "jpg", output);
             saveFile(is2, fileDetail.getFileName());
         } catch (IOException ex) {

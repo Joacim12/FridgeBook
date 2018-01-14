@@ -1,6 +1,6 @@
 import React from 'react'
 import {Avatar} from "react-native-elements";
-import {RefreshControl, ScrollView, TouchableOpacity, View, ActivityIndicator, FlatList, Text} from "react-native";
+import {RefreshControl, ScrollView, TouchableOpacity, View, ActivityIndicator, FlatList, Text, Image} from "react-native";
 import AddComestible from "./AddComestible";
 import Login from "./Login";
 import {NavigationActions} from "react-navigation";
@@ -20,8 +20,8 @@ class Home extends React.Component {
     static navigationOptions = ({navigation, screenProps}) => {
         const params = navigation.state.params || {};
         return {
-            title: params.title,
-            // headerLeft:  params.headerLeft,
+            // title: params.title,
+            headerLeft: params.headerLeft,
             headerRight: params.headerRight,
         }
     }
@@ -34,9 +34,12 @@ class Home extends React.Component {
     }
 
     _setNavigationParams() {
-        let title = 'FridgeBook';
-        // let headerLeft  = <Button onPress={console.log("1")} />;
-
+        // let title =
+        let headerLeft =
+                <View style={{flex:1,flexDirection:'row'}}>
+                    <Image source={require('../assets/splash.png')} style={{width: 25, height: 25, padding: 20, paddingRight: -40}}/>
+                    <Text style={{paddingTop: 10,fontSize:18,color:'#f0f0f0',fontWeight:'bold'}}>Fridge'N'Chef</Text>
+                </View>
         let headerRight = <Avatar
             rounded
             containerStyle={{margin: 15}}
@@ -46,8 +49,8 @@ class Home extends React.Component {
 
 
         this.props.navigation.setParams({
-            title,
-            // headerLeft,
+            // title,
+            headerLeft,
             headerRight,
 
         });
@@ -101,7 +104,6 @@ class Home extends React.Component {
     }
 
 
-
     render() {
         if (Object.keys(this.state.user).length === 0) {
             return (
@@ -110,10 +112,11 @@ class Home extends React.Component {
                 </View>
             )
         }
-        if(this.state.user.comestibles.length===0){
-            return(
-                <View style={{flex:1,backgroundColor:'white',justifyContent:'center'}}>
-                    <Text style={{textAlign:'center'}}>Her er tomt</Text>
+        if (this.state.user.comestibles.length === 0) {
+            return (
+                <View style={{flex: 1, backgroundColor: 'white', justifyContent: 'center'}}>
+                    <Text style={{textAlign: 'center'}}>Dit køleskab er tomt!</Text>
+                    <Text style={{textAlign: 'center'}}>Tilføj en vare ved at scanne stregkoden eller indtaste manuelt</Text>
                     <TouchableOpacity
                         style={{
                             alignItems: 'center',

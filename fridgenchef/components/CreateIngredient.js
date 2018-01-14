@@ -14,7 +14,8 @@ class AddIngredient extends React.Component {
     componentDidMount() {
         this.getIngredients()
             .then(() => {
-                if (this.props.navigation.state.params.barcode !== undefined) {
+                console.log(this.props.navigation.state.params)
+                if (this.props.navigation.state.params !== undefined) {
                     this.setState({barcode: this.props.navigation.state.params.barcode})
                 }
             })
@@ -58,7 +59,7 @@ class AddIngredient extends React.Component {
     addIngredient = async () => {
         const ingredient = {
             name: this.state.ingredient.name,
-            imagePath:  this.state.image.uri.split('/').pop(),
+            imagePath: this.state.image.uri.split('/').pop(),
             barcode: this.state.barcode
         }
         const options = {
@@ -73,7 +74,9 @@ class AddIngredient extends React.Component {
         const res = await fetch('https:/vetterlain.dk/FridgeBook/api/ingredient', options)
             .then(() => {
                 this.props.navigation.state.params.fetchIngredients()
-                    .then(() =>  this.props.navigation.goBack())
+                    .then(() =>
+                        this.props.navigation.goBack()
+                    )
             });
         console.log(res);
     }
@@ -101,6 +104,7 @@ class AddIngredient extends React.Component {
                         this.addIngredient();
                     }
                 }} title="OK"/>
+                <Text>{"\nAlle uploads bliver gennemgået, og upassende indhold vil blive fjernet"}</Text>
             </View>
         );
     }

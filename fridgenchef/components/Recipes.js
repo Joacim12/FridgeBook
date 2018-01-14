@@ -144,7 +144,7 @@ class Recipes extends React.Component {
                 <ScrollView style={{flex: 1, backgroundColor: 'white'}} refreshControl={
                     <RefreshControl refreshing={this.state.refreshing} onRefresh={this.onRefresh}/>
                 }>
-                    <Text style={{textAlign: 'center'}}>{"\n"}Fandt ingen resultater :(,{"\n"} Træk ned for at opdatere..</Text>
+                    <Text style={{textAlign: 'center'}}>{"\n"}Fandt ingen resultater :({"\n"} Træk ned for at opdatere..</Text>
                 </ScrollView>)
         }
         return (

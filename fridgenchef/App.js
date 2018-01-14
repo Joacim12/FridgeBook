@@ -24,7 +24,7 @@ const Start = StackNavigator({
         Login: {
             screen: Login,
             navigationOptions: {
-                title: 'FridgeBook',
+                title: 'Fridge\'N\'Chef',
                 gesturesEnabled: false,
                 tabBarVisible: false,
                 swipeEnabled: false,

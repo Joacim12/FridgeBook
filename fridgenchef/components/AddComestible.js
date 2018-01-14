@@ -114,7 +114,7 @@ class AddComestible extends React.Component {
                                 title={ingredient.name}
                                 avatar={<Avatar
                                     rounded
-                                    source={{uri: 'https://vetterlain.dk/images/fridgebook/thumb' + ingredient.imagePath}}
+                                    source={{uri: 'https://vetterlain.dk/images/fridgebook/thumb/' + ingredient.imagePath}}
                                     title={ingredient.name}
                                 />}
                                 hideChevron
@@ -124,7 +124,7 @@ class AddComestible extends React.Component {
                     }
                         <ListItem
                             title={"Opret ny vare"}
-                            onPress={() => this.props.navigation.navigate('AddIngredient')}
+                            onPress={() => this.props.navigation.navigate('AddIngredient',{fetchIngredients: this.fetchIngredients})}
                         />
                     </List>
                 </View>
