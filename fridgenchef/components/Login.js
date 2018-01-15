@@ -50,7 +50,7 @@ class Login extends React.Component {
     render() {
         return (
             <View style={{flex: 1, backgroundColor: "white", alignItems: "center"}}>
-                <Text style={{textAlign: 'center'}}>{"\n\n"}For at komme i gang med at bruge appen, log venligst ind{"\n"}</Text>
+                <Text style={{textAlign: 'center'}}>{"\n\n"}Log venligst ind for at bruge denne app{"\n"}</Text>
                 <Button
                     onPress={this.login}
                     title="Login with Facebook"

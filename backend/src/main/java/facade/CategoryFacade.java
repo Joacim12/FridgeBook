@@ -1,6 +1,7 @@
 package facade;
 
 import entity.Category;
+import entity.Ingredient;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -31,12 +32,22 @@ public class CategoryFacade {
     public void tester() {
 //        Category c = new Category();
 //        c.setIngredients(new ArrayList());
-//Økologisk hvedemel
+////Økologisk hvedemel
 //        c.setName("Hvedemel");
 //        createCategory(c);
+//        c.setCategoryAmounts(new ArrayList());
+//        Ingredient i = new Ingredient();
+//        i.setBarcode("1234");
+////        i.setComestible(c);
+//        i.setImagePath("1234");
+//        i.setName("Øko mel");
+//        i.setNewIngredient(true);
+//        new IngredientFacade("PU").createIngredient(i);
+
         Category c = getCategory(1l);
-        c.getIngredients().add(new IngredientFacade("PU").getIngredientByName("Økologisk hvedemel"));
-        updateCategory(c);
+        System.out.println(c.getCategoryAmounts());
+//        c.getIngredients().add(new IngredientFacade("PU").getIngredientByName("Økologisk hvedemel"));
+//        updateCategory(c);
 //        updateUser(c);
 //        System.out.println(getCategories());
     }
@@ -49,7 +60,7 @@ public class CategoryFacade {
         return getEntityManager().createQuery("SELECT c FROM Category c", Category.class).getResultList();
     }
 
-    public void createCategory(Category category) {
+    public Category createCategory(Category category) {
         EntityManager em = getEntityManager();
         try {
             em.getTransaction().begin();
@@ -58,6 +69,7 @@ public class CategoryFacade {
         } finally {
             em.close();
         }
+        return category;
     }
 
     public Category updateCategory(Category category) {

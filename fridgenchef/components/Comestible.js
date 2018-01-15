@@ -7,8 +7,8 @@ import Dimensions from 'Dimensions';
 class Comestible extends React.Component {
     static navigationOptions = ({navigation}) => ({
         title: navigation.state.params.comestible.ingredient.name,
-        tabBarLabel: 'Varer',
-        tabBarVisible: false
+        tabBarVisible: false,
+        swipeEnabled: false,
     });
 
     state = {

@@ -5,9 +5,9 @@
     "slug": "FridgeNChef",
     "privacy": "public",
     "sdkVersion": "24.0.0",
-    "version": "0.0.1",
+    "version": "0.0.4",
     "orientation": "portrait",
-    "primaryColor": "#cccccc",
+    "primaryColor": "#2196F3",
     "icon": "./assets/icon.png",
     "splash": {
       "image": "./assets/splash.png",
@@ -25,7 +25,10 @@
     },
     "android": {
       "package": "com.fridgenchef",
-      "versionCode": 1
+      "versionCode": 4
+    },
+    "androidStatusBar": {
+      "backgroundColor": "#2196F3"
     }
   }
 }

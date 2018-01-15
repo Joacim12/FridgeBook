@@ -15,14 +15,38 @@ class Recipe extends React.Component {
 
     state = {
         user: {},
-        recipe: this.props.navigation.state.params.recipe
+        recipe: this.props.navigation.state.params.recipe,
+        categories: [],
+        ingredients: [],
     }
 
     componentWillUnmount() {
         this.props.navigation.state.params.onBack()
     }
 
+    getCategories = async () => {
+        let ingredients = [];
+        fetch('https://vetterlain.dk/FridgeBook/api/category')
+            .then(res => res.json())
+            .then(categories => this.setState({categories}, () => {
+                this.state.categories.forEach(category => {
+                    category.amounts.forEach(amount => {
+                        if (amount.recipe.id === this.props.navigation.state.params.recipe.id) {
+                            for (let i = 0; i < category.ingredients.length; i++) {
+                                ingredients.push({"name": category.name, "amount": category.amounts[i].amount});
+                            }
+                        }
+                    })
+                })
+            }))
+            .then(() => {
+                this.setState({ingredients});
+            })
+    }
+
+
     componentDidMount() {
+        this.getCategories();
         this.props.screenProps.getUser()
             .then(user => {
                     this.heart(user);
@@ -60,18 +84,18 @@ class Recipe extends React.Component {
             body: JSON.stringify(this.state.recipe)
         }
 
-        const res = await fetch('https://vetterlain.dk/FridgeBook/api/recipe', options);
-        //console.log(res);
+        await fetch('https://vetterlain.dk/FridgeBook/api/recipe', options);
+
     }
 
     updateUserFavourites = async (hasFavourite) => {
         let user = {...this.state.user};
 
         if (!hasFavourite) {
-            console.log("updateUserFavourites - recipe findes IKKE fav")
+            // console.log("updateUserFavourites - recipe findes IKKE fav")
             user.favouriteRecipes.push(this.state.recipe);
         } else {
-            console.log("updateUserFavourites - recipe findes i fav")
+            // console.log("updateUserFavourites - recipe findes i fav")
             user.favouriteRecipes = user.favouriteRecipes.filter(recipe => recipe.id !== this.state.recipe.id);
         }
 
@@ -93,13 +117,13 @@ class Recipe extends React.Component {
     handleCounterChanging = async () => {
         if (this.state.user.favouriteRecipes.length > 0) {
             if (this.state.user.favouriteRecipes.filter(recipe => recipe.id === this.state.recipe.id).length === 0) {
-                console.log("change counter - recipe findes IKKE i fav")
+                // console.log("change counter - recipe findes IKKE i fav")
                 this.setState({recipe: {...this.state.recipe, rateCounter: this.state.recipe.rateCounter + 1}}, async () => {
                     await this.updateRecipe()
                         .then(this.updateUserFavourites(false));
                 });
             } else {
-                console.log("change counter - recipe findes i fav")
+                // console.log("change counter - recipe findes i fav")
                 this.setState({recipe: {...this.state.recipe, rateCounter: this.state.recipe.rateCounter - 1}}, async () => {
                     await this.updateRecipe()
                         .then(this.updateUserFavourites(true));
@@ -115,23 +139,23 @@ class Recipe extends React.Component {
 
     onClick = () => {
         Share.share({
-            message: 'Checkout FridgeBook on Google play store',
-            url: 'https://play.google.com/store/apps/details?id=com.companyName.appname',
-            title: 'Wow, did you see that?'
+            message: 'Checkout Fridge\'N\'Chef on Google Play Store: https://play.google.com/store/apps/details?id=com.fridgenchef',
+            // url: 'https://play.google.com/store/apps/details?isd=com.companyName.appname',
+            // title: 'Wow, did you see that?'
         }, {
             // Android only:
-            dialogTitle: 'Share FridgeBook',
+            dialogTitle: 'Share Fridge\'N\'Chef',
             // iOS only:
-            excludedActivityTypes: [
-                'com.apple.UIKit.activity.PostToTwitter'
-            ]
+            // excludedActivityTypes: [
+            //     'com.apple.UIKit.activity.PostToTwitter'
+            // ]
         })
     }
 
     renderIngredients = () => {
-        return this.state.recipe.recipeIngredients.map((ingredient, index) => {
+        return this.state.ingredients.map((ingredient, index) => {
             return (
-                <Text key={index}>{ingredient.name}</Text>
+                <Text key={index}>{ingredient.name} : {ingredient.amount}</Text>
             )
         })
     }
@@ -139,32 +163,31 @@ class Recipe extends React.Component {
     render() {
         return (
             <ScrollView style={{flex: 1, backgroundColor: "white"}}>
-                <ImageSlider handleImagePress={()=>this.handleCounterChanging()} images={this.state.recipe.imagePaths}/>
+                <ImageSlider handleImagePress={() => this.handleCounterChanging()} images={this.state.recipe.imagePaths}/>
                 <View style={{flex: 1}}>
-                    <Text style={{
-                        fontWeight: 'bold',
-                        fontSize: 34,
-
-                        textAlign: 'center',
-                        borderBottomColor: 'black',
-                        borderBottomWidth: .5,
-                        marginLeft: 20,
-                        marginRight: 20,
-                        marginBottom: -15,
-                    }}>{this.state.recipe.name}</Text>
-                    <View style={{flexDirection: 'row', position: 'absolute'}}>
-                        <Icon name={this.state.recipe.icon} style={{padding: 10, elevation: 5}} size={26} color={this.state.recipe.color} onPress={() => {
+                    <View style={{flexDirection: 'row', padding: 10}}>
+                        <Icon name={this.state.recipe.icon} iconStyle={{padding: 10}} size={26} color={this.state.recipe.color} onPress={() => {
                             this.handleCounterChanging()
                                 .then(() => this.props.screenProps.getUser());
                         }}/>
-                        <Icon name="share" style={{margin: 10}} size={26} color="gray" onPress={() => {
+                        <Text> </Text>
+                        <Icon name="share" iconStyle={{margin: 10}} size={26} color="gray" onPress={() => {
                             this.onClick();
                         }}/>
+                        <View style={{paddingBottom: -10,marginTop:-10, borderBottomWidth: .5, borderBottomColor: 'gray'}}>
+                            <Text style={{
+                                fontWeight: 'bold',
+                                fontSize: 34,
+                                textAlign: 'center',
+                            }}>{this.state.recipe.name}</Text>
+                        </View>
                     </View>
-                    <Text h4>{"\n"}Ingredienser:</Text>
-                    {this.renderIngredients()}
-                    <Text h4>Fremgangsmåde:</Text>
-                    <Text>{this.state.recipe.text}</Text>
+                    <View style={{flex: 1,marginTop:-45,padding:10}}>
+                        <Text h4>{"\n"}Ingredienser:</Text>
+                        {this.renderIngredients()}
+                        <Text h4>Fremgangsmåde:</Text>
+                        <Text>{this.state.recipe.text}</Text>
+                    </View>
                 </View>
             </ScrollView>
         );

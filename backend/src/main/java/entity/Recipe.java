@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Recipe implements Serializable {
@@ -28,6 +29,8 @@ public class Recipe implements Serializable {
     private String note;
     @ManyToMany(fetch = FetchType.EAGER)
     private List<Category> recipeIngredients;
+    @OneToOne(mappedBy = "recipe")
+    private CategoryAmount categoryAmount;
 
     public Recipe() {
         rateCounter = 0;

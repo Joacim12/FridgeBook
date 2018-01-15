@@ -22,7 +22,7 @@ class User extends React.Component {
         return (
             <View>
                 <Text>{"\n"}</Text>
-                <Button title={"Log ud"} onPress={() => {
+                <Button title={"Log ud"} buttonStyle={{backgroundColor: "#2196F3"}} onPress={() => {
                     this.logOut()
                 }}/>
             </View>

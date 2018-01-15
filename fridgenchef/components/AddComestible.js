@@ -1,5 +1,5 @@
 import React from 'react';
-import {RefreshControl, TextInput, View, StyleSheet, TouchableOpacity, Alert} from "react-native";
+import {RefreshControl, TextInput, View, StyleSheet, TouchableOpacity, Alert, ScrollView} from "react-native";
 import {Button, Icon, List, ListItem, Text, FormInput, FormLabel, Avatar} from "react-native-elements";
 import DatePicker from 'react-native-datepicker';
 
@@ -107,26 +107,28 @@ class AddComestible extends React.Component {
                         }}
                         placeholder="Navn på vare"
                     />
-                    <List>{
-                        ingredientsContainingInput.map((ingredient, index) => (
-                            <ListItem
-                                key={index}
-                                title={ingredient.name}
-                                avatar={<Avatar
-                                    rounded
-                                    source={{uri: 'https://vetterlain.dk/images/fridgebook/thumb/' + ingredient.imagePath}}
+                    <ScrollView>
+                        <List>{
+                            ingredientsContainingInput.map((ingredient, index) => (
+                                <ListItem
+                                    key={index}
                                     title={ingredient.name}
-                                />}
-                                hideChevron
-                                onPress={() => this.pickIngredient(ingredient)}
+                                    avatar={<Avatar
+                                        rounded
+                                        source={{uri: 'https://vetterlain.dk/images/fridgebook/thumb/' + ingredient.imagePath}}
+                                        title={ingredient.name}
+                                    />}
+                                    hideChevron
+                                    onPress={() => this.pickIngredient(ingredient)}
+                                />
+                            ))
+                        }
+                            <ListItem
+                                title={"Opret ny vare"}
+                                onPress={() => this.props.navigation.navigate('AddIngredient', {fetchIngredients: this.fetchIngredients})}
                             />
-                        ))
-                    }
-                        <ListItem
-                            title={"Opret ny vare"}
-                            onPress={() => this.props.navigation.navigate('AddIngredient',{fetchIngredients: this.fetchIngredients})}
-                        />
-                    </List>
+                        </List>
+                    </ScrollView>
                 </View>
             )
         }
@@ -143,7 +145,7 @@ class AddComestible extends React.Component {
                 <FormLabel>Mængde</FormLabel>
                 <FormInput
                     keyboardType="default"
-                    placeholder="Fx: 5 Tomater, 250g smør"
+                    placeholder="Fx 5 tomater, 250g smør eller 1 liter mælk"
                     onChangeText={amount => this.setState({amount})}
                 />
                 <Text>{"\n"}</Text>

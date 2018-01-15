@@ -11,7 +11,7 @@ import Test from "./components/Test";
 import {Ionicons} from "react-native-vector-icons";
 import {SecureStore} from 'expo';
 import Login from "./components/Login";
-import {ActivityIndicator, View} from "react-native";
+import {ActivityIndicator, StatusBar, View} from "react-native";
 import Barcode from "./components/Barcode";
 import {Icon} from "react-native-elements";
 
@@ -46,6 +46,8 @@ const Start = StackNavigator({
             screen: AddIngredient,
             navigationOptions: {
                 title: 'Opret vare',
+                tabBarVisible: false,
+                swipeEnabled: false,
             }
         },
         User: {
@@ -59,7 +61,7 @@ const Start = StackNavigator({
         Barcode: {
             screen: Barcode,
             navigationOptions: {
-                title:'Scan stregkode',
+                title: 'Scan stregkode',
                 tabBarVisible: false,
                 swipeEnabled: false,
             }
@@ -68,7 +70,7 @@ const Start = StackNavigator({
     , {
         navigationOptions: {
             headerTintColor: '#f0f0f0',
-            headerStyle: {marginTop: 24, backgroundColor: "#3b9bff", height: 45},
+            headerStyle: {backgroundColor: "#2196F3", height: 45},
             tabBarIcon: () => {
                 return <Icon
                     name='home'
@@ -100,7 +102,7 @@ const RecipesTab = StackNavigator({
 }, {
     navigationOptions: {
         headerTintColor: '#f0f0f0',
-        headerStyle: {marginTop: 24, backgroundColor: "#2196F3", height: 45},
+        headerStyle: {backgroundColor: "#2196F3", height: 45},
         tabBarIcon: () => {
             return <Icon
                 name='local-dining'
@@ -207,6 +209,7 @@ export default class App extends React.Component {
 
 
     render() {
+        StatusBar.setBarStyle('light-content', true);
         if (this.state.loading) {
             return (
                 <View style={{flex: 1, justifyContent: 'center'}}>

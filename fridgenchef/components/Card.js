@@ -32,41 +32,44 @@ class Card extends React.Component {
                         <Text style={{fontWeight: 'bold'}}>{this.props.comestible.ingredient.name}</Text>
                         <Text style={{fontWeight: 'bold'}}>{this.props.comestible.amount}</Text>
                         <Text style={{color: 'gray'}}>Udløber den:{this.props.comestible.expiryDate}</Text>
-                        <View style={{flex: 1, flexDirection: 'row'}}>
-                            <View style={{justifyContent: 'flex-end'}}>
-                                <Icon
-                                    reverse
-                                    name='local-dining'
-                                    size={14}
-                                    type='MaterialIcons'
-                                    color="#2196F3"
-                                    onPress={() => {
-                                        this.findRecipes()
-                                    }}
-                                />
-                            </View>
-                            <View style={{justifyContent: 'flex-end', alignItems: 'flex-end'}}>
-                                <Icon
-                                    reverse
-                                    name='trash'
-                                    size={14}
-                                    type='entypo'
-                                    color='#ff5613'
-                                    onPress={() => {
-                                        Alert.alert(
-                                            'Slet ' + this.props.comestible.ingredient.name,
-                                            `Er du sikker på at du vil slette ${this.props.comestible.ingredient.name.toLowerCase()}? Handlingen kan ikke fortrydes`,
-                                            [{text: 'Annuller'},
-                                                {
-                                                    text: 'OK', onPress: () => {
-                                                        this.deleteComestible(this.props.comestible.id)
-                                                            .then(() => this.props.updateUser())
-                                                    }
-                                                }]
-                                        );
-                                    }}
-                                />
-                            </View>
+                        <View style={{flex: 1, flexDirection: 'row', alignItems: 'flex-end', justifyContent: 'space-around', paddingBottom: 10}}>
+                            <Icon
+                                name='local-dining'
+                                size={24}
+                                type='MaterialIcons'
+                                color="#2196F3"
+                                onPress={() => {
+                                    this.findRecipes()
+                                }}
+                            />
+                            <Icon
+                                name='edit'
+                                size={24}
+                                type='MaterialIcons'
+                                color="#ffc413"
+                                onPress={() => {
+                                    this.props.info(this.props.comestible);
+                                }}
+                            />
+                            <Icon
+                                name='trash'
+                                size={24}
+                                type='entypo'
+                                color='#ff5613'
+                                onPress={() => {
+                                    Alert.alert(
+                                        'Slet ' + this.props.comestible.ingredient.name,
+                                        `Er du sikker på at du vil slette ${this.props.comestible.ingredient.name.toLowerCase()}? Handlingen kan ikke fortrydes`,
+                                        [{text: 'Annuller'},
+                                            {
+                                                text: 'OK', onPress: () => {
+                                                    this.deleteComestible(this.props.comestible.id)
+                                                        .then(() => this.props.updateUser())
+                                                }
+                                            }]
+                                    );
+                                }}
+                            />
                         </View>
                     </View>
                 </View>
@@ -102,30 +105,8 @@ const styles = StyleSheet.create({
         marginLeft: 10,
         marginRight: 10,
         flex: 1,
-        // padding: 10,
 
     }
 });
-
-{/*<Card*/
-}
-{/*key={index}*/
-}
-{/*title={comestible.ingredient.name}*/
-}
-{/*image={{uri: 'https://vetterlain.dk/images/fridgebook/thumb' + comestible.ingredient.imagePath}}>*/
-}
-{/*<Text style={{marginBottom: 10}}>*/
-}
-{/*{'Antal: ' + comestible.amount}*/
-}
-{/*{'\nUdløber den: ' + comestible.expiryDate}*/
-}
-{/*</Text>*/
-}
-{/*
-}
-                                {/*</Card>*/
-}
 
 export default Card;

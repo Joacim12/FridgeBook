@@ -2,12 +2,15 @@ package entity;
 
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 /**
  *
@@ -25,6 +28,16 @@ public class Category implements Serializable {
     private String imageName;
     @OneToMany(fetch = FetchType.EAGER)
     private List<Ingredient> ingredients;
+    @OneToMany(fetch = FetchType.EAGER)
+    private List<CategoryAmount> categoryAmounts;
+
+    public List<CategoryAmount> getCategoryAmounts() {
+        return categoryAmounts;
+    }
+
+    public void setCategoryAmounts(List<CategoryAmount> categoryAmounts) {
+        this.categoryAmounts = categoryAmounts;
+    }
 
     public String getImageName() {
         return imageName;

@@ -64,5 +64,12 @@ public class Ingredient implements Serializable {
     public void setComestible(Comestible comestible) {
         this.comestible = comestible;
     }
+    
+    
+
+    @Override
+    public String toString() {
+        return "Ingredient{" + "name=" + name + ", imagePath=" + imagePath + ", barcode=" + barcode + ", newIngredient=" + newIngredient + ", comestible=" + comestible + '}';
+    }
 
 }
