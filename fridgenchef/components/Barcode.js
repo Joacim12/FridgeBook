@@ -14,7 +14,6 @@ class Barcode extends React.Component {
 
     handleBarCodeRead = ({type, data}) => {
         if (!this.state.read) {
-            // console.log(this.props.navigation)
             this.props.navigation.navigate('AddComestible', {data: data, onBack: this.props.navigation.state.params.onBack, setBack: this.setBack});
             this.setState({read: true})
         }
@@ -26,12 +25,11 @@ class Barcode extends React.Component {
             <View style={styles.container}>
                 <BarCodeScanner
                     onBarCodeRead={this.handleBarCodeRead}
-                    // style={{height:300,width:300}}
                     style={StyleSheet.absoluteFill}
                 />
                 <View style={{backgroundColor: 'rgba(255,255,255,0.1)', flex: 1}}>
-                    <View style={{marginTop: 120,marginBottom:-120}}>
-                        <Text style={{color: 'white', textAlign: 'center'}}>Vend stregkode i samme retning som mobilen{"\n"}</Text>
+                    <View style={{marginTop: 120, marginBottom: -120}}>
+                        <Text style={{color: 'white', textAlign: 'center', fontFamily: 'fira'}}>Vend stregkode i samme retning som mobilen{"\n"}</Text>
                     </View>
                     <View style={{
                         backgroundColor: 'rgba(0,0,0,0.1)',

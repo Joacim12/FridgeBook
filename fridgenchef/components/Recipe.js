@@ -155,7 +155,7 @@ class Recipe extends React.Component {
     renderIngredients = () => {
         return this.state.ingredients.map((ingredient, index) => {
             return (
-                <Text key={index}>{ingredient.name} : {ingredient.amount}</Text>
+                <Text style={{fontFamily: 'fira'}} key={index}>{ingredient.name}: {ingredient.amount}</Text>
             )
         })
     }
@@ -174,19 +174,19 @@ class Recipe extends React.Component {
                         <Icon name="share" iconStyle={{margin: 10}} size={26} color="gray" onPress={() => {
                             this.onClick();
                         }}/>
-                        <View style={{paddingBottom: -10,marginTop:-10, borderBottomWidth: .5, borderBottomColor: 'gray'}}>
+                        <View style={{paddingBottom: -10, marginTop: -10, borderBottomWidth: .5, borderBottomColor: 'gray'}}>
                             <Text style={{
-                                fontWeight: 'bold',
+                                fontFamily: 'fira-bold',
                                 fontSize: 34,
                                 textAlign: 'center',
                             }}>{this.state.recipe.name}</Text>
                         </View>
                     </View>
-                    <View style={{flex: 1,marginTop:-45,padding:10}}>
-                        <Text h4>{"\n"}Ingredienser:</Text>
+                    <View style={{flex: 1, marginTop: -45, padding: 10}}>
+                        <Text style={{fontFamily: 'fira-bold', fontSize: 24}}>{"\n"}Ingredienser:</Text>
                         {this.renderIngredients()}
-                        <Text h4>Fremgangsmåde:</Text>
-                        <Text>{this.state.recipe.text}</Text>
+                        <Text style={{fontFamily: 'fira-bold', fontSize: 24}}>Fremgangsmåde:</Text>
+                        <Text style={{fontFamily: 'fira'}}>{this.state.recipe.text}</Text>
                     </View>
                 </View>
             </ScrollView>

@@ -1,8 +1,11 @@
 import React from 'react'
-import {Text, View} from "react-native";
+import {Dimensions, Image, Text, View} from "react-native";
 import {Button} from "react-native-elements";
 import {SecureStore, Facebook} from 'expo';
 import {NavigationActions} from 'react-navigation';
+
+const deviceWidth = Dimensions.get('window').width;
+const deviceHeight = Dimensions.get('window').height;
 
 class Login extends React.Component {
 
@@ -49,11 +52,13 @@ class Login extends React.Component {
 
     render() {
         return (
-            <View style={{flex: 1, backgroundColor: "white", alignItems: "center"}}>
-                <Text style={{textAlign: 'center'}}>{"\n\n"}Log venligst ind for at bruge denne app{"\n"}</Text>
+            <View style={{flex: 1, backgroundColor: "#2196F3", alignItems: "center", justifyContent: 'center'}}>
+                <Text style={{color: 'white', fontSize: 34, fontFamily: 'fira-bold'}}>Fridge'N'Chef</Text>
+                <Image source={require('../assets/splash.png')} style={{width: deviceWidth / 2, height: deviceHeight / 3}}/>
+                {/*<Text style={{textAlign: 'center',color:'white'}}>{"\n\n"}Log venligst ind for at bruge denne app{"\n"}</Text>*/}
                 <Button
                     onPress={this.login}
-                    title="Login with Facebook"
+                    title="Login med Facebook"
                     icon={{name: 'facebook', type: 'entypo'}}
                     backgroundColor='#3b5998'
                 />

@@ -35,7 +35,7 @@ class Recipes extends React.Component {
                 <FormInput
                     placeholder={"Søg"}
                     underlineColorAndroid={'transparent'}
-                    inputStyle={{color: '#f0f0f0'}}
+                    inputStyle={{color: '#f0f0f0', fontFamily: 'fira'}}
                     onChangeText={(text) => this.search(text)}
                 />
             </View>
@@ -197,18 +197,15 @@ class Recipes extends React.Component {
     updateUserInState = async () => {
         let user = this.props.screenProps.getUser()
         this.setState({user: await user}, () => {
-            // let recipes = this.state.recipes;
-            // this.state.user.favouriteRecipes.forEach(rec => {
-            //     recipes.forEach(reci => {
-            //         if (reci.id === rec.id) {
-            //             reci.color = 'red';
-            //         } else {
-            //             reci.color = 'white';
-            //         }
-            //     })
-            // })
-            // // console.warn(recipes)
-            // this.setState({recipes})
+            let recipes = this.state.recipes;
+            recipes.forEach(reci => {
+                this.state.user.favouriteRecipes.forEach(rec => {
+                    if (reci.id === rec.id) {
+                        reci.color = 'red';
+                    }
+                })
+            })
+            this.setState({recipes})
         });
     }
 
@@ -239,7 +236,7 @@ class Recipes extends React.Component {
                 <ScrollView style={{flex: 1, backgroundColor: 'white'}} refreshControl={
                     <RefreshControl refreshing={this.state.refreshing} onRefresh={this.onRefresh}/>
                 }>
-                    <Text style={{textAlign: 'center'}}>{"\n"}Fandt ingen resultater :({"\n"} Stryg ned for at opdatere..</Text>
+                    <Text style={{textAlign: 'center', fontFamily: 'fira'}}>{"\n"}Fandt ingen resultater :({"\n"} Stryg ned for at opdatere..</Text>
                 </ScrollView>)
         }
         return (
@@ -276,15 +273,21 @@ class Recipes extends React.Component {
                         <Card
                             key={index}
                             title={recipe.name}
+                            titleStyle={{fontFamily: 'fira-bold', fontWeight: '300'}}
                             containerStyle={{backgroundColor: "white"}}
                             wrapperStyle={{backgroundColor: "white"}}
+                            // fontFamily={'fira'}
+                            // fontWeight={'300'}
+
                             image={{uri: recipe.imagePaths[0]}}>
-                            <Text style={{marginBottom: 10, textAlign: 'center'}}>
+
+                            <Text style={{marginBottom: 10, textAlign: 'center', fontFamily: 'fira'}}>
                                 {recipe.note}
                             </Text>
                             <Button
                                 iconRight={{name: 'favorite', color: recipe.color}}
                                 backgroundColor='#2196F3'
+                                fontFamily={'fira'}
                                 buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
                                 title={"Se opskrift      " + recipe.rateCounter}
                                 onPress={() => this.props.navigation.navigate('Recipe', {

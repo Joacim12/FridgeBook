@@ -1,5 +1,5 @@
 import React from 'react';
-import {RefreshControl, TextInput, View, StyleSheet, TouchableOpacity, Alert, ScrollView} from "react-native";
+import {RefreshControl, TextInput, View, StyleSheet, TouchableOpacity, Alert, ScrollView, KeyboardAvoidingView} from "react-native";
 import {Button, Icon, List, ListItem, Text, FormInput, FormLabel, Avatar} from "react-native-elements";
 import DatePicker from 'react-native-datepicker';
 
@@ -99,19 +99,21 @@ class AddComestible extends React.Component {
             }
             return (
                 <View style={styles.container}>
-                    <FormLabel>Vare</FormLabel>
+                    <FormLabel labelStyle={{fontFamily: 'fira', fontWeight: '300'}}>Vare</FormLabel>
                     <FormInput
+                        inputStyle={{fontFamily: 'fira', fontWeight: '300'}}
                         value={this.state.name}
                         onChangeText={(text) => {
                             this.setState({name: text})
                         }}
                         placeholder="Navn på vare"
                     />
-                    <ScrollView>
+                    <ScrollView keyboardShouldPersistTaps={'always'}>
                         <List>{
                             ingredientsContainingInput.map((ingredient, index) => (
                                 <ListItem
                                     key={index}
+                                    fontFamily={'fira'}
                                     title={ingredient.name}
                                     avatar={<Avatar
                                         rounded
@@ -125,6 +127,7 @@ class AddComestible extends React.Component {
                         }
                             <ListItem
                                 title={"Opret ny vare"}
+                                fontFamily={'fira'}
                                 onPress={() => this.props.navigation.navigate('AddIngredient', {fetchIngredients: this.fetchIngredients})}
                             />
                         </List>
@@ -135,15 +138,17 @@ class AddComestible extends React.Component {
 
         return (
             <View style={styles.container}>
-                <FormLabel>Vare</FormLabel>
+                <FormLabel labelStyle={{fontFamily: 'fira', fontWeight: '300'}}>Vare</FormLabel>
                 <FormInput
+                    inputStyle={{fontFamily: 'fira', fontWeight: '300'}}
                     value={this.state.name}
                     placeholder="Søg efter vare..."
                     onChangeText={text => this.setSearching(text)}
                     onFocus={() => this.setState({search: true})}
                 />
-                <FormLabel>Mængde</FormLabel>
+                <FormLabel labelStyle={{fontFamily: 'fira', fontWeight: '300'}}>Mængde</FormLabel>
                 <FormInput
+                    inputStyle={{fontFamily: 'fira', fontWeight: '300'}}
                     keyboardType="default"
                     placeholder="Fx 5 tomater, 250g smør eller 1 liter mælk"
                     onChangeText={amount => this.setState({amount})}
@@ -176,6 +181,7 @@ class AddComestible extends React.Component {
                 </View>
                 <Text>{"\n"}</Text>
                 <Button
+                    fontFamily={'fira'}
                     title='OK'
                     onPress={() => {
                         if (this.state.name === '' || this.state.amount === '' || this.state.expiryDate === '') {
@@ -203,7 +209,7 @@ class AddComestible extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#ffffff"
+        backgroundColor: "#ffffff",
     }, buttonContainer: {
         flexDirection: 'row',
         justifyContent: 'center',

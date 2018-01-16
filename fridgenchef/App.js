@@ -9,7 +9,7 @@ import Recipe from "./components/Recipe";
 import AddIngredient from "./components/CreateIngredient";
 import Test from "./components/Test";
 import {Ionicons} from "react-native-vector-icons";
-import {SecureStore} from 'expo';
+import {SecureStore, Font} from 'expo';
 import Login from "./components/Login";
 import {ActivityIndicator, StatusBar, View} from "react-native";
 import Barcode from "./components/Barcode";
@@ -28,6 +28,7 @@ const Start = StackNavigator({
                 gesturesEnabled: false,
                 tabBarVisible: false,
                 swipeEnabled: false,
+                header: null,
             },
         },
         AddComestible: {
@@ -70,6 +71,7 @@ const Start = StackNavigator({
     , {
         navigationOptions: {
             headerTintColor: '#f0f0f0',
+            headerTitleStyle: {fontFamily: 'fira-bold', fontWeight: '300'},
             headerStyle: {backgroundColor: "#2196F3", height: 45},
             tabBarIcon: () => {
                 return <Icon
@@ -97,11 +99,15 @@ const RecipesTab = StackNavigator({
             title: 'Opskrift',
             tabBarVisible: false,
             swipeEnabled: false,
+            // headerTitleStyle: {
+            //     fontFamily: 'fira'
+            // }
         }
     },
 }, {
     navigationOptions: {
         headerTintColor: '#f0f0f0',
+        headerTitleStyle: {fontFamily: 'fira-bold', fontWeight: '300'},
         headerStyle: {backgroundColor: "#2196F3", height: 45},
         tabBarIcon: () => {
             return <Icon
@@ -111,12 +117,6 @@ const RecipesTab = StackNavigator({
                 color="#2196F3"
                 iconStyle={{paddingBottom: 23}}
             />
-            // return <Ionicons
-            //     name={'bowl'}
-            //     type="entypo"
-            //     size={26}
-            //     style={{color: '#2196F3',paddingBottom:32}}
-            // />
         }
     },
 });
@@ -169,17 +169,21 @@ export default class App extends React.Component {
         loading: true,
         fbUser: null,
         search: "",
+        fontLoading: true,
     }
 
     getUser = async () => {
         return await (await fetch('https://vetterlain.dk/FridgeBook/api/user/' + this.state.fbUser.id)).json()
     }
 
-    // componentDidMount() {
-    //     Font.loadAsync({
-    //         'open-sans-bold': require('./assets/fonts/FiraSans-Regular.ttf'),
-    //     });
-    // }
+    componentDidMount() {
+        Font.loadAsync({
+            'fira': require('./assets/fonts/FiraSans-Regular.ttf'),
+            'fira-bold': require('./assets/fonts/FiraSans-Bold.ttf'),
+        }).then(() => {
+            this.setState({fontLoading: false})
+        })
+    }
 
     componentWillMount = async () => {
         this.fetchFromFacebook();
@@ -210,7 +214,7 @@ export default class App extends React.Component {
 
     render() {
         StatusBar.setBarStyle('light-content', true);
-        if (this.state.loading) {
+        if (this.state.loading || this.state.fontLoading) {
             return (
                 <View style={{flex: 1, justifyContent: 'center'}}>
                     <ActivityIndicator size={100} color="#2196F3"/>
@@ -227,5 +231,6 @@ export default class App extends React.Component {
             }}/>
         )
     }
+
 
 }

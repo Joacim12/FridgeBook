@@ -31,7 +31,7 @@ class Home extends React.Component {
         let headerLeft =
             <View style={{flex: 1, flexDirection: 'row'}}>
                 <Image source={require('../assets/icon.png')} style={{width: 25, height: 25, padding: 20, paddingRight: -40}}/>
-                <Text style={{paddingTop: 10, fontSize: 18, color: '#f0f0f0', fontWeight: 'bold'}}>Fridge'N'Chef</Text>
+                <Text style={{paddingTop: 10, fontSize: 18, color: '#f0f0f0', fontFamily: 'fira-bold'}}>Fridge'N'Chef</Text>
             </View>
         let headerRight =
             <View style={{flexDirection: 'row'}}>
@@ -168,8 +168,8 @@ class Home extends React.Component {
         if (this.state.user.comestibles.length === 0) {
             return (
                 <View style={{flex: 1, backgroundColor: 'white', justifyContent: 'center'}}>
-                    <Text style={{textAlign: 'center'}}>Dit køleskab er tomt!</Text>
-                    <Text style={{textAlign: 'center'}}>Tilføj en vare ved at scanne stregkoden eller indtaste manuelt</Text>
+                    <Text style={{textAlign: 'center',fontFamily:'fira'}}>Dit køleskab er tomt!</Text>
+                    <Text style={{textAlign: 'center',fontFamily:'fira'}}>Tilføj en vare ved at scanne stregkoden eller indtaste manuelt</Text>
                     <TouchableOpacity
                         style={{
                             alignItems: 'center',
@@ -244,12 +244,14 @@ class Home extends React.Component {
                                     this.closeModal();
                                 }
                                 }
+                                fontFamily={'fira'}
                                 buttonStyle={{backgroundColor: "#2196F3"}}
                                 title="Sorter efter dato"
                             />
                             <Text>{"\n"}</Text>
                             <Button
                                 buttonStyle={{backgroundColor: "#2196F3"}}
+                                fontFamily={'fira'}
                                 onPress={() => {
                                     this.sortAlphabetic();
                                     this.closeModal();

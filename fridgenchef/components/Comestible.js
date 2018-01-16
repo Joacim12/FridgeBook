@@ -7,6 +7,7 @@ import Dimensions from 'Dimensions';
 class Comestible extends React.Component {
     static navigationOptions = ({navigation}) => ({
         title: navigation.state.params.comestible.ingredient.name,
+        headerTitleStyle: {fontFamily: 'fira-bold', fontWeight: '300'},
         tabBarVisible: false,
         swipeEnabled: false,
     });
@@ -45,64 +46,65 @@ class Comestible extends React.Component {
         return (
             <ScrollView style={styles.container}>
                 <KeyboardAvoidingView behavior={'position'}>
-                <View style={styles.upperContainer}>
-                    <Image style={{flex: 1, width: Dimensions.get('window').width, height: Dimensions.get('window').height/2}}
-                           source={{uri: "https://vetterlain.dk/images/fridgebook/" + this.state.comestible.ingredient.imagePath}}/>
-                    <View style={styles.buttomContainer}>
-                        <FormLabel>Mængde:</FormLabel><FormInput
-                        style={{height: 40}}
-                        value={this.state.comestible.amount}
-                        onChangeText={text => this.setState({comestible: {...this.state.comestible, amount: text}})}
-                        placeholder="Mængde"
-                    />
-                        <View style={styles.buttonContainer}>
-                            <DatePicker
-                                style={{width: 200}}
-                                date={this.state.comestible.expiryDate}
-                                value={this.state.comestible.expiryDate}
-                                mode="date"
-                                placeholder="Vælg udløbsdato"
-                                format="DD/MM/YYYY"
-                                minDate="01-05-2017"
-                                maxDate="10-06-2020"
-                                confirmBtnText="Confirm"
-                                cancelBtnText="Cancel"
-                                customStyles={{
-                                    dateIcon: {
-                                        position: 'absolute',
-                                        left: 0,
-                                        top: 4,
-                                        marginLeft: 0
-                                    }
-                                }}
-                                onDateChange={date => this.setState({comestible: {...this.state.comestible, expiryDate: date}})}
-                            />
-                        </View>
-                        <Text>{"\n"}</Text>
-                        <View style={styles.buttonContainer}>
-                            <Button title="OK" backgroundColor="#3B9BFF" onPress={() => this.updateComestible()
-                                .then(() => this.props.navigation.state.params.onBack())
-                                .then(() => this.props.navigation.goBack())}/>
+                    <View style={styles.upperContainer}>
+                        <Image style={{flex: 1, width: Dimensions.get('window').width, height: Dimensions.get('window').height / 2}}
+                               source={{uri: "https://vetterlain.dk/images/fridgebook/" + this.state.comestible.ingredient.imagePath}}/>
+                        <View style={styles.buttomContainer}>
+                            <FormLabel labelStyle={{fontFamily: 'fira', fontWeight: '300'}}>Mængde:</FormLabel><FormInput
+                            style={{height: 40}}
+                            inputStyle={{fontFamily: 'fira', fontWeight: '300'}}
+                            value={this.state.comestible.amount}
+                            onChangeText={text => this.setState({comestible: {...this.state.comestible, amount: text}})}
+                            placeholder="Mængde"
+                        />
+                            <View style={styles.buttonContainer}>
+                                <DatePicker
+                                    style={{width: 200}}
+                                    date={this.state.comestible.expiryDate}
+                                    value={this.state.comestible.expiryDate}
+                                    mode="date"
+                                    placeholder="Vælg udløbsdato"
+                                    format="DD/MM/YYYY"
+                                    minDate="01-05-2017"
+                                    maxDate="10-06-2020"
+                                    confirmBtnText="Confirm"
+                                    cancelBtnText="Cancel"
+                                    customStyles={{
+                                        dateIcon: {
+                                            position: 'absolute',
+                                            left: 0,
+                                            top: 4,
+                                            marginLeft: 0
+                                        }
+                                    }}
+                                    onDateChange={date => this.setState({comestible: {...this.state.comestible, expiryDate: date}})}
+                                />
+                            </View>
                             <Text>{"\n"}</Text>
-                            <Button title="Slet" backgroundColor="#ff0000" onPress={() => {
-                                Alert.alert(
-                                    'Slet ' + this.state.comestible.ingredient.name,
-                                    `Er du sikker på at du vil slette ${this.state.comestible.ingredient.name.toLowerCase()}? Handlingen kan ikke fortrydes`,
-                                    [{text: 'Annuller'},
-                                        {
-                                            text: 'OK', onPress: () => {
-                                                this.deleteComestible(this.state.comestible.id)
-                                                    .then(() => this.props.navigation.state.params.onBack())
-                                                    .then(() => this.props.navigation.goBack())
-                                            }
-                                        }]
-                                );
-                            }
-                            }
-                            />
+                            <View style={styles.buttonContainer}>
+                                <Button fontFamily={'fira'} title="OK" backgroundColor="#3B9BFF" onPress={() => this.updateComestible()
+                                    .then(() => this.props.navigation.state.params.onBack())
+                                    .then(() => this.props.navigation.goBack())}/>
+                                <Text>{"\n"}</Text>
+                                <Button fontFamily={'fira'} title="Slet" backgroundColor="#ff0000" onPress={() => {
+                                    Alert.alert(
+                                        'Slet ' + this.state.comestible.ingredient.name,
+                                        `Er du sikker på at du vil slette ${this.state.comestible.ingredient.name.toLowerCase()}? Handlingen kan ikke fortrydes`,
+                                        [{text: 'Annuller'},
+                                            {
+                                                text: 'OK', onPress: () => {
+                                                    this.deleteComestible(this.state.comestible.id)
+                                                        .then(() => this.props.navigation.state.params.onBack())
+                                                        .then(() => this.props.navigation.goBack())
+                                                }
+                                            }]
+                                    );
+                                }
+                                }
+                                />
+                            </View>
                         </View>
                     </View>
-                </View>
                 </KeyboardAvoidingView>
             </ScrollView>
         );

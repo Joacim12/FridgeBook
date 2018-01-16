@@ -29,9 +29,9 @@ class Card extends React.Component {
                         style={styles.image}
                         source={{uri: "https://vetterlain.dk/images/fridgebook/thumb/" + this.props.comestible.ingredient.imagePath}}/>
                     <View style={styles.text}>
-                        <Text style={{fontWeight: 'bold'}}>{this.props.comestible.ingredient.name}</Text>
-                        <Text style={{fontWeight: 'bold'}}>{this.props.comestible.amount}</Text>
-                        <Text style={{color: 'gray'}}>Udløber den:{this.props.comestible.expiryDate}</Text>
+                        <Text style={{fontFamily: 'fira-bold'}}>{this.props.comestible.ingredient.name}</Text>
+                        <Text style={{fontFamily: 'fira-bold'}}>{this.props.comestible.amount}</Text>
+                        <Text style={{color: 'gray', fontFamily: 'fira'}}>Udløber den:{this.props.comestible.expiryDate}</Text>
                         <View style={{flex: 1, flexDirection: 'row', alignItems: 'flex-end', justifyContent: 'space-around', paddingBottom: 10}}>
                             <Icon
                                 name='local-dining'
@@ -95,8 +95,8 @@ const styles = StyleSheet.create({
         flexDirection: 'row'
     },
     image: {
-        height: 150,
-        width: 150,
+        height: 175,
+        width: 180,
         flex: 1,
         borderBottomLeftRadius: 5,
         borderTopLeftRadius: 5,
@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
     text: {
         marginLeft: 10,
         marginRight: 10,
-        flex: 1,
+        flex: 1
 
     }
 });

@@ -1,5 +1,5 @@
 import React from 'react';
-import {TextInput, View, StyleSheet, TouchableOpacity, Alert, Image} from "react-native";
+import {TextInput, View, StyleSheet, Alert, Image} from "react-native";
 import {Button, Text} from "react-native-elements";
 import {ImagePicker} from "expo";
 import {NavigationActions} from "react-navigation";
@@ -100,7 +100,7 @@ class AddIngredient extends React.Component {
                 // console.log(this.props.navigation)
                 this.props.navigation.state.params.fetchIngredients()
                     .then(() => {
-                        Alert.alert('Oprettelse godkendt', 'Din vare er hermed oprettet, og du kan nu tilføje den til dit køleskab')
+                        Alert.alert('Oprettelse godkendt', 'Varen er hermed oprettet og kan nu tilføjes til dit køleskab')
                         this.props.navigation.goBack();
                     })
             })
@@ -109,9 +109,10 @@ class AddIngredient extends React.Component {
     render() {
         return (
             <View style={{padding: 10}}>
-                <Text>Denne vare findes ikke i vores system - du bedes venligst oprette den ved at angive et navn, og tage et billede af varen.</Text>
+                <Text style={{fontFamily: 'fira'}}>Denne vare findes ikke i vores system - du bedes venligst oprette den ved at angive et navn, og tage et
+                    billede af varen.</Text>
                 <TextInput
-                    style={{height: 40}}
+                    style={{height: 40, fontFamily: 'fira'}}
                     placeholder="Navn på vare"
                     value={this.state.name}
                     onChangeText={text => this.setState({ingredient: {...this.state.ingredient, name: text}})}
@@ -123,6 +124,7 @@ class AddIngredient extends React.Component {
                 <Button
                     iconRight={{name: 'camera', type: 'entypo'}}
                     buttonStyle={{backgroundColor: "#2196F3"}}
+                    fontFamily={'fira'}
                     title="Tag et billede"
                     onPress={this.takePicture}/>
                 <Text>{"\n"}</Text>
@@ -135,8 +137,10 @@ class AddIngredient extends React.Component {
                     } else {
                         this.addIngredient();
                     }
-                }} title="Opret"/>
-                <Text>{"\nAlle uploads bliver gennemgået, og upassende indhold vil blive fjernet"}</Text>
+                }} title="Opret"
+                        fontFamily={'fira'}
+                />
+                <Text style={{fontFamily: 'fira'}}>{"\nAlle uploads bliver gennemgået, og upassende indhold vil blive fjernet"}</Text>
             </View>
         );
     }
