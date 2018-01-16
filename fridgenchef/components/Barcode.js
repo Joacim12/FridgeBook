@@ -14,8 +14,9 @@ class Barcode extends React.Component {
 
     handleBarCodeRead = ({type, data}) => {
         if (!this.state.read) {
-            this.props.navigation.navigate('AddComestible', {data: data, onBack: this.props.navigation.state.params.onBack, setBack: this.setBack});
-            this.setState({read: true})
+            this.setState({read: true},()=>{
+                this.props.navigation.navigate('AddComestible', {data: data, onBack: this.props.navigation.state.params.onBack, setBack: this.setBack});
+            })
         }
     }
 
