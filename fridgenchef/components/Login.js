@@ -38,12 +38,13 @@ class Login extends React.Component {
                 let dbUser = {};
                 dbUser.username = res.id + "";
                 dbUser.pin = 1234;
+                dbUser.fbName = res.name;
                 const options = {
                     headers: {
                         'Accept': 'application/json',
                         'Content-Type': 'application/json'
                     },
-                    method: "POST",
+                    method: "PUT",
                     body: JSON.stringify(dbUser)
                 }
                 fetch('https:/vetterlain.dk/FridgeBook/api/user', options)

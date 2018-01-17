@@ -36,6 +36,7 @@ public class UserFacade {
             em.getTransaction().commit();
             userInDB = em.find(User.class, user.getUsername());
         } catch (RollbackException r) {
+//            updateUser(user);
             em.getTransaction().rollback();
         } finally {
             em.close();

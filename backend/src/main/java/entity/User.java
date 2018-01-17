@@ -20,13 +20,14 @@ public class User implements Serializable {
     private String username;
     @Column(nullable = false)
     private String pin;
+    private String fbName;
     @JoinColumn
     @OneToMany(fetch = FetchType.EAGER)
     private List<Recipe> recipesCreatedByUser;
     @ManyToMany(fetch = FetchType.EAGER)
     private List<Recipe> favouriteRecipes;
     @JoinColumn
-    @OneToMany(fetch = FetchType.EAGER,cascade=CascadeType.PERSIST)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     private List<Comestible> comestibles;
 
     public User() {
@@ -38,6 +39,14 @@ public class User implements Serializable {
         recipesCreatedByUser = new ArrayList();
         favouriteRecipes = new ArrayList();
         comestibles = new ArrayList();
+    }
+
+    public String getFbName() {
+        return fbName;
+    }
+
+    public void setFbName(String fbName) {
+        this.fbName = fbName;
     }
 
     public String getUsername() {

@@ -1,5 +1,5 @@
 import React from 'react'
-import {ScrollView, View} from "react-native";
+import {ScrollView,  View} from "react-native";
 import {Text} from "react-native-elements";
 import Icon from 'react-native-vector-icons/FontAwesome';
 import ImageSlider from "./ImageSlider";
@@ -164,30 +164,30 @@ class Recipe extends React.Component {
         return (
             <ScrollView style={{flex: 1, backgroundColor: "white"}}>
                 <ImageSlider handleImagePress={() => this.handleCounterChanging()} images={this.state.recipe.imagePaths}/>
-                <View style={{flex: 1}}>
-                    <View style={{flexDirection: 'row', padding: 10}}>
-                        <Icon name={this.state.recipe.icon} iconStyle={{padding: 10}} size={26} color={this.state.recipe.color} onPress={() => {
+                <View style={{paddingLeft: 2, borderBottomWidth: .5, borderBottomColor: 'gray', flexDirection: 'row'}}>
+                    <Text style={{
+                        fontFamily: 'fira-bold',
+                        fontSize: 34,
+                        textAlign: 'center',
+                    }}>{this.state.recipe.name}</Text>
+
+                    <View style={{flex: 1, flexDirection: 'row', justifyContent: 'flex-end', padding: 10}}>
+                        <Icon name={this.state.recipe.icon} size={30}  color={this.state.recipe.color} onPress={() => {
                             this.handleCounterChanging()
                                 .then(() => this.props.screenProps.getUser());
                         }}/>
-                        <Text> </Text>
-                        <Icon name="share" iconStyle={{margin: 10}} size={26} color="gray" onPress={() => {
+                        <Text>   </Text>
+                        <Icon name="share" size={30} color="gray" onPress={() => {
                             this.onClick();
                         }}/>
-                        <View style={{paddingBottom: -10, marginTop: -10, borderBottomWidth: .5, borderBottomColor: 'gray'}}>
-                            <Text style={{
-                                fontFamily: 'fira-bold',
-                                fontSize: 34,
-                                textAlign: 'center',
-                            }}>{this.state.recipe.name}</Text>
-                        </View>
+                        <Text>   </Text>
                     </View>
-                    <View style={{flex: 1, marginTop: -45, padding: 10}}>
-                        <Text style={{fontFamily: 'fira-bold', fontSize: 24}}>{"\n"}Ingredienser:</Text>
-                        {this.renderIngredients()}
-                        <Text style={{fontFamily: 'fira-bold', fontSize: 24}}>Fremgangsmåde:</Text>
-                        <Text style={{fontFamily: 'fira'}}>{this.state.recipe.text}</Text>
-                    </View>
+                </View>
+                <View style={{flex: 1, marginTop: -45, padding: 3, paddingTop: 10}}>
+                    <Text style={{fontFamily: 'fira-bold', fontSize: 24}}>{"\n"}Ingredienser:</Text>
+                    {this.renderIngredients()}
+                    <Text style={{fontFamily: 'fira-bold', fontSize: 24}}>Fremgangsmåde:</Text>
+                    <Text style={{fontFamily: 'fira'}}>{this.state.recipe.text}</Text>
                 </View>
             </ScrollView>
         );

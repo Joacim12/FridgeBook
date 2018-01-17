@@ -1,6 +1,7 @@
 import React from 'react'
 import {Text, ScrollView, RefreshControl, StyleSheet, View, Modal} from 'react-native'
 import {Card, Button, Icon, FormInput} from 'react-native-elements'
+import RecipeCard from "./RecipeCard";
 
 // import navIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 
@@ -198,8 +199,11 @@ class Recipes extends React.Component {
         let user = this.props.screenProps.getUser()
         this.setState({user: await user}, () => {
             let recipes = this.state.recipes;
-            recipes.forEach(reci => {
-                this.state.user.favouriteRecipes.forEach(rec => {
+            recipes.forEach(rec => {
+                rec.color = '#e2e2e2';
+            })
+            this.state.user.favouriteRecipes.forEach(rec => {
+                recipes.forEach(reci => {
                     if (reci.id === rec.id) {
                         reci.color = 'red';
                     }
@@ -229,6 +233,15 @@ class Recipes extends React.Component {
         this.setState({recipes: await this.fetchRecipes(), refreshing: false})
         await this.updateUserInState();
     }
+
+    openRecipe = (recipe) => {
+        this.props.navigation.navigate('Recipe', {
+            recipe: recipe, onBack: async () => {
+                this.setState({recipes: await this.fetchRecipes()}), this.updateUserInState();
+            }
+        })
+    }
+
 
     render() {
         if (this.state.recipes.length === 0) {
@@ -267,37 +280,9 @@ class Recipes extends React.Component {
                         </View>
                     </View>
                 </Modal>
-
                 {
                     this.state.recipes.map((recipe, index) => (
-                        <Card
-                            key={index}
-                            title={recipe.name}
-                            titleStyle={{fontFamily: 'fira-bold', fontWeight: '300'}}
-                            containerStyle={{backgroundColor: "white"}}
-                            wrapperStyle={{backgroundColor: "white"}}
-                            // fontFamily={'fira'}
-                            // fontWeight={'300'}
-
-                            image={{uri: recipe.imagePaths[0]}}>
-
-                            <Text style={{marginBottom: 10, textAlign: 'center', fontFamily: 'fira'}}>
-                                {recipe.note}
-                            </Text>
-                            <Button
-                                iconRight={{name: 'favorite', color: recipe.color}}
-                                backgroundColor='#2196F3'
-                                fontFamily={'fira'}
-                                buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
-                                title={"Se opskrift      " + recipe.rateCounter}
-                                onPress={() => this.props.navigation.navigate('Recipe', {
-                                    recipe: recipe, onBack: async () => {
-                                        this.setState({recipes: await this.fetchRecipes()}), this.updateUserInState();
-                                    }
-                                })
-                                }
-                            />
-                        </Card>
+                        <RecipeCard key={index} openRecipe={this.openRecipe} recipe={recipe}/>
                     ))
                 }
             </ScrollView>
@@ -305,6 +290,7 @@ class Recipes extends React.Component {
         );
     }
 }
+
 
 const styles = StyleSheet.create({
     container: {
@@ -315,7 +301,6 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(255,255,255,0.8)',
         flex: 1,
         justifyContent: 'center',
-        // backgroundColor: 'grey',
     },
     innerContainer: {
         alignItems: 'center',
@@ -323,3 +308,59 @@ const styles = StyleSheet.create({
 });
 
 export default Recipes;
+{
+    /*<Card*/
+}
+
+{/*key={index}*/
+}
+{/*title={recipe.name}*/
+}
+{/*titleStyle={{fontFamily: 'fira-bold', fontWeight: '300'}}*/
+}
+{/*containerStyle={{backgroundColor: "white"}}*/
+}
+{/*wrapperStyle={{backgroundColor: "white"}}*/
+}
+{/*// fontFamily={'fira'}*/
+}
+{/*// fontWeight={'300'}*/
+}
+
+{/*image={{uri: recipe.imagePaths[0]}}>*/
+}
+
+{/*<Text style={{marginBottom: 10, textAlign: 'center', fontFamily: 'fira'}}>*/
+}
+{/*{recipe.note}*/
+}
+{/*</Text>*/
+}
+{/*<Button*/
+}
+{/*iconRight={{name: 'favorite', color: recipe.color}}*/
+}
+{/*backgroundColor='#2196F3'*/
+}
+{/*fontFamily={'fira'}*/
+}
+{/*buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}*/
+}
+{/*title={"Se opskrift      " + recipe.rateCounter}*/
+}
+{/*onPress={() => this.props.navigation.navigate('Recipe', {*/
+}
+{/*recipe: recipe, onBack: async () => {*/
+}
+{/*this.setState({recipes: await this.fetchRecipes()}), this.updateUserInState();*/
+}
+{/*}*/
+}
+{/*})*/
+}
+{/*}*/
+}
+{/*/>*/
+}
+{/*</Card>*/
+}
