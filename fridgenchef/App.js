@@ -71,8 +71,8 @@ const Start = StackNavigator({
     , {
         navigationOptions: {
             headerTintColor: '#f0f0f0',
-            headerTitleStyle: {fontFamily: 'fira-bold', fontWeight: '300'},
-            headerStyle: {backgroundColor: "#2196F3", height: 45},
+            headerTitleStyle: {fontFamily: 'fira-bold', fontWeight: '300', height: 34},
+            headerStyle: {backgroundColor: "#2196F3", height: 24,padding:-20},
             tabBarIcon: () => {
                 return <Icon
                     name='home'
@@ -89,9 +89,6 @@ const Start = StackNavigator({
 const RecipesTab = StackNavigator({
     Recipes: {
         screen: Recipes,
-        // navigationOptions: {
-        //     title: 'Opskrifter',
-        // },
     },
     Recipe: {
         screen: Recipe,
@@ -99,16 +96,13 @@ const RecipesTab = StackNavigator({
             title: 'Opskrift',
             tabBarVisible: false,
             swipeEnabled: false,
-            // headerTitleStyle: {
-            //     fontFamily: 'fira'
-            // }
         }
     },
 }, {
     navigationOptions: {
         headerTintColor: '#f0f0f0',
-        headerTitleStyle: {fontFamily: 'fira-bold', fontWeight: '300'},
-        headerStyle: {backgroundColor: "#2196F3", height: 45},
+        headerTitleStyle: {fontFamily: 'fira-bold', fontWeight: '300', height: 34},
+        headerStyle: {backgroundColor: "#2196F3",height: 24,padding:-20},
         tabBarIcon: () => {
             return <Icon
                 name='local-dining'
@@ -123,12 +117,7 @@ const RecipesTab = StackNavigator({
 
 // const TestTab = StackNavigator({
 //     Shop: {
-//         screen: Login,
-//         navigationOptions: {},
-//     },
-// }, {
-//     navigationOptions: {
-//         headerStyle: {marginTop: 24}
+//         screen: Test,
 //     },
 // });
 
@@ -140,7 +129,6 @@ const MyApp = TabNavigator({
 }, {
     tabBarPosition: 'bottom',
     animationEnabled: true,
-    // indicatorStyle: {backgroundColor: "red"},
     tabBarOptions: {
         showIcon: true,
         showLabel: false,
@@ -207,8 +195,6 @@ export default class App extends React.Component {
 
     getSearch = () => {
         return this.state.search;
-        // this.setState({search: ''});
-        // return text;
     }
 
 
@@ -231,6 +217,5 @@ export default class App extends React.Component {
             }}/>
         )
     }
-
 
 }

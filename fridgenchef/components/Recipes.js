@@ -1,9 +1,7 @@
 import React from 'react'
 import {Text, ScrollView, RefreshControl, StyleSheet, View, Modal} from 'react-native'
-import {Card, Button, Icon, FormInput} from 'react-native-elements'
+import {Button, Icon, FormInput} from 'react-native-elements'
 import RecipeCard from "./RecipeCard";
-
-// import navIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 class Recipes extends React.Component {
     state = {
@@ -84,23 +82,7 @@ class Recipes extends React.Component {
                 })
             })
         })
-
-        //
-        // let sortedArr = [];
-        // userCategories.forEach(cat => {
-        //     recipes.forEach(rec => {
-        //         rec.forEach()
-        //         if (cat === rec.name) {
-        //             sortedArr.push(com);
-        //         }
-        //     })
-        // })
-
-
-        // let user = this.state.user;
-        // user.comestibles = sortedArr;
         this.setState({recipes: userReceps})
-        // console.log(userCategories)
     }
 
     openModal() {
@@ -169,24 +151,6 @@ class Recipes extends React.Component {
                 }
             })
         })
-
-
-        // this.state.categories.forEach(category => {
-        //     category.ingredients.forEach(ingredient => {
-        //         if (ingredient.name.toLowerCase().indexOf(text.toLowerCase()) > -1) {
-        //             this.state.recipes.forEach(recipe => {
-        //                     if (recipe.recipeIngredients !== undefined) {
-        //                         recipe.recipeIngredients.forEach(ingr => {
-        //                             if (ingr.name.toLowerCase().indexOf(category.name.toLowerCase()) > -1) {
-        //                                 recipesContainingInput.push(recipe);
-        //                             }
-        //                         })
-        //                     }
-        //                 }
-        //             )
-        //         }
-        //     })
-        // })
         this.setState({recipes: recipesContainingInput})
         if (text.length === 0) {
             this.setState({recipes: await this.fetchRecipes()})
@@ -308,59 +272,3 @@ const styles = StyleSheet.create({
 });
 
 export default Recipes;
-{
-    /*<Card*/
-}
-
-{/*key={index}*/
-}
-{/*title={recipe.name}*/
-}
-{/*titleStyle={{fontFamily: 'fira-bold', fontWeight: '300'}}*/
-}
-{/*containerStyle={{backgroundColor: "white"}}*/
-}
-{/*wrapperStyle={{backgroundColor: "white"}}*/
-}
-{/*// fontFamily={'fira'}*/
-}
-{/*// fontWeight={'300'}*/
-}
-
-{/*image={{uri: recipe.imagePaths[0]}}>*/
-}
-
-{/*<Text style={{marginBottom: 10, textAlign: 'center', fontFamily: 'fira'}}>*/
-}
-{/*{recipe.note}*/
-}
-{/*</Text>*/
-}
-{/*<Button*/
-}
-{/*iconRight={{name: 'favorite', color: recipe.color}}*/
-}
-{/*backgroundColor='#2196F3'*/
-}
-{/*fontFamily={'fira'}*/
-}
-{/*buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}*/
-}
-{/*title={"Se opskrift      " + recipe.rateCounter}*/
-}
-{/*onPress={() => this.props.navigation.navigate('Recipe', {*/
-}
-{/*recipe: recipe, onBack: async () => {*/
-}
-{/*this.setState({recipes: await this.fetchRecipes()}), this.updateUserInState();*/
-}
-{/*}*/
-}
-{/*})*/
-}
-{/*}*/
-}
-{/*/>*/
-}
-{/*</Card>*/
-}

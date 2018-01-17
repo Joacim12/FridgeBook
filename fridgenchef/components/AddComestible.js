@@ -2,6 +2,7 @@ import React from 'react';
 import {RefreshControl, TextInput, View, StyleSheet, TouchableOpacity, Alert, ScrollView, KeyboardAvoidingView} from "react-native";
 import {Button, Icon, List, ListItem, Text, FormInput, FormLabel, Avatar} from "react-native-elements";
 import DatePicker from 'react-native-datepicker';
+import {NavigationActions} from "react-navigation";
 
 class AddComestible extends React.Component {
 
@@ -29,14 +30,26 @@ class AddComestible extends React.Component {
                         }
                     })
                     if (!found) {
-                        this.props.navigation.navigate('AddIngredient',
-                            {barcode: this.props.navigation.state.params.data, fetchIngredients: this.fetchIngredients});
+                        this.navigateIngredient();
                     }
                 }
             }).catch(err => {
             console.log(err);
         })
     };
+
+    navigateIngredient = () => {
+        const resetAction = NavigationActions.reset({
+            index: 0,
+            actions: [
+                NavigationActions.navigate({
+                    routeName: 'AddIngredient',
+                    params: {barcode: this.props.navigation.state.params.data, fetchIngredients: this.fetchIngredients}
+                })
+            ]
+        })
+        this.props.navigation.dispatch(resetAction)
+    }
 
     updateUserInState = () => {
         this.props.screenProps.getUser()
@@ -128,7 +141,7 @@ class AddComestible extends React.Component {
                             <ListItem
                                 title={"Opret ny vare"}
                                 fontFamily={'fira'}
-                                onPress={() => this.props.navigation.navigate('AddIngredient', {fetchIngredients: this.fetchIngredients})}
+                                onPress={() => this.navigateIngredient()}
                             />
                         </List>
                     </ScrollView>

@@ -7,7 +7,6 @@ import {NavigationActions} from "react-navigation";
 class AddIngredient extends React.Component {
     state = {
         ingredient: {},
-        ingredients: [],
         image: {},
         barcode: '',
         res: null,
@@ -15,13 +14,9 @@ class AddIngredient extends React.Component {
     };
 
     componentDidMount() {
-        this.getIngredients()
-            .then(() => {
-                // console.log(this.props.navigation.state.params)
-                if (this.props.navigation.state.params !== undefined) {
-                    this.setState({barcode: this.props.navigation.state.params.barcode})
-                }
-            })
+        if (this.props.navigation.state.params !== undefined) {
+            this.setState({barcode: this.props.navigation.state.params.barcode})
+        }
     };
 
     goHome = () => {
@@ -37,7 +32,6 @@ class AddIngredient extends React.Component {
     takePicture = async () => {
         try {
             let result = await ImagePicker.launchCameraAsync({
-                // allowsEditing: true,
                 aspect: [5, 6],
                 quality: 0.5
             });
@@ -75,11 +69,6 @@ class AddIngredient extends React.Component {
         )
     }
 
-    getIngredients = async () => {
-        const ingredients = await (await fetch('https://vetterlain.dk/FridgeBook/api/ingredient')).json();
-        this.setState({ingredients});
-    }
-
     addIngredient = async () => {
         const ingredient = {
             name: this.state.ingredient.name,
@@ -97,12 +86,8 @@ class AddIngredient extends React.Component {
 
         fetch('https:/vetterlain.dk/FridgeBook/api/ingredient', options)
             .then(() => {
-                // console.log(this.props.navigation)
-                this.props.navigation.state.params.fetchIngredients()
-                    .then(() => {
-                        Alert.alert('Oprettelse godkendt', 'Varen er hermed oprettet og kan nu tilføjes til dit køleskab')
-                        this.props.navigation.goBack();
-                    })
+                Alert.alert('Oprettelse godkendt', 'Varen er hermed oprettet og kan nu tilføjes til dit køleskab');
+                this.goHome();
             })
     }
 
@@ -145,19 +130,5 @@ class AddIngredient extends React.Component {
         );
     }
 }
-
-const styles = StyleSheet.create({
-    button: {
-        margin: 3,
-        alignItems: 'center',
-        backgroundColor: '#2196F3'
-    },
-    buttonText: {
-        padding: 7,
-        fontSize: 18,
-        fontWeight: "bold",
-        color: 'white'
-    }
-});
 
 export default AddIngredient;

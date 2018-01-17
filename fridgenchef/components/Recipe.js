@@ -1,17 +1,9 @@
 import React from 'react'
-import {ScrollView,  View} from "react-native";
-import {Text} from "react-native-elements";
-import Icon from 'react-native-vector-icons/FontAwesome';
+import {ScrollView, View, Text, Share, TouchableOpacity} from "react-native";
 import ImageSlider from "./ImageSlider";
-import {Share} from "react-native";
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 class Recipe extends React.Component {
-    static navigationOptions = ({navigation}) => ({
-        // headerRight: <Button
-        //     title="something"
-        //     onPress={() => console.log("clicked")}
-        // />
-    });
 
     state = {
         user: {},
@@ -90,7 +82,6 @@ class Recipe extends React.Component {
 
     updateUserFavourites = async (hasFavourite) => {
         let user = {...this.state.user};
-
         if (!hasFavourite) {
             // console.log("updateUserFavourites - recipe findes IKKE fav")
             user.favouriteRecipes.push(this.state.recipe);
@@ -98,7 +89,6 @@ class Recipe extends React.Component {
             // console.log("updateUserFavourites - recipe findes i fav")
             user.favouriteRecipes = user.favouriteRecipes.filter(recipe => recipe.id !== this.state.recipe.id);
         }
-
         this.setState({user});
 
         const options = {
@@ -162,29 +152,30 @@ class Recipe extends React.Component {
 
     render() {
         return (
-            <ScrollView style={{flex: 1, backgroundColor: "white"}}>
+            <ScrollView style={{flex: 1, backgroundColor: 'white'}}>
                 <ImageSlider handleImagePress={() => this.handleCounterChanging()} images={this.state.recipe.imagePaths}/>
-                <View style={{paddingLeft: 2, borderBottomWidth: .5, borderBottomColor: 'gray', flexDirection: 'row'}}>
+                <View style={{borderBottomWidth: .5, borderBottomColor: 'gray', flexDirection: 'row', justifyContent: 'space-between'}}>
                     <Text style={{
                         fontFamily: 'fira-bold',
                         fontSize: 34,
                         textAlign: 'center',
                     }}>{this.state.recipe.name}</Text>
-
-                    <View style={{flex: 1, flexDirection: 'row', justifyContent: 'flex-end', padding: 10}}>
-                        <Icon name={this.state.recipe.icon} size={30}  color={this.state.recipe.color} onPress={() => {
-                            this.handleCounterChanging()
-                                .then(() => this.props.screenProps.getUser());
-                        }}/>
-                        <Text>   </Text>
-                        <Icon name="share" size={30} color="gray" onPress={() => {
+                    <View/>
+                    <View style={{flexDirection: 'row',paddingTop:3}}>
+                        <TouchableOpacity onPress={() => {
+                            this.handleCounterChanging().then(() => this.props.screenProps.getUser());
+                        }}>
+                            <Icon name={"heart"} size={40} color={this.state.recipe.color}/>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => {
                             this.onClick();
-                        }}/>
-                        <Text>   </Text>
+                        }}>
+                            <Icon name="share" size={40} color="gray"/>
+                        </TouchableOpacity>
                     </View>
                 </View>
-                <View style={{flex: 1, marginTop: -45, padding: 3, paddingTop: 10}}>
-                    <Text style={{fontFamily: 'fira-bold', fontSize: 24}}>{"\n"}Ingredienser:</Text>
+                <View style={{padding: 3}}>
+                    <Text style={{fontFamily: 'fira-bold', fontSize: 24}}>Ingredienser:</Text>
                     {this.renderIngredients()}
                     <Text style={{fontFamily: 'fira-bold', fontSize: 24}}>Fremgangsmåde:</Text>
                     <Text style={{fontFamily: 'fira'}}>{this.state.recipe.text}</Text>

@@ -9,23 +9,21 @@ class RecipeCard extends React.Component {
 
     openRecipe = (recipe) => {
         this.props.openRecipe(recipe);
-    }
-
+    };
 
     render() {
         return (
             <View style={styles.outerContainer}>
-                <TouchableHighlight
-                    onPress={() => {this.openRecipe(this.props.recipe)}}
-                >
+                <TouchableHighlight onPress={() => {this.openRecipe(this.props.recipe)}}>
                     <Image source={{uri: this.props.recipe.imagePaths[0]}} style={styles.image}/>
                 </TouchableHighlight>
                 <View style={styles.textContainer}>
                     <View style={{flexDirection: 'row'}}>
-                        <Text style={styles.textOverhead}>OPSKRIFT {this.props.recipe.rateCounter} </Text>
+                        <Text style={styles.textOverhead}>OPSKRIFT  </Text>
                         <Icon name='heart' size={26} color={this.props.recipe.color}/>
+                        <Text style={styles.textOverhead}>{this.props.recipe.rateCounter}</Text>
                     </View>
-                    <Text style={styles.textHeader}>{this.props.recipe.name}</Text>
+                    <Text style={styles.textHeader}> {this.props.recipe.name}</Text>
                 </View>
             </View>
         );
