@@ -190,7 +190,6 @@ class AddComestible extends React.Component {
                                 'Indtast venligst vare, mængde samt udløbsdato for at fortsætte'
                             );
                         } else {
-                            console.log(this.props.navigation)
                             this.addComestible()
                                 .then(() => this.props.screenProps.getUser())
                                 .then(() => this.props.navigation.state.params.onBack())

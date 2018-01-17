@@ -14,6 +14,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+<<<<<<< HEAD
       <file leaf-file-name="Home.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/components/Home.js">
           <provider selected="true" editor-type-id="text-editor">
@@ -31,16 +32,31 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="306">
               <caret line="18" column="1" lean-forward="false" selection-start-line="18" selection-start-column="1" selection-end-line="18" selection-end-column="1" />
+=======
+      <file leaf-file-name="package.json" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/package.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="289">
+              <caret line="17" column="46" lean-forward="true" selection-start-line="17" selection-start-column="46" selection-end-line="17" selection-end-column="46" />
+>>>>>>> 019f43bb2fab36e997eb251c01262a4d47ac38c1
               <folding />
             </state>
           </provider>
         </entry>
       </file>
+<<<<<<< HEAD
       <file leaf-file-name="app.json" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app.json">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="119">
               <caret line="7" column="21" lean-forward="false" selection-start-line="7" selection-start-column="21" selection-end-line="7" selection-end-column="21" />
+=======
+      <file leaf-file-name="Barcode.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/components/Barcode.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="374">
+              <caret line="24" column="16" lean-forward="true" selection-start-line="24" selection-start-column="16" selection-end-line="24" selection-end-column="16" />
+>>>>>>> 019f43bb2fab36e997eb251c01262a4d47ac38c1
               <folding />
             </state>
           </provider>
@@ -49,8 +65,13 @@
       <file leaf-file-name="App.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/App.js">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="153">
               <caret line="9" column="32" lean-forward="false" selection-start-line="9" selection-start-column="32" selection-end-line="9" selection-end-column="32" />
+=======
+            <state relative-caret-position="493">
+              <caret line="32" column="45" lean-forward="true" selection-start-line="32" selection-start-column="45" selection-end-line="32" selection-end-column="45" />
+>>>>>>> 019f43bb2fab36e997eb251c01262a4d47ac38c1
               <folding />
             </state>
           </provider>
@@ -72,6 +93,7 @@
       <file leaf-file-name="RecipeCard.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/components/RecipeCard.js">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="253">
               <caret line="17" column="13" lean-forward="false" selection-start-line="17" selection-start-column="13" selection-end-line="19" selection-end-column="17" />
               <folding>
@@ -89,10 +111,16 @@
               <folding>
                 <element signature="e#0#25#0" expanded="true" />
               </folding>
+=======
+            <state relative-caret-position="17">
+              <caret line="97" column="72" lean-forward="false" selection-start-line="97" selection-start-column="72" selection-end-line="97" selection-end-column="72" />
+              <folding />
+>>>>>>> 019f43bb2fab36e997eb251c01262a4d47ac38c1
             </state>
           </provider>
         </entry>
       </file>
+<<<<<<< HEAD
       <file leaf-file-name="ImageSlider.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/components/ImageSlider.js">
           <provider selected="true" editor-type-id="text-editor">
@@ -121,6 +149,14 @@
               <folding>
                 <element signature="e#0#25#0" expanded="true" />
               </folding>
+=======
+      <file leaf-file-name="User.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/components/User.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="404">
+              <caret line="33" column="10" lean-forward="false" selection-start-line="33" selection-start-column="10" selection-end-line="33" selection-end-column="10" />
+              <folding />
+>>>>>>> 019f43bb2fab36e997eb251c01262a4d47ac38c1
             </state>
           </provider>
         </entry>
@@ -192,10 +228,10 @@
         <option value="$PROJECT_DIR$/components/Card.js" />
         <option value="$PROJECT_DIR$/components/Home.js" />
         <option value="$PROJECT_DIR$/components/Comestible.js" />
-        <option value="$PROJECT_DIR$/components/AddComestible.js" />
         <option value="$PROJECT_DIR$/App.js" />
         <option value="$PROJECT_DIR$/components/User.js" />
         <option value="$PROJECT_DIR$/components/CreateIngredient.js" />
+<<<<<<< HEAD
         <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/components/Barcode.js" />
         <option value="$PROJECT_DIR$/components/Login.js" />
@@ -203,6 +239,12 @@
         <option value="$PROJECT_DIR$/components/Recipes.js" />
         <option value="$PROJECT_DIR$/app.json" />
         <option value="$PROJECT_DIR$/components/Recipe.js" />
+=======
+        <option value="$PROJECT_DIR$/app.json" />
+        <option value="$PROJECT_DIR$/package.json" />
+        <option value="$PROJECT_DIR$/components/AddComestible.js" />
+        <option value="$PROJECT_DIR$/components/Barcode.js" />
+>>>>>>> 019f43bb2fab36e997eb251c01262a4d47ac38c1
       </list>
     </option>
   </component>
@@ -245,7 +287,11 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+<<<<<<< HEAD
       <pane id="Scope" />
+=======
+      <pane id="Scratches" />
+>>>>>>> 019f43bb2fab36e997eb251c01262a4d47ac38c1
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -262,7 +308,11 @@
           <select />
         </subPane>
       </pane>
+<<<<<<< HEAD
       <pane id="Scratches" />
+=======
+      <pane id="Scope" />
+>>>>>>> 019f43bb2fab36e997eb251c01262a4d47ac38c1
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -328,13 +378,22 @@
       <workItem from="1515837951640" duration="42817000" />
       <workItem from="1515884660784" duration="3261000" />
       <workItem from="1515924707091" duration="39740000" />
+<<<<<<< HEAD
       <workItem from="1516051734368" duration="10199000" />
       <workItem from="1516132142836" duration="10033000" />
+=======
+      <workItem from="1516051734368" duration="9608000" />
+      <workItem from="1516093275828" duration="2287000" />
+>>>>>>> 019f43bb2fab36e997eb251c01262a4d47ac38c1
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
+<<<<<<< HEAD
     <option name="totallyTimeSpent" value="295697000" />
+=======
+    <option name="totallyTimeSpent" value="287360000" />
+>>>>>>> 019f43bb2fab36e997eb251c01262a4d47ac38c1
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -357,7 +416,11 @@
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3264642" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+<<<<<<< HEAD
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3054348" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+=======
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3051948" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+>>>>>>> 019f43bb2fab36e997eb251c01262a4d47ac38c1
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -381,8 +444,11 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/.gitignore" />
     <entry file="file://$PROJECT_DIR$/README.md" />
+=======
+>>>>>>> 019f43bb2fab36e997eb251c01262a4d47ac38c1
     <entry file="file://$PROJECT_DIR$/components/old/Styles.js" />
     <entry file="file://$PROJECT_DIR$/node_modules/react-native-vector-icons/Feather.js">
       <provider selected="true" editor-type-id="text-editor">
@@ -461,13 +527,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/expo/src/Expo.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="782">
-          <caret line="48" column="6" lean-forward="false" selection-start-line="48" selection-start-column="6" selection-end-line="48" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/node_modules/expo/src/Asset.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="822">
@@ -496,9 +555,14 @@
     <entry file="file://$PROJECT_DIR$/js/UserStore.js" />
     <entry file="file://$PROJECT_DIR$/components/Comestible.js">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="1156">
           <caret line="72" column="51" lean-forward="false" selection-start-line="72" selection-start-column="51" selection-end-line="72" selection-end-column="51" />
           <folding />
+=======
+        <state relative-caret-position="34">
+          <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="50" />
+>>>>>>> 019f43bb2fab36e997eb251c01262a4d47ac38c1
         </state>
       </provider>
     </entry>
@@ -512,11 +576,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/components/User.js">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="408">
           <caret line="28" column="110" lean-forward="false" selection-start-line="28" selection-start-column="110" selection-end-line="28" selection-end-column="110" />
           <folding>
             <element signature="e#0#25#0" expanded="false" />
           </folding>
+=======
+        <state relative-caret-position="-288">
+          <caret line="15" column="0" lean-forward="true" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+>>>>>>> 019f43bb2fab36e997eb251c01262a4d47ac38c1
         </state>
       </provider>
     </entry>
@@ -532,6 +601,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/components/Barcode.js">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="-276">
           <caret line="18" column="14" lean-forward="true" selection-start-line="18" selection-start-column="14" selection-end-line="18" selection-end-column="14" />
           <folding />
@@ -543,48 +613,128 @@
         <state relative-caret-position="153">
           <caret line="9" column="32" lean-forward="false" selection-start-line="9" selection-start-column="32" selection-end-line="9" selection-end-column="32" />
           <folding />
+=======
+        <state relative-caret-position="1173">
+          <caret line="73" column="48" lean-forward="false" selection-start-line="73" selection-start-column="48" selection-end-line="73" selection-end-column="48" />
+          <folding>
+            <marker date="1516093237037" expanded="true" signature="5544:5567" ph="&lt;View/&gt;" />
+            <marker date="1516093237037" expanded="true" signature="5785:5810" ph="{...}" />
+            <marker date="1516093237037" expanded="true" signature="5833:5858" ph="{...}" />
+            <marker date="1516093237037" expanded="true" signature="5881:5952" ph="{&quot;flexDirection&quot;: 'row'...}" />
+          </folding>
+>>>>>>> 019f43bb2fab36e997eb251c01262a4d47ac38c1
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/components/Login.js">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="102">
           <caret line="6" column="0" lean-forward="false" selection-start-line="6" selection-start-column="0" selection-end-line="7" selection-end-column="53" />
           <folding>
             <element signature="e#0#25#0" expanded="true" />
             <marker date="1516133219407" expanded="true" signature="1934:1941" ph="..." />
+=======
+        <state relative-caret-position="3655">
+          <caret line="230" column="16" lean-forward="false" selection-start-line="230" selection-start-column="16" selection-end-line="230" selection-end-column="16" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+            <marker date="1516093236997" expanded="true" signature="6434:6437" ph="{...}" />
+>>>>>>> 019f43bb2fab36e997eb251c01262a4d47ac38c1
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/components/Card.js">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="493">
           <caret line="43" column="30" lean-forward="false" selection-start-line="35" selection-start-column="27" selection-end-line="43" selection-end-column="30" />
           <folding>
             <element signature="e#0#25#0" expanded="true" />
+=======
+        <state relative-caret-position="969">
+          <caret line="66" column="5" lean-forward="false" selection-start-line="66" selection-start-column="5" selection-end-line="66" selection-end-column="5" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+            <marker date="1516093237058" expanded="true" signature="2448:2605" ph="&lt;View/&gt;" />
+            <marker date="1516093237058" expanded="true" signature="2448:2624" ph="{...}" />
+>>>>>>> 019f43bb2fab36e997eb251c01262a4d47ac38c1
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/components/Recipes.js">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="274">
           <caret line="238" column="20" lean-forward="false" selection-start-line="238" selection-start-column="20" selection-end-line="238" selection-end-column="20" />
+=======
+        <state relative-caret-position="850">
+          <caret line="50" column="80" lean-forward="false" selection-start-line="50" selection-start-column="80" selection-end-line="50" selection-end-column="80" />
+>>>>>>> 019f43bb2fab36e997eb251c01262a4d47ac38c1
           <folding />
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/components/ImageSlider.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="137">
           <caret line="58" column="34" lean-forward="false" selection-start-line="58" selection-start-column="28" selection-end-line="58" selection-end-column="34" />
+=======
+    <entry file="file://$PROJECT_DIR$/app.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="21" lean-forward="false" selection-start-line="7" selection-start-column="21" selection-end-line="7" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="17" column="46" lean-forward="true" selection-start-line="17" selection-start-column="46" selection-end-line="17" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/expo/src/Expo.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="90" column="26" lean-forward="false" selection-start-line="90" selection-start-column="26" selection-end-line="90" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/expo/src/BarCodeScanner.android.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="55" lean-forward="false" selection-start-line="11" selection-start-column="55" selection-end-line="11" selection-end-column="55" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/expo/src/CameraBasedBarCodeScanner.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="493">
+          <caret line="36" column="17" lean-forward="false" selection-start-line="36" selection-start-column="17" selection-end-line="36" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/expo/src/Camera.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-323">
+          <caret line="155" column="14" lean-forward="false" selection-start-line="155" selection-start-column="14" selection-end-line="155" selection-end-column="14" />
+>>>>>>> 019f43bb2fab36e997eb251c01262a4d47ac38c1
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/components/RecipeCard.js">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="253">
           <caret line="17" column="13" lean-forward="false" selection-start-line="17" selection-start-column="13" selection-end-line="19" selection-end-column="17" />
           <folding>
@@ -600,21 +750,39 @@
           <folding>
             <element signature="e#0#25#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="21" lean-forward="false" selection-start-line="7" selection-start-column="21" selection-end-line="7" selection-end-column="21" />
+=======
+        <state relative-caret-position="17">
+          <caret line="97" column="72" lean-forward="false" selection-start-line="97" selection-start-column="72" selection-end-line="97" selection-end-column="72" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/package.json">
+    <entry file="file://$PROJECT_DIR$/components/User.js">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="404">
+          <caret line="33" column="10" lean-forward="false" selection-start-line="33" selection-start-column="10" selection-end-line="33" selection-end-column="10" />
+          <folding />
+>>>>>>> 019f43bb2fab36e997eb251c01262a4d47ac38c1
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/AddComestible.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="493">
+          <caret line="32" column="45" lean-forward="true" selection-start-line="32" selection-start-column="45" selection-end-line="32" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/Barcode.js">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="306">
           <caret line="18" column="1" lean-forward="false" selection-start-line="18" selection-start-column="1" selection-end-line="18" selection-end-column="1" />
+=======
+        <state relative-caret-position="374">
+          <caret line="24" column="16" lean-forward="true" selection-start-line="24" selection-start-column="16" selection-end-line="24" selection-end-column="16" />
+>>>>>>> 019f43bb2fab36e997eb251c01262a4d47ac38c1
           <folding />
         </state>
       </provider>
