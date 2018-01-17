@@ -20,7 +20,6 @@ public class User implements Serializable {
     private String username;
     @Column(nullable = false)
     private String pin;
-    private String fbName;
     @JoinColumn
     @OneToMany(fetch = FetchType.EAGER)
     private List<Recipe> recipesCreatedByUser;
@@ -39,14 +38,6 @@ public class User implements Serializable {
         recipesCreatedByUser = new ArrayList();
         favouriteRecipes = new ArrayList();
         comestibles = new ArrayList();
-    }
-
-    public String getFbName() {
-        return fbName;
-    }
-
-    public void setFbName(String fbName) {
-        this.fbName = fbName;
     }
 
     public String getUsername() {

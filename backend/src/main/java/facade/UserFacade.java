@@ -52,6 +52,7 @@ public class UserFacade {
             userInDB = em.merge(user);
             em.getTransaction().commit();
         } catch (RollbackException r) {
+//            createUser(user);
             em.getTransaction().rollback();
         } finally {
             em.close();

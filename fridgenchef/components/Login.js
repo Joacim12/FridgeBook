@@ -14,7 +14,9 @@ class Login extends React.Component {
             .then(() => {
                 const resetAction = NavigationActions.reset({
                     index: 0,
-                    actions: [NavigationActions.navigate({routeName: 'Home'})]
+                    // actions: [NavigationActions.navigate({routeName: 'Home',{'data':'hej'}})]
+                    actions: [NavigationActions.navigate('Home',{'data':'barcode'})]
+                // this.props.navigation.navigate('Barcode', {onBack: this.updateUserInState})
                 })
                 this.props.navigation.dispatch(resetAction)
             })
@@ -38,13 +40,12 @@ class Login extends React.Component {
                 let dbUser = {};
                 dbUser.username = res.id + "";
                 dbUser.pin = 1234;
-                dbUser.fbName = res.name;
                 const options = {
                     headers: {
                         'Accept': 'application/json',
                         'Content-Type': 'application/json'
                     },
-                    method: "PUT",
+                    method: "POST",
                     body: JSON.stringify(dbUser)
                 }
                 fetch('https:/vetterlain.dk/FridgeBook/api/user', options)
